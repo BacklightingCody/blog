@@ -25,6 +25,12 @@ module.exports = {
     ecmaVersion: 'latest'
   },
   rules: {
-    "semi": error,
-  }
+    "semi": "error",
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:vue/vue3-essential",
+    "plugin:prettier/recommented", // eslint prettier 兼容插件
+    "eslint-config-prettier" // eslint 使用 prettier 配置
+  ],
 }

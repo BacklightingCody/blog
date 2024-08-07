@@ -1,40 +1,25 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import NavPage from '@/views/index.vue'
-import HomeLayout from '@/layouts/Home/index.vue'
-
+import { constantRouter } from './route'
+import { start, close } from '@/utils/nprogress'
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [
-    {
-      path: '/',
-      name: 'nav',
-      meta: {
-        name: 'Nav',
-      },
-      component: NavPage,
-      redirect: '/home',
-      children:[]
-    },
-    {
-      path: '/',
-      name: 'HomeLayout',
-      meta: {
-        name: 'HomeLayout',
-      },
-      component: HomeLayout,
-      redirect: '/home',
-      children: [
-        {
-          path: '/home',
-          name: 'Home',
-          meta: {
-            name: '首页',
-          },
-          component: () => import('@/views/home/index.vue'),
-        },
-      ]
-    }
-  ]
+  // history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(),
+  routes: constantRouter
 })
+
+router.beforeEach((to, from, next) => {
+  start()
+})
+
+
+router.afterEach((to, from) => {
+  close()
+})
+
+
+
+
+
+
 
 export default router
