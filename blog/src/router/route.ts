@@ -13,7 +13,7 @@ export const constantRouter = [
       // 时间轴
       {
         path: '/timeline',
-        // component: () => import('@/views/Pigeonhole/TimeLine/index.vue'),
+        // component: () => import('@/views/TimeLine/index.vue'),
         name: 'timeline',
         children:[]
       }

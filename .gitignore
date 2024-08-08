@@ -1,0 +1,131 @@
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+yarn-debug.log
+package-lock.json
+yarn.lock
+
+# Logs
+*.log
+*.log.*
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Environment files
+.env
+.env.*
+
+# TypeScript
+dist/
+*.tsbuildinfo
+
+# Next.js
+.next/
+out/
+
+# Nuxt.js
+.nuxt/
+dist/
+
+# Vue.js
+/dist/
+*.local
+
+# Compiled output
+*.js
+*.d.ts
+*.js.map
+*.css.map
+*.scss.map
+
+# IDEs and editors
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Temporary files
+*.tmp
+*.temp
+
+# Miscellaneous
+*.swp
+*.swo
+
+# Frontend specific
+public/
+*.svg
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.webp
+*.ico
+*.eot
+*.woff
+*.woff2
+*.ttf
+*.otf
+*.map
+*.lock
+
+# Backend specific
+build/
+logs/
+*.log
+
+# Test coverage
+coverage/
+
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# Production
+build/
+dist/
+*.tgz
+*.gz
+
+# SASS / SCSS
+.sass-cache/
+*.scssc
+
+# TypeScript
+*.tsbuildinfo
+
+# Jest
+jest.config.js
+jest.setup.js
+jest.setup.ts
+
+# ESLint
+.eslintcache
+
+# Prettier
+.prettierignore
+
+# Others
+*.DS_Store
+*.eslintignore
+*.prettierignore
+*.eslintcache
+*.cache
+
+# NPM
+npm-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock

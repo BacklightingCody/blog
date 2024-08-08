@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-red w-[100px] h-[200px]"></div>
+  <div class="bg-red-300"></div>
 </template>
 <script setup lang="ts">
 import { ref, reactive } from 'vue'

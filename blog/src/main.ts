@@ -1,6 +1,6 @@
-import './assets/main.css'
 import 'virtual:uno.css'  //引入unocss样式
 import 'animate.css'  // 引入animate.css动画库
+import '@/sass/main.scss'  // 引入全局样式
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 

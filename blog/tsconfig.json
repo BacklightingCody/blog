@@ -9,23 +9,25 @@
     }
   ],
   "compilerOptions": {
+    "baseUrl": ".",
     "composite": true,
     "module": "NodeNext",
     "types": ["node"], // 确保包含 "node"
     "paths": {
-      "@/*": ["./src/*"],
-      "~/*": ["./src/types/*"]
+      "@/*": ["src/*"],
+      "~/*": ["src/types/*"]
     }
   },
   "include": [
-    "src/**/*.ts",
-    "src/**/*.d.ts",
-    "src/**/*.vue",
-    "build/**/*.ts",
-    "build/**/*.d.ts",
-    "mock/**/*.ts",
-    "vite.config.ts",
-    "postcss.config.mjs",
-    "cypress/**/*.ts"
+    // "src/**/*.ts",
+    // "src/**/*.d.ts",
+    // "src/**/*.vue",
+    // "build/**/*.ts",
+    // "build/**/*.d.ts",
+    // "mock/**/*.ts",
+    // "vite.config.ts",
+    // "postcss.config.mjs",
+    // "cypress/**/*.ts"
+    "src"
   ]
 }

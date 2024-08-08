@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "es2016",
+    "baseUrl": ".",
+    "composite": true,
+    "outDir": "./build",
+    "strict": true,
+    "module": "commonjs",
+    "types": ["node"], // 确保包含 "node"
+    "paths": {
+      "@/*": ["src/*"],
+      "~/*": ["types/*"]
+    }
+  },
+  "include": ["src"]
+}
