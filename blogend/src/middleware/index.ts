@@ -1,2 +1,1 @@
-// 111
-const middle =1123
+export * from './errorHandle'

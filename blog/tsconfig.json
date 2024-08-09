@@ -1,5 +1,4 @@
 {
-  "files": [],
   "references": [
     {
       "path": "./tsconfig.node.json"
@@ -9,25 +8,17 @@
     }
   ],
   "compilerOptions": {
+    "target": "ES2016",
     "baseUrl": ".",
     "composite": true,
-    "module": "NodeNext",
-    "types": ["node"], // 确保包含 "node"
+    "module": "ESNext",
+    "moduleResolution": "bundler",
     "paths": {
       "@/*": ["src/*"],
       "~/*": ["src/types/*"]
     }
   },
   "include": [
-    // "src/**/*.ts",
-    // "src/**/*.d.ts",
-    // "src/**/*.vue",
-    // "build/**/*.ts",
-    // "build/**/*.d.ts",
-    // "mock/**/*.ts",
-    // "vite.config.ts",
-    // "postcss.config.mjs",
-    // "cypress/**/*.ts"
     "src"
   ]
 }

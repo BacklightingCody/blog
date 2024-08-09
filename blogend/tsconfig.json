@@ -1,16 +1,21 @@
 {
   "compilerOptions": {
-    "target": "es2016",
-    "baseUrl": ".",
-    "composite": true,
-    "outDir": "./build",
+    "target": "ESNext",
+    "baseUrl": "./",
+    "outDir": "./dist",
     "strict": true,
-    "module": "commonjs",
-    "types": ["node"], // 确保包含 "node"
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "esModuleInterop": true,
     "paths": {
       "@/*": ["src/*"],
-      "~/*": ["types/*"]
+      "~/*": ["types/*"],
+      "#/*": ["db/*"]
     }
   },
-  "include": ["src"]
+  "ts-node": {
+    "esm": true,
+    "experimentalSpecifierResolution": "node"
+  },
+  "include": ["src", "db"]
 }
