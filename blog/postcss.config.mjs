@@ -1,5 +1,5 @@
-import postcssPxToRem from 'postcss-pxtorem';
-import autoprefixer from 'autoprefixer';
+import postcssPxToRem from 'postcss-pxtorem'
+import autoprefixer from 'autoprefixer'
 import UnoCSS from '@unocss/postcss'
 
 export default {
@@ -15,6 +15,6 @@ export default {
     }),
     autoprefixer({
       // 配置选项
-    }),
-  ],
+    })
+  ]
 }

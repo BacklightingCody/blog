@@ -1,7 +1,8 @@
-import { ref, computed } from 'vue'
-import { defineStore } from 'pinia'
+import { createPinia } from 'pinia'
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+export const pinia = createPinia()
+pinia.use(piniaPluginPersistedstate)
 
-export const useCounterStore = defineStore('index', () => {
-  
-  
-})
+
+export * from './modules/user'
+export * from './modules/global'

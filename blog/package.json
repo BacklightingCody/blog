@@ -14,13 +14,16 @@
     "build-only": "vite build",
     "type-check": "vue-tsc --build --force",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
-    "format": "prettier --write src/"
+    "format": "prettier --write \"./**/*.{html,vue,ts,js,json,md}\""
   },
   "dependencies": {
+    "@vueuse/components": "^10.11.1",
+    "@vueuse/core": "^10.11.1",
     "animate.css": "^4.1.1",
     "element-plus": "^2.7.8",
     "nprogress": "^0.2.0",
     "pinia": "^2.1.7",
+    "pinia-plugin-persistedstate": "^3.2.1",
     "postcss": "^8.4.41",
     "sass": "^1.77.8",
     "vite-plugin-eslint": "^1.8.1",
@@ -28,10 +31,13 @@
     "vue-router": "^4.3.3"
   },
   "devDependencies": {
+    "@iconify-json/mingcute": "^1.1.19",
+    "@iconify/vue": "^4.1.2",
     "@rushstack/eslint-patch": "^1.8.0",
     "@tsconfig/node20": "^20.1.4",
     "@types/node": "^20.14.14",
     "@unocss/postcss": "^0.61.9",
+    "@unocss/preset-icons": "^0.61.9",
     "@vitejs/plugin-vue": "^5.0.5",
     "@vue/eslint-config-prettier": "^9.0.0",
     "@vue/eslint-config-typescript": "^13.0.0",
@@ -51,6 +57,7 @@
     "unplugin-auto-import": "^0.18.2",
     "unplugin-vue-components": "^0.27.3",
     "vite": "^5.3.1",
+    "vite-plugin-svg-icons": "^2.0.1",
     "vue-tsc": "^2.0.21"
   }
 }
