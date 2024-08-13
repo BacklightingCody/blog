@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { constantRouter } from './route'
 import { start, close } from '@/utils/nprogress'
+import { useGlobalStore } from '@/stores'
 const router = createRouter({
   // history: createWebHistory(import.meta.env.BASE_URL),
   history: createWebHistory(),
@@ -8,12 +9,20 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  console.log(to, from)
+  // console.log(to, from)
+  const globalStore = useGlobalStore()
   start()
-  next()
+  globalStore.showLoader()
+  setTimeout(() => {
+    next()
+  }, 2000) // 延迟300ms
+  // Loading.startLoader()
 })
 
 router.afterEach((to, from) => {
+  // console.log(to, from)
+  const globalStore = useGlobalStore()
+  globalStore.hideLoader()
   close()
 })
 

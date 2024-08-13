@@ -1,7 +1,10 @@
 <template>
-  <div class="bg-black w-full h-full"></div>
+  <div>
+    <ul>
+      <li v-for="n in 10" :key="n">{{n}}</li>
+    </ul>
+  </div>
 </template>
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
 </script>
 <style lang="scss" scoped></style>

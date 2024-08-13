@@ -9,6 +9,8 @@
 import Header from '../default/header/header.vue'
 import Footer from '../default/footer/footer.vue'
 import Main from '../default/main/index.vue'
-import { ref, reactive } from 'vue'
+
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+</style>
