@@ -9,6 +9,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     Avatar: typeof import('./src/components/Avatar.vue')['default']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
+    ElButton: typeof import('element-plus/es')['ElButton']
     ElContainer: typeof import('element-plus/es')['ElContainer']
     ElFooter: typeof import('element-plus/es')['ElFooter']
     ElHeader: typeof import('element-plus/es')['ElHeader']
@@ -25,9 +26,6 @@ declare module 'vue' {
     IconThink: typeof import('./src/components/icons/iconThink.vue')['default']
     IconTimeLine: typeof import('./src/components/icons/iconTimeLine.vue')['default']
     Loading: typeof import('./src/components/Loading.vue')['default']
-    'Loading.': typeof import('./src/components/Loading..vue')['default']
-    Loading1: typeof import('./src/components/Loading1.vue')['default']
-    Loading2: typeof import('./src/components/Loading2.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }

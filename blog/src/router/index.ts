@@ -13,10 +13,7 @@ router.beforeEach((to, from, next) => {
   const globalStore = useGlobalStore()
   start()
   globalStore.showLoader()
-  setTimeout(() => {
-    next()
-  }, 2000) // 延迟300ms
-  // Loading.startLoader()
+  next()
 })
 
 router.afterEach((to, from) => {

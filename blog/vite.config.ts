@@ -35,5 +35,17 @@ export default defineConfig({
         additionalData: '@use "@/sass//themes/_theme.scss" as *;'
       }
     }
+  },
+  server: {
+    port: 5173, //设置服务启动端口号
+    open: false, //设置服务器启动时是否自动打开浏览器
+    cors: true, //允许跨域
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8000',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, '')
+      }
+    }
   }
 })

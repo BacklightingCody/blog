@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "typeRoots": ["./node_modules/@types/", "./types/"],
+    "types": ["node"],
     "target": "ESNext",
     "baseUrl": "./",
     "outDir": "./dist",
