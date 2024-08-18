@@ -13,13 +13,17 @@ export default defineConfig({
     vue(),
     // eslintPlugin(),
     UnoCSS(),
+    Components({
+      resolvers: [ElementPlusResolver()]
+    }),
     AutoImport({
       resolvers: [ElementPlusResolver()],
       imports: ['vue'], //导入vue
-      dts: './src/types/auto-import.d.ts' //自动导入的声明文件
-    }),
-    Components({
-      resolvers: [ElementPlusResolver()]
+      dts: './src/types/auto-import.d.ts', //自动导入的声明文件
+      eslintrc: {
+        enabled: true, //默认关闭eslint
+        filepath: './.eslintrc-auto-import.json' //eslint配置文件路径
+      }
     })
   ],
   resolve: {

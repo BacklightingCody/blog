@@ -12,10 +12,21 @@
 import Avatar from '@/components/Avatar.vue'
 import Nav from './Nav.vue'
 import ColorMode from './ColorMode.vue'
+import { loginApi } from '@/services/auth'
+import { useGlobalStore } from '@/stores'
 
-import { login } from '@/services/index'
+const globalStore = useGlobalStore()
 const loginSubmit = () => {
-  login({username:'123',password:'123'})
+  loginApi({ username: 'backlighting', password: '123456' }).then(res => {
+    globalStore.setToken(res.data.refreshToken, 'refresh')
+    globalStore.setToken(res.data.accessToken, 'access')
+    globalStore.changeLoginStatus(true)
+    ElMessage({
+      message: res.message,
+      type: 'success'
+    })
+
+  })
 }
 </script>
 <style lang="scss" scoped></style>

@@ -1,3 +1,11 @@
+<script lang="ts">
+import { defineComponent } from 'vue'
+defineComponent({
+  name: 'MingcuteFan2Fill'
+})
+
+</script>
+
 <template>
   <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
     <g fill="none" fillRule="evenodd">
@@ -10,11 +18,3 @@
     </g>
   </svg>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-defineComponent({
-  name: 'MingcuteFan2Fill'
-})
-
-</script>

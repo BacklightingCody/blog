@@ -66,5 +66,4 @@ import iconMore from '@/components/icons/iconMore.vue'
     }
   }
 }
-
 </style>

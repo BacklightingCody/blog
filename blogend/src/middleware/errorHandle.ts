@@ -1,4 +1,4 @@
-import { ErrorHandler } from '~/index';
+import { ErrorHandler } from '@/types/index';
 
 export const errorHandler: ErrorHandler = (err, req, res, next) => {
   console.error(err);

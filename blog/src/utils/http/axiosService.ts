@@ -58,13 +58,11 @@ class AxiosService {
     this.axiosInstance.interceptors.response.use(
       (response: AxiosResponse<any>) => {
         axiosCanceler.removePending(response.config)
-
+        if (this.transform?.responseInterceptors) {
+          response = this.transform.responseInterceptors(response)
+        }
         if (this.transform?.transformResponseHook) {
           return this.transform.transformResponseHook(response, {} as any)
-        }
-
-        if (this.transform?.responseInterceptors) {
-          return this.transform.responseInterceptors(response)
         }
 
         return response
