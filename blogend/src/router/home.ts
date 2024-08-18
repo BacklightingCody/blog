@@ -1,4 +1,4 @@
-import { Route } from '~/index'
+import { Route } from '@/types/index'
 import { home } from '@/handlers/index'
 
 export const homeRoutes: Route[] = [

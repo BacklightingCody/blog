@@ -3,8 +3,10 @@ const app = express();
 const PORT = process.env.PORT || 8000; // process.env.PORT读取当前目录下环境变量port的值，若没有则默认端口为3000
 import { errorHandler } from "@/middleware";
 import { corsMiddleware, customCorsHeaders } from "@/middleware";
+import { authenticateToken } from "@/middleware/authMiddle";
 import { routes } from "@/router/index";
 app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 app.use(corsMiddleware); // 使用 CORS 中间件
 
 const API_PREFIX = "/api";

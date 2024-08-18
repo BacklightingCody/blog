@@ -1,9 +1,9 @@
 /* eslint-env node */
 require('@rushstack/eslint-patch/modern-module-resolution')
-
+import autoImportConfig from './.eslintrc-auto-import'
 module.exports = {
   root: true,
-  plugins: ['vue', '@typescript-eslint'],
+  plugins: ['import', 'vue', '@typescript-eslint'],
   env: {
     browser: true,
     es2021: true,
@@ -63,11 +63,12 @@ module.exports = {
   },
   extends: [
     'eslint:recommended',
-    'plugin:vue/vue3-essential',
+    'plugin:vue/vue3-recommended',
     'plugin:@typescript-eslint/recommended',
     'eslint-config-prettier', // eslint 使用 prettier 配置
     'prettier',
     'plugin:prettier/recommended', // eslint prettier 兼容插件
     '@vue/eslint-config-prettier/skip-formatting'
-  ]
+  ],
+  ...autoImportConfig,
 }
