@@ -8,7 +8,7 @@ export const loginApi = (data: { username: string; password: string }) => {
   })
 }
 
-export const refreshTokenApi = (data: { refreshToken: string }) => {
+export const refreshTokenApi = async (data: { refreshToken: string }) => {
   return http.request({
     url: '/refresh_token',
     method: 'post',

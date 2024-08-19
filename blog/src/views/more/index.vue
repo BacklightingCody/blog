@@ -12,7 +12,6 @@ import { useGlobalStore } from '@/stores'
 const globalStore = useGlobalStore()
 const run = () => {
   getMoreApi().then(res => {
-    console.log(res, 'more')
     ElMessage.success(res.message)
   })
 }
