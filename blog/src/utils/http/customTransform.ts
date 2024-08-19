@@ -73,40 +73,32 @@ export class CustomTransform extends AxiosTransform {
   }
 
   // 响应拦截器错误处理钩子函数
-  responseInterceptorsCatch(
+  async responseInterceptorsCatch(
     axiosInstance: AxiosInstance,
     error: AxiosError
   ): Promise<any> {
     // 可以尝试做一些全局的错误重试或错误处理
+    let message = ''
     async function handleResponseError() {
-      const axiosRetry = new AxiosRetry()
+      // const axiosRetry = new AxiosRetry()
       console.log('进入错误处理')
       const globalStore = useGlobalStore()
-      let message = ''
       switch (error.response?.status) {
         case 400:
           message = '请求错误(400)'
           break
         case 401:
           if (globalStore.isLogin) {
-            try {
-              console.log('进入刷新token')
-              await refreshToken() // 等待 refreshToken 完成
-              console.log(111) // 如果刷新成功，这里会被打印
-              // 重新请求
+            console.log('进入刷新token')
+            const isRefresh: boolean = await refreshToken()
+            // 重新请求
+            if (isRefresh) {
               const originalRequest = error.config
               const accessToken = globalStore.getToken('access')
               originalRequest.headers.Authorization = `Bearer ${accessToken}`
-
-              // Return the retried request
-              return axiosRetry.retry(axiosInstance, {
-                ...error,
-                config: originalRequest
-              })
-            } catch (error) {
-              console.error('Token 刷新失败:', error)
-              message = '未授权，请重新登录(401)'
-              return Promise.reject(error) // 抛出错误以供外部处理
+              await axiosInstance.request(originalRequest)
+            } else {
+              console.log(1)
             }
           }
           // 这里可以做清空storage并跳转到登录页的操作
@@ -138,17 +130,16 @@ export class CustomTransform extends AxiosTransform {
         case 505:
           message = 'HTTP版本不受支持(505)'
           break
-        default:
-          message = `连接出错(${error.response?.status})!`
       }
+    }
+    await handleResponseError()
+    // 这里错误消息可以使用全局弹框展示出来
+    if (message) {
       ElMessage.error({
         message,
         duration: 3000
       })
     }
-    handleResponseError()
-    // 这里错误消息可以使用全局弹框展示出来
-
     // 这里是AxiosError类型，所以一般我们只reject我们需要的响应即可
     return Promise.reject(error.response)
   }
