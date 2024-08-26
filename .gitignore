@@ -64,22 +64,22 @@ Desktop.ini
 *.swp
 *.swo
 
-# Frontend specific
-public/
-*.svg
-*.png
-*.jpg
-*.jpeg
-*.gif
-*.webp
-*.ico
-*.eot
-*.woff
-*.woff2
-*.ttf
-*.otf
-*.map
-*.lock
+# # Frontend specific
+# public/
+# *.svg
+# *.png
+# *.jpg
+# *.jpeg
+# *.gif
+# *.webp
+# *.ico
+# *.eot
+# *.woff
+# *.woff2
+# *.ttf
+# *.otf
+# *.map
+# *.lock
 
 # Backend specific
 build/

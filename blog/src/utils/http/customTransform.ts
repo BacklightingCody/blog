@@ -17,6 +17,7 @@ export class CustomTransform extends AxiosTransform {
     config: InternalAxiosRequestConfig,
     options: RequestOptions
   ): InternalAxiosRequestConfig {
+    console.log('发起了请求')
     const globalStore = useGlobalStore()
     // 在请求头中添加 token
     const accessToken = globalStore.getToken('access')
@@ -56,9 +57,10 @@ export class CustomTransform extends AxiosTransform {
       const accessToken = res.headers.authorization.replace('Bearer ', '')
       globalStore.setToken(accessToken, 'access')
     }
-    if (res.data.status === 200) {
+    console.log(res,'res')
+    if (res.status === 200) {
       ElMessage.success({
-        message: res.data.msg,
+        message: res.data.message,
         duration: 3000
       })
     }
@@ -78,6 +80,8 @@ export class CustomTransform extends AxiosTransform {
     error: AxiosError
   ): Promise<any> {
     // 可以尝试做一些全局的错误重试或错误处理
+    const axiosRetry = new AxiosRetry()
+    // axiosRetry.retry(axiosInstance, error)  放在外边可以默认重试
     let message = ''
     async function handleResponseError() {
       // const axiosRetry = new AxiosRetry()
@@ -89,17 +93,16 @@ export class CustomTransform extends AxiosTransform {
           break
         case 401:
           if (globalStore.isLogin) {
-            console.log('进入刷新token')
             const isRefresh: boolean = await refreshToken()
             // 重新请求
             if (isRefresh) {
-              const originalRequest = error.config
-              const accessToken = globalStore.getToken('access')
-              originalRequest.headers.Authorization = `Bearer ${accessToken}`
-              await axiosInstance.request(originalRequest)
-            } else {
-              console.log(1)
+              console.log(error,'error')
+              error.config.headers['Authorization'] = `Bearer ${globalStore.getToken('access')}`
+              // error.config.headers['Content-Type'] = `application/json; charset=utf-8`
+              axiosRetry.retry(axiosInstance, error)
             }
+          }else{
+            message = '请先登录'
           }
           // 这里可以做清空storage并跳转到登录页的操作
           break
@@ -129,6 +132,9 @@ export class CustomTransform extends AxiosTransform {
           break
         case 505:
           message = 'HTTP版本不受支持(505)'
+          break
+        default:
+          message = '未知错误'
           break
       }
     }

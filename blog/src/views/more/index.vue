@@ -12,7 +12,7 @@ import { useGlobalStore } from '@/stores'
 const globalStore = useGlobalStore()
 const run = () => {
   getMoreApi().then(res => {
-    ElMessage.success(res.message)
+    console.log(111)
   })
 }
 const refreshstatus = () => {

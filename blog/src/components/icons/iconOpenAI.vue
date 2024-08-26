@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang="ts" setup>
 import { defineComponent } from 'vue'
 defineComponent({
   name: 'MingcuteFan2Fill'

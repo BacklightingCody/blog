@@ -2,6 +2,7 @@ import axios, {
   AxiosInstance,
   AxiosRequestConfig,
   AxiosResponse,
+  AxiosError,
   InternalAxiosRequestConfig
 } from 'axios'
 import { AxiosCanceler } from './axiosCancel'
@@ -15,7 +16,7 @@ import {
 class AxiosService {
   private axiosInstance: AxiosInstance
   constructor(
-    config: AxiosRequestConfig,
+    config: CreateAxiosOptions,
     private transform: AxiosTransform | null = null
   ) {
     this.axiosInstance = axios.create(config)
@@ -79,7 +80,7 @@ class AxiosService {
       }
     )
   }
-  public request<T = any>(config: AxiosRequestConfig): Promise<T> {
+  public request<T = any>(config: CreateAxiosOptions): Promise<T> {
     return this.axiosInstance.request<any, T>(config)
   }
 }
