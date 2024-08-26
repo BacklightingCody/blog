@@ -16,7 +16,7 @@ export async function refreshToken(): Promise<boolean> {
 
       const { accessToken } = res.data
       globalStore.setToken(accessToken, 'access')
-      ElMessage.success('Token refreshed successfully')
+      // ElMessage.success('Token refreshed successfully')
 
       resolve(res.code === 200)
     } catch (error) {

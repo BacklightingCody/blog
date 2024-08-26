@@ -8,12 +8,20 @@ const getPendingUrl = (config: AxiosRequestConfig): string => {
 
 export class AxiosCanceler {
   public addPending(config: AxiosRequestConfig): void {
-    this.removePending(config)
     const url = getPendingUrl(config)
-    const controller = new AbortController()
-    config.signal = config.signal || controller.signal
     if (!pendingMap.has(url)) {
+      const controller = new AbortController()
+      config.signal = config.signal || controller.signal
       pendingMap.set(url, controller)
+      console.log('加入队列')
+    }
+  }
+
+  public removePending(config: AxiosRequestConfig): void {
+    const url = getPendingUrl(config)
+    if (pendingMap.has(url)) {
+      pendingMap.delete(url)
+      console.log('移除队列')
     }
   }
 
@@ -22,15 +30,6 @@ export class AxiosCanceler {
       controller.abort()
     })
     this.reset()
-  }
-
-  public removePending(config: AxiosRequestConfig): void {
-    const url = getPendingUrl(config)
-    if (pendingMap.has(url)) {
-      const controller = pendingMap.get(url)
-      controller?.abort()
-      pendingMap.delete(url)
-    }
   }
 
   public reset(): void {
