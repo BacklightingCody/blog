@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
+import {updateCSSVariables,generateRandomColors} from '@/utils/color'
 export const useGlobalStore = defineStore(
   'global',
   () => {
@@ -10,9 +11,14 @@ export const useGlobalStore = defineStore(
     }
     // 主题方面
     const theme = ref('light')
+    const colors = ref(generateRandomColors(5))
     const changeMode = () => {
       theme.value = theme.value === 'dark' ? 'light' : 'dark'
+      updateCSSVariables(theme)
     }
+    watchEffect(() => {
+      updateCSSVariables(theme)
+    })
     // 加载loading方面
     const loading = ref(true)
     const showLoader = () => {

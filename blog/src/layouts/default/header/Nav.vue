@@ -1,42 +1,43 @@
 <template>
-  <div class="nav h-full flex items-center shadow-lg rounded-full shadow-[var(--accent-color)]">
+  <div class="nav h-full flex items-center shadow-lg rounded-full shadow-[var(--accent-color)]"
+    @mousemove="handleMouseMove" @mouseleave="handleMouseLeave" ref="nav" :style="{ background: backgroundStyle }">
     <div class="nav-tab">
-      <RouterLink to="/">
+      <RouterLink to="/" exact-active-class="active-nav">
         <iconHome class="icon"></iconHome>
         主页
       </RouterLink>
     </div>
     <div class="nav-tab">
-      <RouterLink to="/docs">
+      <RouterLink to="/docs" active-class="active-nav">
         <iconDocs class="icon"></iconDocs>
         文稿
       </RouterLink>
     </div>
     <div class="nav-tab">
-      <RouterLink to="/timeline">
+      <RouterLink to="/timeline" active-class="active-nav">
         <iconTimeLine class="icon"></iconTimeLine>
         时光轴
       </RouterLink>
     </div>
     <div class="nav-tab">
-      <RouterLink to="/chat">
+      <RouterLink to="/chat" active-class="active-nav">
         <iconOpenAI class="icon"></iconOpenAI>
         Chat
       </RouterLink>
     </div>
     <div class="nav-tab">
-      <RouterLink to="/friend">
+      <RouterLink to="/friend" active-class="active-nav">
         <iconFriendLink class="icon"></iconFriendLink>
         友链
       </RouterLink>
     </div>
     <div class="nav-tab">
-      <RouterLink to="/about">
+      <RouterLink to="/about" active-class="active-nav">
         <iconAbout class="icon"></iconAbout>关于
       </RouterLink>
     </div>
     <div class="nav-tab">
-      <RouterLink to="/more">
+      <RouterLink to="/more" active-class="active-nav">
         <iconMore class="icon"></iconMore>更多
       </RouterLink>
     </div>
@@ -51,6 +52,22 @@ import iconTimeLine from '@/components/icons/iconTimeLine.vue'
 import iconFriendLink from '@/components/icons/iconFriendLink.vue'
 import iconAbout from '@/components/icons/iconAbout.vue'
 import iconMore from '@/components/icons/iconMore.vue'
+
+// Navigation bar background color gradient
+const currentNav = ref('')
+const nav = ref()
+const backgroundStyle = ref('')
+const handleMouseMove = (event) => {
+  const rect = nav.value.getBoundingClientRect()
+  // 计算鼠标在目标元素中的相对坐标
+  const x = event.clientX - rect.left
+  const y = event.clientY - rect.top
+  backgroundStyle.value = `radial-gradient(circle 70px at ${x}px ${y}px,var(--radial-color), transparent)`
+}
+const handleMouseLeave = () => {
+  document.body.style.cursor = 'default'
+  backgroundStyle.value = ``
+}
 </script>
 <style lang="scss" scoped>
 .nav {
@@ -63,6 +80,9 @@ import iconMore from '@/components/icons/iconMore.vue'
       .icon {
         @apply m-1
       }
+    }
+    .active-nav{
+      @apply text-[var(--active-color)] filter brightness-120 contrast-251 saturate-100;
     }
   }
 }
