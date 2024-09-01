@@ -12,12 +12,12 @@
 <script setup lang="ts">
 const props = defineProps({
   width: {
-    type: Number,
-    default: 300,
+    type: String,
+    default: '300px',
   },
   height: {
-    type: Number,
-    default: 100
+    type: String,
+    default: '100px'
   }
 });
 </script>
