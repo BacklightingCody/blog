@@ -1,5 +1,5 @@
 <template>
-  <div class="nav h-full flex items-center shadow-lg rounded-full shadow-[var(--accent-color)]"
+  <div class="nav h-full flex items-center shadow-lg rounded-full shadow-[var(--shadow-color)]"
     @mousemove="handleMouseMove" @mouseleave="handleMouseLeave" ref="nav" :style="{ background: backgroundStyle }">
     <div class="nav-tab">
       <RouterLink to="/" exact-active-class="active-nav">

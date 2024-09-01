@@ -27,5 +27,6 @@ declare module 'vue' {
     Loading: typeof import('./src/components/Loading.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Signature: typeof import('./src/components/Signature.vue')['default']
   }
 }
