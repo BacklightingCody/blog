@@ -57,7 +57,7 @@ export class CustomTransform extends AxiosTransform {
       const accessToken = res.headers.authorization.replace('Bearer ', '')
       globalStore.setToken(accessToken, 'access')
     }
-    console.log(res,'res')
+    console.log(res, 'res')
     if (res.status === 200) {
       ElMessage.success({
         message: res.data.message,
@@ -79,74 +79,46 @@ export class CustomTransform extends AxiosTransform {
     axiosInstance: AxiosInstance,
     error: AxiosError
   ): Promise<any> {
-    // 可以尝试做一些全局的错误重试或错误处理
     const axiosRetry = new AxiosRetry()
-    // axiosRetry.retry(axiosInstance, error)  放在外边可以默认重试
     let message = ''
+    const globalStore = useGlobalStore()
+    const statusMessageMap: Record<number, string> = {
+      400: '请求错误(400)',
+      401: '未授权，请先登录',
+      403: '拒绝访问(403)',
+      404: '请求出错(404)',
+      408: '请求超时(408)',
+      500: '服务器错误(500)',
+      501: '服务未实现(501)',
+      502: '网络错误(502)',
+      503: '服务不可用(503)',
+      504: '网络超时(504)',
+      505: 'HTTP版本不受支持(505)'
+    }
+
     async function handleResponseError() {
-      // const axiosRetry = new AxiosRetry()
-      console.log('进入错误处理')
-      const globalStore = useGlobalStore()
-      switch (error.response?.status) {
-        case 400:
-          message = '请求错误(400)'
-          break
-        case 401:
-          if (globalStore.isLogin) {
-            const isRefresh: boolean = await refreshToken()
-            // 重新请求
-            if (isRefresh) {
-              console.log(error,'error')
-              error.config.headers['Authorization'] = `Bearer ${globalStore.getToken('access')}`
-              // error.config.headers['Content-Type'] = `application/json; charset=utf-8`
-              axiosRetry.retry(axiosInstance, error)
-            }
-          }else{
-            message = '请先登录'
-          }
-          // 这里可以做清空storage并跳转到登录页的操作
-          break
-        case 403:
-          message = '拒绝访问(403)'
-          break
-        case 404:
-          message = '请求出错(404)'
-          break
-        case 408:
-          message = '请求超时(408)'
-          break
-        case 500:
-          message = '服务器错误(500)'
-          break
-        case 501:
-          message = '服务未实现(501)'
-          break
-        case 502:
-          message = '网络错误(502)'
-          break
-        case 503:
-          message = '服务不可用(503)'
-          break
-        case 504:
-          message = '网络超时(504)'
-          break
-        case 505:
-          message = 'HTTP版本不受支持(505)'
-          break
-        default:
-          message = '未知错误'
-          break
+      const status = error.response?.status
+
+      if (status === 401 && globalStore.isLogin) {
+        const isRefresh: boolean = await refreshToken()
+        if (isRefresh) {
+          error.config.headers['Authorization'] =
+            `Bearer ${globalStore.getToken('access')}`
+          return axiosRetry.retry(axiosInstance, error)
+        }
+      } else {
+        message = statusMessageMap[status] || '未知错误'
       }
+
+      if (message) {
+        ElMessage.error({
+          message,
+          duration: 3000
+        })
+      } // 如果没有重新请求，则直接返回错误
+      // return Promise.reject(error.response);
     }
-    await handleResponseError()
-    // 这里错误消息可以使用全局弹框展示出来
-    if (message) {
-      ElMessage.error({
-        message,
-        duration: 3000
-      })
-    }
-    // 这里是AxiosError类型，所以一般我们只reject我们需要的响应即可
-    return Promise.reject(error.response)
+
+    return handleResponseError()
   }
 }
