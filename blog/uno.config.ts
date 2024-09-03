@@ -13,13 +13,28 @@ export default defineConfig({
   ],
   theme: {
     colors: {
-      // 使用 CSS 变量定义主题颜色
-      'background-color': 'var(--background-color)',
-      'text-color': 'var(--text-color)',
-      'icon-color': 'var(--icon-color)',
-      'accent-color': 'var(--accent-color)',
-      'active-color': 'var(--active-color)',
-      'inactive-color': 'var(--inactive-color)'
+      bgColor: 'var(--background-color)',
+      iconColor: 'var(--icon-color)',
+      accentColor: 'var(--accent-color)',
+      borderColor: 'var(--border-color)',
+      shadowColor: 'var(--shadow-color)',
+      text:{
+        primary: 'var(--text-color)',
+        btn: 'var(--btn-text-color)',
+      },
+      btn:{
+        primary: 'var(--btn-text-color)',
+        active: 'var(--active-color)',
+        inactive: 'var(--inactive-color)',
+        hover: 'var(--hover-color)'
+      }
+    },
+    breakpoints: {
+      sm: '640px',
+      md: '768px',
+      lg: '1024px',
+      xl: '1280px',
+      '2xl': '1536px'
     }
   }
 })
