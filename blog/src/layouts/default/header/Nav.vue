@@ -1,5 +1,6 @@
 <template>
-  <div class="nav h-full flex items-center shadow-lg rounded-full shadow-[var(--shadow-color)]"
+  <div
+    class="nav h-full flex items-center shadow-lg rounded-full shadow-opacity-50 shadow-default-shadow "
     @mousemove="handleMouseMove" @mouseleave="handleMouseLeave" ref="nav" :style="{ background: backgroundStyle }">
     <div class="nav-tab">
       <RouterLink to="/" exact-active-class="active-nav">
@@ -75,14 +76,15 @@ const handleMouseLeave = () => {
     @apply h-full flex items-center;
 
     a {
-      @apply h-full text-[var(--btn-text-color)] flex items-center flex-nowrap px-2 hover:(text-[var(--btn-color)] filter brightness-120 contrast-251 saturate-100);
+      @apply h-full text-default-btnText flex items-center flex-nowrap px-2 hover:(text-hover-btnText filter brightness-120 contrast-251 saturate-100);
 
       .icon {
         @apply m-1
       }
     }
-    .active-nav{
-      @apply text-[var(--active-color)] filter brightness-120 contrast-251 saturate-100;
+
+    .active-nav {
+      @apply text-active-btnText filter brightness-120 contrast-251 saturate-100;
     }
   }
 }

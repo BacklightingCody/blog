@@ -13,21 +13,24 @@ export default defineConfig({
   ],
   theme: {
     colors: {
-      bgColor: 'var(--background-color)',
-      iconColor: 'var(--icon-color)',
-      accentColor: 'var(--accent-color)',
-      borderColor: 'var(--border-color)',
-      shadowColor: 'var(--shadow-color)',
-      text:{
-        primary: 'var(--text-color)',
-        btn: 'var(--btn-text-color)',
+      default: {
+        bg: 'var(--background-color)',
+        text: 'var(--text-color)',
+        btnText: 'var(--btn-text-color)',
+        shadow: 'var(--shadow-color)',
+        icon: 'var(--icon-color)',
+        border:'var(--border-color)'
       },
-      btn:{
-        primary: 'var(--btn-text-color)',
-        active: 'var(--active-color)',
-        inactive: 'var(--inactive-color)',
-        hover: 'var(--hover-color)'
-      }
+      active: {
+        btnText: 'var(--active-btn-text)'
+      },
+      hover: {
+        btnText: 'var(--btn-hover-text-color)'
+      },
+      inactive: {},
+      primary: {
+      },
+      warning: {}
     },
     breakpoints: {
       sm: '640px',
