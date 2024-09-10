@@ -17,7 +17,14 @@
     "paths": {
       "@/*": ["src/*"],
       "~/*": ["src/types/*"]
+<<<<<<< Updated upstream
     }
+=======
+    },
+    "jsx": "preserve", // 在 .tsx文件里支持JSX
+    "outDir": "./dist",
+    "emitDeclarationOnly": true  //如果你只需要生成 .d.ts 文件而不希望生成 .js 文件
+>>>>>>> Stashed changes
   },
   "include": [
     "src"

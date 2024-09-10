@@ -1,6 +1,9 @@
 import { defineConfig, presetAttributify, presetUno } from 'unocss'
 import presetIcons from '@unocss/preset-icons'
 export default defineConfig({
+  content: {
+    filesystem: ['**/*.{html,js,ts,jsx,tsx,vue}']
+  },
   presets: [
     presetAttributify({
       /* preset options */
@@ -13,6 +16,7 @@ export default defineConfig({
   ],
   theme: {
     colors: {
+<<<<<<< Updated upstream
       // 使用 CSS 变量定义主题颜色
       'background-color': 'var(--background-color)',
       'text-color': 'var(--text-color)',
@@ -20,6 +24,34 @@ export default defineConfig({
       'accent-color': 'var(--accent-color)',
       'active-color': 'var(--active-color)',
       'inactive-color': 'var(--inactive-color)'
+=======
+      default: {
+        bg: 'var(--background-color)',
+        text: 'var(--text-color)',
+        btnText: 'var(--btn-text-color)',
+        shadow: 'var(--shadow-color)',
+        icon: 'var(--icon-color)',
+        border: 'var(--border-color)',
+        currency: 'var(--currency-color)',
+        accent: 'var(--accent-color)'
+      },
+      active: {
+        btnText: 'var(--active-btn-text)'
+      },
+      hover: {
+        btnText: 'var(--btn-hover-text-color)'
+      },
+      inactive: {},
+      primary: {},
+      warning: {}
+    },
+    breakpoints: {
+      sm: '640px',
+      md: '768px',
+      lg: '1024px',
+      xl: '1280px',
+      '2xl': '1536px'
+>>>>>>> Stashed changes
     }
   }
 })

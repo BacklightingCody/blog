@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import {updateCSSVariables,generateRandomColors} from '@/utils/color'
+import { updateCSSVariables, generateRandomColors } from '@/utils/color'
 export const useGlobalStore = defineStore(
   'global',
   () => {
@@ -10,11 +10,16 @@ export const useGlobalStore = defineStore(
       isLogin.value = value
     }
     // 主题方面
-    const theme = ref('light')
-    const colors = ref(generateRandomColors(5))
-    const changeMode = () => {
-      theme.value = theme.value === 'dark' ? 'light' : 'dark'
-      updateCSSVariables(theme)
+    const oldTheme = localStorage.getItem('theme')
+    const theme = ref(oldTheme)
+    watchEffect(() => {
+      console.log(theme.value, '111')
+    })
+    const colors = ref(generateRandomColors(5))  //产生一组颜色
+    const changeMode = (mode: string) => {
+      console.log(111)
+      theme.value = mode
+      // updateCSSVariables(theme)
     }
     watchEffect(() => {
       updateCSSVariables(theme)
@@ -66,12 +71,12 @@ export const useGlobalStore = defineStore(
   {
     persist: [
       {
-        paths: ['theme'],
+        pick: ['theme'],
         key: 'theme',
         storage: localStorage
       },
       {
-        paths: ['refreshToken'],
+        pick: ['refreshToken'],
         key: 'blog-token',
         storage: localStorage
       }

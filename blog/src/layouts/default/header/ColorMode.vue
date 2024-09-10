@@ -32,17 +32,17 @@ const isDarkMode = ref(colorMode.value === 'dark')
 
 const toggleMode = () => {
   colorMode.value = isDarkMode.value ? 'dark' : 'light'
-  globalStore.changeMode()
-  console.log(isDarkMode.value)
+  globalStore.changeMode(colorMode.value)
 }
 </script>
 <style lang="scss" scoped>
-:deep(.el-switch__core){
-  border-color:var(--accent-color) !important;
+:deep(.el-switch__core) {
+  border-color: var(--accent-color) !important;
 }
-:deep(.el-switch__core .el-switch__action){
-  background-color:var(--background-color) !important;
-  color:var(--icon-color) !important;
-  
+
+:deep(.el-switch__core .el-switch__action) {
+  background-color: var(--background-color) !important;
+  color: var(--icon-color) !important;
+
 }
 </style>
