@@ -4,7 +4,7 @@ export const generateRandomColor = () => {
   const r = Math.floor(Math.random() * 256)
   const g = Math.floor(Math.random() * 256)
   const b = Math.floor(Math.random() * 256)
-  let alpha =0.2
+  let alpha = 0.2
   // 确保颜色足够饱和
   const max = Math.max(r, g, b)
   const scale = 255 / max
@@ -12,7 +12,6 @@ export const generateRandomColor = () => {
   const newR = Math.min(255, Math.floor(r * scale))
   const newG = Math.min(255, Math.floor(g * scale))
   const newB = Math.min(255, Math.floor(b * scale))
-
   return `rgba(${newR}, ${newG}, ${newB},${alpha})`
 }
 
@@ -53,7 +52,7 @@ export const adjustColorBrightness = (color, amount) => {
 
 // 动态更新CSS变量
 export const updateCSSVariables = (theme) => {
-  const radialGradientColor = generateRandomColor()
+  const randomGradientColor = generateRandomColor()
   const root = document.documentElement
   if (theme.value === 'dark') {
     // root.style.setProperty('--background-color', '#2c303f')
@@ -63,7 +62,7 @@ export const updateCSSVariables = (theme) => {
     // root.style.setProperty('--icon-color', '#03a2fe')
     // root.style.setProperty('--accent-color', '#705ad6')
     // root.style.setProperty('--active-color', '#ff785a')
-    root.style.setProperty('--radial-color', radialGradientColor)
+    root.style.setProperty('--currency-color', randomGradientColor)
   } else {
     // root.style.setProperty('--background-color', '#f5f5f7')
     // root.style.setProperty('--btn-color', '#007BFF')
@@ -72,6 +71,6 @@ export const updateCSSVariables = (theme) => {
     // root.style.setProperty('--icon-color', '#FF8C00')
     // root.style.setProperty('--accent-color', '#8a72d9')
     // root.style.setProperty('--active-color', '#ff7b42')
-    root.style.setProperty('--radial-color', radialGradientColor)
+    root.style.setProperty('--currency-color', randomGradientColor)
   }
 }

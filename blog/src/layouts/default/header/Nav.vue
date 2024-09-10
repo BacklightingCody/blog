@@ -1,6 +1,6 @@
 <template>
   <div
-    class="nav h-full flex items-center shadow-lg rounded-full shadow-opacity-50 shadow-default-shadow "
+    class="nav h-full flex items-center rounded-full"
     @mousemove="handleMouseMove" @mouseleave="handleMouseLeave" ref="nav" :style="{ background: backgroundStyle }">
     <div class="nav-tab">
       <RouterLink to="/" exact-active-class="active-nav">
@@ -63,7 +63,7 @@ const handleMouseMove = (event) => {
   // 计算鼠标在目标元素中的相对坐标
   const x = event.clientX - rect.left
   const y = event.clientY - rect.top
-  backgroundStyle.value = `radial-gradient(circle 70px at ${x}px ${y}px,var(--radial-color), transparent)`
+  backgroundStyle.value = `radial-gradient(circle 70px at ${x}px ${y}px,var(--currency-color), transparent)`
 }
 const handleMouseLeave = () => {
   document.body.style.cursor = 'default'

@@ -1,6 +1,9 @@
 import { defineConfig, presetAttributify, presetUno } from 'unocss'
 import presetIcons from '@unocss/preset-icons'
 export default defineConfig({
+  content: {
+    filesystem: ['**/*.{html,js,ts,jsx,tsx,vue}']
+  },
   presets: [
     presetAttributify({
       /* preset options */
@@ -19,7 +22,9 @@ export default defineConfig({
         btnText: 'var(--btn-text-color)',
         shadow: 'var(--shadow-color)',
         icon: 'var(--icon-color)',
-        border:'var(--border-color)'
+        border: 'var(--border-color)',
+        currency: 'var(--currency-color)',
+        accent: 'var(--accent-color)'
       },
       active: {
         btnText: 'var(--active-btn-text)'
@@ -28,8 +33,7 @@ export default defineConfig({
         btnText: 'var(--btn-hover-text-color)'
       },
       inactive: {},
-      primary: {
-      },
+      primary: {},
       warning: {}
     },
     breakpoints: {
