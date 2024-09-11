@@ -1,6 +1,6 @@
 <template>
   <div
-    class="fixed flex w-full items-center bg-default-bg border-b-[1px] border-solid border-gray-400 border-op-0 px-20"
+    class="fixed flex w-full items-center bg-default-bg border-b-[1px] border-solid border-gray-400 border-op-0"
     ref="header" :class="{ isborder: showHeaderBorder }">
     <avatar class="m-2.5"></avatar>
     <Signature width="150px" height="50px" class="relative top-[5px] ml-[20px] flex-shrink-0"></Signature>
