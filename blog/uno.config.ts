@@ -1,9 +1,9 @@
 import { defineConfig, presetAttributify, presetUno } from 'unocss'
 import presetIcons from '@unocss/preset-icons'
 export default defineConfig({
-  content: {
-    filesystem: ['**/*.{html,js,ts,jsx,tsx,vue}']
-  },
+  // content: {
+  //   filesystem: ['**/*.{html,js,ts,jsx,tsx,vue}']
+  // },
   presets: [
     presetAttributify({
       /* preset options */

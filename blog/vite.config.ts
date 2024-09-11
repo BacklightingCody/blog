@@ -3,6 +3,7 @@ import UnoCSS from 'unocss/vite' //引入unocss
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers' //引入element-plus
+import { VantResolver } from '@vant/auto-import-resolver' //引入vant
 // import eslintPlugin from 'vite-plugin-eslint'    //eslint插件
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
@@ -14,10 +15,10 @@ export default defineConfig({
     // eslintPlugin(),
     UnoCSS(),
     Components({
-      resolvers: [ElementPlusResolver()]
+      resolvers: [ElementPlusResolver(), VantResolver()]
     }),
     AutoImport({
-      resolvers: [ElementPlusResolver()],
+      resolvers: [ElementPlusResolver(), VantResolver()],
       imports: ['vue'], //导入vue
       dts: './src/types/auto-import.d.ts', //自动导入的声明文件
       eslintrc: {

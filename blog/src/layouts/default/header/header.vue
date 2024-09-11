@@ -1,9 +1,13 @@
 <template>
-  <div class="fixed flex w-full items-center bg-default-bg" ref="header" :class="{ isborder: showHeaderBorder }">
+  <div
+    class="fixed flex w-full items-center bg-default-bg border-b-[1px] border-solid border-gray-400 border-op-0 px-20"
+    ref="header" :class="{ isborder: showHeaderBorder }">
     <avatar class="m-2.5"></avatar>
-    <Signature width="150px" height="50px" class="absolute left-[80px] top-[15px]"></Signature>
-    <Nav class="ml-auto h-[40px]!" :class="{ isborder: showNavBorder }"></Nav>
-    <div class="w-[100px] h-[60px] ml-auto flex items-center">
+    <Signature width="150px" height="50px" class="relative top-[5px] ml-[20px] flex-shrink-0"></Signature>
+    <Nav class="mx-auto h-[40px]!  border-b-[1px] border-solid border-gray-400 border-op-0"
+      :class="{ isborder: showNavBorder }"></Nav>
+    
+    <div class="w-[100px] h-[60px] flex items-center">
       <ColorMode></ColorMode>
       <div><el-button type="success" class="text-black ml-2" size="small" @click="loginSubmit">登录</el-button></div>
     </div>
@@ -40,7 +44,7 @@ const handleScroll = () => {
   if (scrollTop > threshold) {
     showHeaderBorder.value = true
     showNavBorder.value = false
-  }else{
+  } else {
     showHeaderBorder.value = false
     showNavBorder.value = true
   }
@@ -58,6 +62,6 @@ onUnmounted(() => {
 </script>
 <style lang="scss" scoped>
 .isborder {
-  @apply border-b-[1px] border-solid border-gray-400 border-op-30
+  @apply border-op-30 transition-all .duration-1000
 }
 </style>

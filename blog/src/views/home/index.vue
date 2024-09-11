@@ -1,8 +1,10 @@
 <template>
-  <div class="nav"></div>
+  <div class="w-[60px] h-[60px] mx-auto">
+    <InnerLoading />
+  </div>
 </template>
 <script setup lang="ts">
-
+import InnerLoading from '@/components/InnerLoading.vue'
 </script>
 <style lang="scss" scoped>
 .nav {

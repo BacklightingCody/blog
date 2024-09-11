@@ -1,5 +1,5 @@
 <template>
-  <div class="circle flex justify-center items-center">
+  <div class="circle flex justify-center items-center flex-shrink-0">
     <el-avatar
     :size="size"
     :src="props.src"
