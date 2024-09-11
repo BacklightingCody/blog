@@ -1,12 +1,12 @@
 <template>
-  <div
-    class="fixed flex w-full items-center bg-default-bg border-b-[1px] border-solid border-gray-400 border-op-0"
+  <div class="flex  fixed w-full items-center bg-default-bg border-b-[1px] border-solid border-gray-400 border-op-0"
     ref="header" :class="{ isborder: showHeaderBorder }">
-    <avatar class="m-2.5"></avatar>
-    <Signature width="150px" height="50px" class="relative top-[5px] ml-[20px] flex-shrink-0"></Signature>
+    <avatar class="m-2.5" :size="windowWidth > 900 ? 40 : 30"></avatar>
+    <Signature :width="windowWidth > 900 ? '150px' : '90px'" :height="windowWidth > 900 ? '50px' : '40px'"
+      class="relative top-[5px] ml-[15px]"></Signature>
     <Nav class="mx-auto h-[40px]!  border-b-[1px] border-solid border-gray-400 border-op-0"
       :class="{ isborder: showNavBorder }"></Nav>
-    
+
     <div class="w-[100px] h-[60px] flex items-center">
       <ColorMode></ColorMode>
       <div><el-button type="success" class="text-black ml-2" size="small" @click="loginSubmit">登录</el-button></div>
@@ -21,7 +21,7 @@ import ColorMode from './ColorMode.vue'
 import Signature from '@/components/Signature.vue'
 import { loginApi } from '@/services/auth'
 import { useGlobalStore } from '@/stores'
-
+import { useWindowSize } from '@vueuse/core';
 const globalStore = useGlobalStore()
 const loginSubmit = () => {
   loginApi({ username: 'backlighting', password: '123456' }).then(res => {
@@ -58,6 +58,17 @@ onMounted(() => {
 })
 onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll);
+})
+// 响应式设计
+const windowWidth = ref(0);
+const windowHeight = ref(0);
+const { width, height } = useWindowSize();
+onMounted(() => {
+  windowWidth.value = width.value;
+  windowHeight.value = height.value;
+});
+watch(width, () => {
+  windowWidth.value = width.value;
 })
 </script>
 <style lang="scss" scoped>

@@ -53,8 +53,7 @@
       </div>
     </div>
     <div v-else class="w-[50px] flex justify-center">
-      <iconHomeMobile @click="showDrawer = true"
-        class="nav cursor-pointer text-default-icon" />
+      <iconHomeMobile @click="showDrawer = true" class="nav cursor-pointer text-default-icon" />
       <div v-if="showDrawer" class="drawer-container" @click="showDrawer = false">
         <div class="nav drawer-content">
           <div class="nav-tab">
@@ -146,7 +145,6 @@ const windowWidth = ref(0);
 const windowHeight = ref(0);
 const { width, height } = useWindowSize();
 onMounted(() => {
-  console.log(windowHeight.value, '11')
   windowWidth.value = width.value;
   windowHeight.value = height.value;
 });
@@ -183,19 +181,6 @@ const showDrawer = ref(false);
   }
 }
 
-@screen at-sm {
-  .nav {
-    flex-direction: column;
-  }
-
-  .is-mobile {}
-
-  .nav-tab {
-    width: 100%;
-    text-align: center;
-  }
-}
-
 .drawer-container {
   position: fixed;
   bottom: 0;
@@ -203,12 +188,15 @@ const showDrawer = ref(false);
   right: 0;
   overflow-y: scroll;
   transition: height 0.3s ease;
+
   .drawer-content {
     background-color: var(--accent-color);
-    padding: 10px;
     display: flex;
-    .nav-tab{
-      @apply flex justify-center pl-10
+    flex-direction: column;
+    height: 300px;
+
+    .nav-tab {
+      @apply flex justify-center
     }
   }
 }
