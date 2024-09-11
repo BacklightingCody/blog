@@ -1,16 +1,10 @@
 <template>
-  <div class="circle flex justify-center items-center flex-shrink-0">
-    <el-avatar
-    :size="size"
-    :src="props.src"
-    :shape="shape"
-    :fit="fit"
-    @error="errorHandler"
-  >
-    <img src="/avatar.jpg" />
-  </el-avatar>
+  <div class="circle flex justify-center items-center flex-shrink-0" :class="{ 'shrink-circle': size === 40 ? false : true }">
+    <el-avatar :size="size" :src="props.src" :shape="shape" :fit="fit" @error="errorHandler">
+      <img src="/avatar.jpg" />
+    </el-avatar>
   </div>
-  
+
 </template>
 <script setup lang="ts">
 const props = defineProps({
@@ -23,11 +17,16 @@ const props = defineProps({
 const errorHandler = () => true
 </script>
 <style lang="scss" scoped>
-.circle{
+.circle {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background:conic-gradient(#f00,#ff0,#0f0,#0ff,#00f,#f0f,#f00);
-  position:relative;
+  background: conic-gradient(#f00, #ff0, #0f0, #0ff, #00f, #f0f, #f00);
+  position: relative;
+}
+
+.shrink-circle {
+  width: 40px;
+  height: 40px;
 }
 </style>
