@@ -1,16 +1,3 @@
-<template>
-  <el-container>
-    <el-header class="p-0!">
-      <Header></Header>
-    </el-header>
-    <el-main class="p-0!" :class="{ 'shrink-header': windowWidth > 900 ? false : true }">
-      <Main></Main>
-    </el-main>
-    <el-footer class="p-0!">
-      <Footer></Footer>
-    </el-footer>
-  </el-container>
-</template>
 <script setup lang="ts">
 import Header from '../default/header/header.vue'
 import Footer from '../default/footer/footer.vue'
@@ -28,7 +15,24 @@ watch(width, () => {
   windowWidth.value = width.value;
 })
 </script>
+<template>
+  <el-container class="box-border w-full">
+    <el-header class="fixed w-full border-box h-[70px]! z-50">
+      <Header></Header>
+    </el-header>
+    <el-main class="p-0! pt-[70px]!">
+      <Main></Main>
+    </el-main>
+    <el-footer class="p-0!">
+      <Footer></Footer>
+    </el-footer>
+  </el-container>
+</template>
 <style lang="scss">
+body {
+  background: var(--background-color);
+}
+
 /* Firefox 浏览器的滚动条样式 */
 /* 针对 Chrome, Safari 和 Edge 定义滚动条样式 */
 ::-webkit-scrollbar {
@@ -49,7 +53,7 @@ watch(width, () => {
   /* 滚动条轨道的颜色 */
 }
 
-.shrink-header {
-  @apply pt-[60px]
-}
+</style>
+<style lang="scss" scoped>
+
 </style>

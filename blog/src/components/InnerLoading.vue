@@ -1,6 +1,6 @@
 <template>
   <div class="inner-loading">
-    <video width="60" ref="loading" loop>
+    <video width="60" ref="loading" loop muted>
       <source src="/loading.webm" type="video/webm">
     </video>
   </div>

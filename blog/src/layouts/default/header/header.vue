@@ -1,18 +1,3 @@
-<template>
-  <div class="flex  fixed w-full items-center bg-default-bg border-b-[1px] border-solid border-gray-400 border-op-0"
-    ref="header" :class="{ isborder: showHeaderBorder }">
-    <avatar class="m-2.5" :size="windowWidth > 900 ? 40 : 30"></avatar>
-    <Signature :width="windowWidth > 900 ? '150px' : '90px'" :height="windowWidth > 900 ? '50px' : '40px'"
-      class="relative top-[5px] ml-[15px]"></Signature>
-    <Nav class="mx-auto h-[40px]!  border-b-[1px] border-solid border-gray-400 border-op-0"
-      :class="{ isborder: showNavBorder }"></Nav>
-
-    <div class="w-[100px] h-[60px] flex items-center">
-      <ColorMode></ColorMode>
-      <div><el-button type="success" class="text-black ml-2" size="small" @click="loginSubmit">登录</el-button></div>
-    </div>
-  </div>
-</template>
 <script setup lang="ts">
 import { useTemplateRef } from 'vue'
 import Avatar from '@/components/Avatar.vue'
@@ -71,7 +56,30 @@ watch(width, () => {
   windowWidth.value = width.value;
 })
 </script>
+<template>
+  <div class="header-container" ref="header" :class="{ isborder: showHeaderBorder }">
+    <avatar class="m-2.5" :size="windowWidth > 900 ? 40 : 30"></avatar>
+    <Signature :width="windowWidth > 900 ? '150px' : '90px'" :height="windowWidth > 900 ? '50px' : '40px'"
+      class="relative top-[5px] ml-[15px]"></Signature>
+    <Nav class="mx-auto h-[40px]!  border-b-[1px] border-solid border-gray-400 border-op-0"
+      :class="{ isborder: showNavBorder }"></Nav>
+
+    <div class="w-[100px] h-[60px] flex items-center">
+      <ColorMode></ColorMode>
+      <div><el-button type="success" class="text-black ml-2" size="small" @click="loginSubmit">登录</el-button></div>
+    </div>
+  </div>
+</template>
 <style lang="scss" scoped>
+.header-container {
+
+  @apply flex px-10 absolute w-full right-0 left-0 items-center border-b-[1px] border-solid border-gray-400 border-op-0
+}
+
+.header-container::after {
+  @apply content-[''] absolute w-full h-full top-0 left-0 backdrop-filter backdrop-blur-xl backdrop-brightness-100 backdrop-contrast-100 z--1
+}
+
 .isborder {
   @apply border-op-30 transition-all .duration-1000
 }
