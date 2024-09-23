@@ -1,5 +1,5 @@
 <template>
-  <div class="circle flex justify-center items-center flex-shrink-0" :class="{ 'shrink-circle': size === 40 ? false : true }">
+  <div class="circle relative flex justify-center items-center flex-shrink-0">
     <el-avatar :size="size" :src="props.src" :shape="shape" :fit="fit" @error="errorHandler">
       <img src="/avatar.jpg" />
     </el-avatar>
@@ -22,11 +22,10 @@ const errorHandler = () => true
   height: 50px;
   border-radius: 50%;
   background: conic-gradient(#f00, #ff0, #0f0, #0ff, #00f, #f0f, #f00);
-  position: relative;
-}
 
-.shrink-circle {
-  width: 40px;
-  height: 40px;
+  @media (max-width: 768px) {
+    width: 40px;
+    height: 40px;
+  }
 }
 </style>

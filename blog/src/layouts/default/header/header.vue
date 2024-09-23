@@ -57,9 +57,10 @@ watch(width, () => {
 })
 </script>
 <template>
-  <div class="header-container" ref="header" :class="{ isborder: showHeaderBorder }">
-    <avatar class="m-2.5" :size="windowWidth > 900 ? 40 : 30"></avatar>
-    <Signature :width="windowWidth > 900 ? '150px' : '90px'" :height="windowWidth > 900 ? '50px' : '40px'"
+  <div class="header-container" ref="header"
+    :class="{ isborder: showHeaderBorder}">
+    <avatar class="m-2.5" :size="windowWidth > 768 ? 40 : 30"></avatar>
+    <Signature :width="windowWidth > 768 ? '150px' : '100px'" :height="windowWidth > 768 ? '50px' : '40px'"
       class="relative top-[5px] ml-[15px]"></Signature>
     <Nav class="mx-auto h-[40px]!  border-b-[1px] border-solid border-gray-400 border-op-0"
       :class="{ isborder: showNavBorder }"></Nav>
@@ -73,7 +74,10 @@ watch(width, () => {
 <style lang="scss" scoped>
 .header-container {
 
-  @apply flex px-10 absolute w-full right-0 left-0 items-center border-b-[1px] border-solid border-gray-400 border-op-0
+  @apply flex px-10 absolute w-full right-0 left-0 items-center border-b-[1px] border-solid border-gray-400 border-op-0;
+  @media (max-width:500px) {
+    @apply px-2
+  }
 }
 
 .header-container::after {
@@ -82,5 +86,9 @@ watch(width, () => {
 
 .isborder {
   @apply border-op-30 transition-all .duration-1000
+}
+
+.isPadding {
+  @apply px-2;
 }
 </style>
