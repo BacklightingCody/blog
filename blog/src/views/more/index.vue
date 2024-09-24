@@ -20,7 +20,10 @@ const refreshstatus = () => {
   console.log(globalStore.isLogin)
 }
 async function refresh() {
-  await refreshToken()
+  const res = await refreshToken()
+  if (res) {
+    ElMessage.success('刷新成功')
+  }
 }
 </script>
 <style lang="scss" scoped></style>

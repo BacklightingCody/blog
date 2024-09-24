@@ -2,7 +2,7 @@ import http from '@/utils/http'
 
 export const loginApi = (data: { username: string; password: string }) => {
   return http.request({
-    url: '/login',
+    url: '/auth/login',
     method: 'post',
     data
   })
@@ -10,7 +10,7 @@ export const loginApi = (data: { username: string; password: string }) => {
 
 export const refreshTokenApi = async (data: { refreshToken: string }) => {
   return http.request({
-    url: '/refresh_token',
+    url: '/auth/refresh_token',
     method: 'post',
     data
   })

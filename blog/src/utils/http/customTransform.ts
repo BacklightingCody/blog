@@ -60,7 +60,7 @@ export class CustomTransform extends AxiosTransform {
     console.log(res, 'res')
     if (res.status === 200) {
       ElMessage.success({
-        message: res.data.message,
+        message: res.data.msg,
         duration: 3000
       })
     }

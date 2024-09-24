@@ -4,7 +4,7 @@ import { CustomTransform } from './customTransform' // 可选的自定义 transf
 
 const http = new AxiosService(
   {
-    baseURL: '/api',
+    baseURL: '/api/v0',
     timeout: 5000
   },
   new CustomTransform()

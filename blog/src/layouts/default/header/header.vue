@@ -14,7 +14,7 @@ const loginSubmit = () => {
     globalStore.setToken(res.data.accessToken, 'access')
     globalStore.changeLoginStatus(true)
     ElMessage({
-      message: res.message,
+      message: '登录成功',
       type: 'success'
     })
   })
