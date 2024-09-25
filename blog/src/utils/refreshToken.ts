@@ -1,31 +1,27 @@
-import { refreshTokenApi } from '@/services'
-import { useGlobalStore } from '@/stores'
+// import { refreshTokenApi } from '@/services'
+// import { useGlobalStore } from '@/stores'
+// let refreshTokenPromise: Promise<boolean> | null = null
+// export async function refreshToken(): Promise<boolean> {
+//   if (refreshTokenPromise) return refreshTokenPromise
 
-let promise: Promise<boolean> | null = null
+//   refreshTokenPromise = new Promise(async (resolve, reject) => {
+//     try {
+//       const globalStore = useGlobalStore()
+//       const refreshToken = globalStore.getToken('refresh')
+//       const accessTOken = globalStore.getToken('access')
+//       console.log(accessTOken)
+//       console.log('refreshToken', refreshToken)
+//       // 请求刷新 token，后端设置新的 accessToken 和 refreshToken
+//       await refreshTokenApi(refreshToken)
+//       ElMessage.success('Token refreshed successfully')
+//       resolve(true)
+//     } catch (error) {
+//       ElMessage.error('Token refresh failed. Please log in again.')
+//       reject(false)
+//     } finally {
+//       refreshTokenPromise = null
+//     }
+//   })
 
-export async function refreshToken(): Promise<boolean> {
-  const globalStore = useGlobalStore()
-
-  if (promise) return promise
-
-  promise = new Promise(async (resolve, reject) => {
-    try {
-      const res = await refreshTokenApi({
-        refreshToken: globalStore.getToken('refresh')
-      })
-
-      const { accessToken } = res.data
-      globalStore.setToken(accessToken, 'access')
-      // ElMessage.success('Token refreshed successfully')
-
-      resolve(res.code === 200)
-    } catch (error) {
-      ElMessage.error('Token refresh failed')
-      reject(error)
-    } finally {
-      promise = null
-    }
-  })
-
-  return promise
-}
+//   return refreshTokenPromise
+// }

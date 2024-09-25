@@ -8,7 +8,7 @@ import axios, {
 import { AxiosRetry } from './axiosRetry'
 import { AxiosTransform, RequestOptions } from './axiosTransform'
 import { useGlobalStore } from '@/stores'
-import { refreshToken } from '@/utils/refreshToken'
+// import { refreshToken } from '@/utils/refreshToken'
 import { getMoreApi } from '@/services/more'
 // 创建自定义的 AxiosTransform 实现
 export class CustomTransform extends AxiosTransform {
@@ -19,8 +19,7 @@ export class CustomTransform extends AxiosTransform {
   ): InternalAxiosRequestConfig {
     console.log('发起了请求')
     const globalStore = useGlobalStore()
-    // 在请求头中添加 token
-    const accessToken = globalStore.getToken('access')
+    const accessToken = globalStore.getToken('access') // 在请求头中添加 token
     if (accessToken) {
       config.headers['Authorization'] = `Bearer ${accessToken}`
     }
@@ -47,16 +46,16 @@ export class CustomTransform extends AxiosTransform {
     // console.log('responseInterceptors')
     const globalStore = useGlobalStore()
     // 首先需要存储token以及更新token
-    if (res.headers.refreshtoken) {
-      console.log('refresh')
-      const refreshToken = res.headers.refreshtoken.replace('Bearer ', '')
-      globalStore.setToken(refreshToken, 'refresh')
-    }
-    if (res.headers.authorization) {
-      console.log('auth')
-      const accessToken = res.headers.authorization.replace('Bearer ', '')
-      globalStore.setToken(accessToken, 'access')
-    }
+    // if (res.headers.refreshtoken) {
+    //   console.log('refresh')
+    //   const refreshToken = res.headers.refreshtoken.replace('Bearer ', '')
+    //   globalStore.setToken(refreshToken, 'refresh')
+    // }
+    // if (res.headers.authorization) {
+    //   console.log('auth')
+    //   const accessToken = res.headers.authorization.replace('Bearer ', '')
+    //   globalStore.setToken(accessToken, 'access')
+    // }
     console.log(res, 'res')
     if (res.status === 200) {
       ElMessage.success({
@@ -98,17 +97,6 @@ export class CustomTransform extends AxiosTransform {
 
     async function handleResponseError() {
       const status = error.response?.status
-
-      if (status === 401 && globalStore.isLogin) {
-        const isRefresh: boolean = await refreshToken()
-        if (isRefresh) {
-          error.config.headers['Authorization'] =
-            `Bearer ${globalStore.getToken('access')}`
-          return axiosRetry.retry(axiosInstance, error)
-        }
-      } else {
-        message = statusMessageMap[status] || '未知错误'
-      }
 
       if (message) {
         ElMessage.error({

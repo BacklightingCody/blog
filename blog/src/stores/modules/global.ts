@@ -1,6 +1,8 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { updateCSSVariables, generateRandomColors } from '@/utils/color'
+import { useCookies } from '@vueuse/integrations/useCookies'
+
 export const useGlobalStore = defineStore(
   'global',
   () => {
@@ -9,21 +11,17 @@ export const useGlobalStore = defineStore(
     const changeLoginStatus = (value: boolean) => {
       isLogin.value = value
     }
+
     // 主题方面
     const oldTheme = localStorage.getItem('theme')
-    const theme = ref(oldTheme)
-    watchEffect(() => {
-      console.log(theme.value, '111')
-    })
-    const colors = ref(generateRandomColors(5))  //产生一组颜色
+    const theme = ref(oldTheme || 'default') // 默认主题
+    const colors = ref(generateRandomColors(5)) // 产生一组颜色
+
     const changeMode = (mode: string) => {
-      console.log(111)
       theme.value = mode
-      // updateCSSVariables(theme)
-    }
-    watchEffect(() => {
       updateCSSVariables(theme)
-    })
+    }
+
     // 加载loading方面
     const loading = ref(true)
     const showLoader = () => {
@@ -32,27 +30,23 @@ export const useGlobalStore = defineStore(
     const hideLoader = () => {
       loading.value = false
     }
-    // token方面
-    const accessToken = ref('')
-    const refreshToken = ref('')
+
+    // 使用 useCookies 管理 token
+    const cookies = useCookies(['accessToken', 'refreshToken'])
+
     const getToken = (isAccess: string) => {
-      if (isAccess == 'access') {
-        return accessToken.value
-      } else {
-        return refreshToken.value
-      }
+      return cookies.get(isAccess === 'access' ? 'accessToken' : 'refreshToken')
     }
+
     const setToken = (value: string, isAccess: string) => {
-      if (isAccess == 'access') {
-        accessToken.value = value
-      } else {
-        refreshToken.value = value
-      }
+      cookies.set(isAccess === 'access' ? 'accessToken' : 'refreshToken', value)
     }
+
     const clearToken = () => {
-      accessToken.value = ''
-      refreshToken.value = ''
+      cookies.remove('accessToken')
+      cookies.remove('refreshToken')
     }
+
     return {
       isLogin,
       changeLoginStatus,
@@ -61,8 +55,6 @@ export const useGlobalStore = defineStore(
       loading,
       showLoader,
       hideLoader,
-      accessToken,
-      refreshToken,
       getToken,
       setToken,
       clearToken
@@ -73,11 +65,6 @@ export const useGlobalStore = defineStore(
       {
         pick: ['theme'],
         key: 'theme',
-        storage: localStorage
-      },
-      {
-        pick: ['refreshToken'],
-        key: 'blog-token',
         storage: localStorage
       }
     ]

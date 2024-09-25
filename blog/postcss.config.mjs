@@ -9,7 +9,7 @@ export default {
     UnoCSS(),
     autoprefixer({}),
     // pxToViewport({
-    //   viewportWidth: 375, // 设计稿的视口宽度，比如设计稿是基于375px宽度的
+    //   viewportWidth: 1024, // 设计稿的视口宽度，比如设计稿是基于375px宽度的
     //   unitPrecision: 5,   // 转换后的精度
     //   viewportUnit: 'vw', // 使用的单位
     //   selectorBlackList: ['.ignore', '.hairlines'], // 选择器黑名单，不转换这些类

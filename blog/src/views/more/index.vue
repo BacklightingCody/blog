@@ -7,7 +7,7 @@
 </template>
 <script setup lang="ts">
 import { getMoreApi } from '@/services/more'
-import { refreshToken } from '@/utils/refreshToken'
+// import { refreshToken } from '@/utils/refreshToken'
 import { useGlobalStore } from '@/stores'
 const globalStore = useGlobalStore()
 const run = () => {
@@ -20,10 +20,6 @@ const refreshstatus = () => {
   console.log(globalStore.isLogin)
 }
 async function refresh() {
-  const res = await refreshToken()
-  if (res) {
-    ElMessage.success('刷新成功')
-  }
 }
 </script>
 <style lang="scss" scoped></style>

@@ -19,7 +19,8 @@
   "dependencies": {
     "@capacitor/screen-orientation": "^6.0.2",
     "@vueuse/components": "^11.0.3",
-    "@vueuse/core": "^11.0.3",
+    "@vueuse/core": "^11.1.0",
+    "@vueuse/integrations": "^11.1.0",
     "animate.css": "^4.1.1",
     "axios": "^1.7.7",
     "element-plus": "^2.8.2",
@@ -27,6 +28,7 @@
     "pinia": "^2.2.2",
     "pinia-plugin-persistedstate": "^4.0.0",
     "sass": "^1.78.0",
+    "universal-cookie": "^7.2.0",
     "vant": "^4.9.5",
     "vite-plugin-eslint": "^1.8.1",
     "vue": "3.5",
