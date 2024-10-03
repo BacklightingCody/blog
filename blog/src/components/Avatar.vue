@@ -1,12 +1,13 @@
 <template>
-  <div class="circle relative flex justify-center items-center flex-shrink-0">
+  <div class="circle relative flex justify-center items-center flex-shrink-0 ">
     <el-avatar :size="size" :src="props.src" :shape="shape" :fit="fit" @error="errorHandler">
-      <img src="/avatar.jpg" />
+      <img :src="props.src" v-if="props.src" />
+      <iconUser v-if="!props.src" class="user-default" @click="userLogin"/>
     </el-avatar>
   </div>
-
 </template>
 <script setup lang="ts">
+import iconUser from '@/components/icons/iconUser.vue'
 const props = defineProps({
   // 头像相关
   src: { type: String, default: '' },
@@ -15,6 +16,9 @@ const props = defineProps({
   fit: { type: String, default: 'cover' }
 })
 const errorHandler = () => true
+const userLogin=()=>{
+
+}
 </script>
 <style lang="scss" scoped>
 .circle {
@@ -27,5 +31,9 @@ const errorHandler = () => true
     width: 40px;
     height: 40px;
   }
+}
+
+.user-default {
+  @apply text-default-text
 }
 </style>

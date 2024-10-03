@@ -4,50 +4,67 @@
       @mousemove="handleMouseMove" @mouseleave="handleMouseLeave" ref="nav" :style="{ background: backgroundStyle }">
       <div class="nav-tab">
         <RouterLink to="/" exact-active-class="active-nav">
-          <iconHome class="icon hidden icon-animation" :class="{ 'show-icon': route.path === '/' ? true : false }">
+          <iconHome class="icon icon-animation" :class="{
+            'block': route.path === '/' ? true : false,
+            'hidden': route.path === '/' ? false : true,
+          }">
           </iconHome>
           主页
         </RouterLink>
       </div>
       <div class="nav-tab">
         <RouterLink to="/docs" active-class="active-nav">
-          <iconDocs class="icon hidden icon-animation" :class="{ 'show-icon': route.path === '/docs' ? true : false }">
+          <iconDocs class="icon icon-animation" :class="{
+            'block': route.path === '/docs' ? true : false,
+            'hidden': route.path === '/docs' ? false : true,
+          }">
           </iconDocs>
           文稿
         </RouterLink>
       </div>
       <div class="nav-tab">
         <RouterLink to="/timeline" active-class="active-nav">
-          <iconTimeLine class="icon hidden icon-animation"
-            :class="{ 'show-icon': route.path === '/timeline' ? true : false }">
+          <iconTimeLine class="icon icon-animation" :class="{
+            'block': route.path === '/timeline' ? true : false,
+            'hidden': route.path === '/timeline' ? false : true,
+          }">
           </iconTimeLine>
           时光轴
         </RouterLink>
       </div>
       <div class="nav-tab">
         <RouterLink to="/chat" active-class="active-nav">
-          <iconOpenAI class="icon hidden icon-animation"
-            :class="{ 'show-icon': route.path === '/chat' ? true : false }"></iconOpenAI>
+          <iconOpenAI class="icon icon-animation" :class="{
+            'block': route.path === '/chat' ? true : false,
+            'hidden': route.path === '/chat' ? false : true,
+          }"></iconOpenAI>
           Chat
         </RouterLink>
       </div>
-      <div class="nav-tab">
+      <div class=" nav-tab">
         <RouterLink to="/friend" active-class="active-nav">
-          <iconFriendLink class="icon hidden icon-animation"
-            :class="{ 'show-icon': route.path === '/friend' ? true : false }">
+          <iconFriendLink class="icon  icon-animation" :class="{
+            'block': route.path === '/friend' ? true : false,
+            'hidden': route.path === '/friend' ? false : true,
+          }">
           </iconFriendLink>
           友链
         </RouterLink>
       </div>
       <div class="nav-tab">
         <RouterLink to="/about" active-class="active-nav">
-          <iconAbout class="icon hidden icon-animation"
-            :class="{ 'show-icon': route.path === '/about' ? true : false }"></iconAbout>关于
+          <iconAbout class="icon  icon-animation" :class="{
+            'block': route.path === '/about' ? true : false,
+            'hidden': route.path === '/about' ? false : true,
+          }"></iconAbout>关于
         </RouterLink>
       </div>
       <div class="nav-tab">
         <RouterLink to="/more" active-class="active-nav">
-          <iconMore class="icon hidden icon-animation" :class="{ 'show-icon': route.path === '/more' ? true : false }">
+          <iconMore class="icon  icon-animation" :class="{
+            'block': route.path === '/more' ? true : false,
+            'hidden': route.path === '/more' ? false : true,
+          }">
           </iconMore>更多
         </RouterLink>
       </div>

@@ -8,6 +8,7 @@ import axios, {
 import { AxiosRetry } from './axiosRetry'
 import { AxiosTransform, RequestOptions } from './axiosTransform'
 import { useGlobalStore } from '@/stores'
+import { useUserStore } from '@/stores'
 // import { refreshToken } from '@/utils/refreshToken'
 import { getMoreApi } from '@/services/more'
 // 创建自定义的 AxiosTransform 实现
@@ -19,7 +20,8 @@ export class CustomTransform extends AxiosTransform {
   ): InternalAxiosRequestConfig {
     console.log('发起了请求')
     const globalStore = useGlobalStore()
-    const accessToken = globalStore.getToken('access') // 在请求头中添加 token
+    const userStore = useUserStore()
+    const accessToken = userStore.getToken('access') // 在请求头中添加 token
     if (accessToken) {
       config.headers['Authorization'] = `Bearer ${accessToken}`
     }
