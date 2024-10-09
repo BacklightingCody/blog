@@ -66,7 +66,7 @@ watch(width, () => {
     <div class="w-[100px] h-[60px] flex items-center">
       <ColorMode></ColorMode>
       <!-- <div><el-button type="success" class="text-black ml-2" size="small" @click="loginSubmit">登录</el-button></div> -->
-      <avatar src="" @click="loginSubmit('github')" class="ml-2"></avatar>
+      <avatar src="" :size="windowWidth > 768 ? 40 : 30" @click="loginSubmit('github')" class="ml-2"></avatar>
     </div>
   </div>
 </template>
