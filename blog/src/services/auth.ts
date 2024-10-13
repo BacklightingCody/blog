@@ -7,7 +7,13 @@ export const loginApi = (data: { username: string; password: string }) => {
     data
   })
 }
-
+export const githubLoginApi = () => {
+  // return http.request({
+  //   url: '/auth/github/redirect',
+  //   method: 'get'
+  // })
+  window.location.href = `${import.meta.env.VITE_BACKEND_URL}/v0/auth/github/redirect`
+}
 export const refreshTokenApi = async (data: { refreshToken: string }) => {
   return http.request({
     url: '/auth/refresh_token',

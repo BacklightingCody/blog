@@ -9,7 +9,7 @@ export const useGlobalStore = defineStore(
     const oldTheme = localStorage.getItem('theme')
     const theme = ref(oldTheme || 'default') // 默认主题
     const colors = ref(generateRandomColors(5)) // 产生一组颜色
-
+    
     const changeMode = (mode: string) => {
       theme.value = mode
       updateCSSVariables(theme)

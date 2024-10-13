@@ -5,19 +5,26 @@ import Avatar from '@/components/Avatar.vue'
 import Nav from './Nav.vue'
 import ColorMode from './ColorMode.vue'
 import Signature from '@/components/Signature.vue'
-import { loginApi } from '@/services/auth'
+import { loginApi, githubLoginApi } from '@/services/auth'
 import { useGlobalStore } from '@/stores'
+import { useUserStore } from '@/stores'
 import { useWindowSize } from '@vueuse/core';
 const globalStore = useGlobalStore()
+const userStore = useUserStore()
 const loginSubmit = (method: string) => {
   switch (method) {
     case 'github':
-      window.location.href = `https://github.com/login/oauth/authorize?client_id=${import.meta.env.VITE_GITHUB_CLIENT_ID}&redirect_uri=${import.meta.env.VITE_GITHUB_CALLBACK_URL}`
+      githubLoginApi()
+
       break;
     case 'email':
       break;
   }
 }
+onMounted(() => {
+  // 获取用户信息
+  userStore.checkLogin()
+})
 // 根据滚动控制是否显示底部bordr
 const showHeaderBorder = ref(false)
 const showNavBorder = ref(true)
