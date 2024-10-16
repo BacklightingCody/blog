@@ -8,16 +8,15 @@
 <script setup lang="ts">
 import { getMoreApi } from '@/services/more'
 // import { refreshToken } from '@/utils/refreshToken'
-import { useGlobalStore } from '@/stores'
-const globalStore = useGlobalStore()
+import { useGlobalStore, useUserStore } from '@/stores'
+const userStore = useUserStore()
 const run = () => {
   getMoreApi().then(res => {
     console.log(111)
   })
 }
 const refreshstatus = () => {
-  globalStore.changeLoginStatus(false)
-  console.log(globalStore.isLogin)
+  userStore.getUserInfo()
 }
 async function refresh() {
 }

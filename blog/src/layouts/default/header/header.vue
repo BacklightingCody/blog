@@ -11,20 +11,31 @@ import { useUserStore } from '@/stores'
 import { useWindowSize } from '@vueuse/core';
 const globalStore = useGlobalStore()
 const userStore = useUserStore()
+const userAvatar = ref(userStore.avatar)
 const loginSubmit = (method: string) => {
   switch (method) {
     case 'github':
       githubLoginApi()
-
       break;
     case 'email':
       break;
   }
 }
-onMounted(() => {
-  // 获取用户信息
-  userStore.checkLogin()
-})
+onMounted(async () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const isLoggedFromUrl = urlParams.get('logged_in');
+
+  if (isLoggedFromUrl) {
+    console.log('1阶段')
+    await userStore.checkLoginFromUrl();  // 第一次登录，处理 URL 参数
+  } else {
+    console.log('2阶段')
+    await userStore.getUserInfo();  // 其他情况，使用 Store 中的数据
+  }
+});
+watch(() => userStore.avatar, (newAvatar) => {
+  userAvatar.value = newAvatar;
+});
 // 根据滚动控制是否显示底部bordr
 const showHeaderBorder = ref(false)
 const showNavBorder = ref(true)
@@ -64,6 +75,7 @@ watch(width, () => {
 </script>
 <template>
   <div class="header-container" ref="header" :class="{ isborder: showHeaderBorder }">
+    <div class="blur-background"></div>
     <avatar class="m-2.5" :size="windowWidth > 768 ? 40 : 30" src="/avatar.jpg"></avatar>
     <Signature :width="windowWidth > 768 ? '150px' : '100px'" :height="windowWidth > 768 ? '50px' : '40px'"
       class="relative top-[5px] ml-[15px]"></Signature>
@@ -73,14 +85,15 @@ watch(width, () => {
     <div class="w-[100px] h-[60px] flex items-center">
       <ColorMode></ColorMode>
       <!-- <div><el-button type="success" class="text-black ml-2" size="small" @click="loginSubmit">登录</el-button></div> -->
-      <avatar src="" :size="windowWidth > 768 ? 40 : 30" @click="loginSubmit('github')" class="ml-2"></avatar>
+      <avatar :src="userAvatar" :size="windowWidth > 768 ? 40 : 30" @click="loginSubmit('github')" class="ml-2">
+      </avatar>
     </div>
   </div>
 </template>
 <style lang="scss" scoped>
 .header-container {
 
-  @apply flex px-10 absolute w-full right-0 left-0 items-center border-b-[1px] border-solid border-gray-400 border-op-0;
+  @apply flex px-10 absolute w-full right-0 left-0 items-center border-b-[1px] border-solid border-gray-400 border-op-0 z-10;
 
   @media (max-width:500px) {
     @apply px-2
@@ -89,6 +102,10 @@ watch(width, () => {
 
 .header-container::after {
   @apply content-[''] absolute w-full h-full top-0 left-0 backdrop-filter backdrop-blur-xl backdrop-brightness-100 backdrop-contrast-100 z--1
+}
+
+.blur-background {
+  @apply absolute w-full h-full top-0 left-0 backdrop-filter backdrop-blur-xl bg-default-bg opacity-80 z--2;
 }
 
 .isborder {

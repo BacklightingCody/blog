@@ -21,10 +21,6 @@ export class CustomTransform extends AxiosTransform {
     console.log('发起了请求')
     const globalStore = useGlobalStore()
     const userStore = useUserStore()
-    const accessToken = userStore.getToken('access') // 在请求头中添加 token
-    if (accessToken) {
-      config.headers['Authorization'] = `Bearer ${accessToken}`
-    }
     return config
   }
 
