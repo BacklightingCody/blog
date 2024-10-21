@@ -22,17 +22,28 @@ const loginSubmit = (method: string) => {
   }
 }
 onMounted(async () => {
-  const urlParams = new URLSearchParams(window.location.search);
+  const urlParams = new URLSearchParams(window.location.search)
+  const userId = urlParams.get('user_id')
   const isLoggedFromUrl = urlParams.get('logged_in');
-
-  if (isLoggedFromUrl) {
-    console.log('1阶段')
-    await userStore.checkLoginFromUrl();  // 第一次登录，处理 URL 参数
-  } else {
-    console.log('2阶段')
-    await userStore.getUserInfo();  // 其他情况，使用 Store 中的数据
+  if (isLoggedFromUrl != null) {
+    userStore.isLoggedIn = !!isLoggedFromUrl
   }
-});
+  if (userId) {
+    console.log('first')
+    userStore.userId = userId
+    await userStore.getUserInfo(userId)
+  } else if (userStore.userId) {
+    console.log('second')
+    console.log('userStore.userId', userStore.userId)
+    await userStore.getUserInfo(userStore.userId)
+  }else{
+    console.log('else')
+    userStore.isLoggedIn = false
+    userStore.clearUserInfo()
+  }
+  // 清理 URL 参数，避免多次判断
+  window.history.replaceState({}, document.title, window.location.pathname)
+})
 watch(() => userStore.avatar, (newAvatar) => {
   userAvatar.value = newAvatar;
 });

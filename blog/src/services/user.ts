@@ -1,18 +1,12 @@
 import http from '@/utils/http'
 
-export const getUserInfoFromUrlApi = (
+export const getUserInfoApi = (
   userId: string | null,
   username: string | null
 ) => {
   return http.request({
-    url: `/user/info?userId=${userId}&username=${username}`,
-    method: 'get'
-  })
-}
-
-export const getUserInfoApi = () => {
-  return http.request({
-    url: '/user/info',
-    method: 'get'
+    url: `/user/info`,
+    method: 'get',
+    params: { userId, username }
   })
 }

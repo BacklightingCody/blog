@@ -12,17 +12,35 @@
           主页
         </RouterLink>
       </div>
-      <div class="nav-tab">
-        <RouterLink to="/docs" active-class="active-nav">
-          <iconDocs class="icon icon-animation" :class="{
-            'block': route.path === '/docs' ? true : false,
-            'hidden': route.path === '/docs' ? false : true,
-          }">
-          </iconDocs>
-          文稿
-        </RouterLink>
-      </div>
-      <div class="nav-tab">
+      <el-dropdown trigger="click">
+        <div class="nav-tab">
+          <RouterLink to="/docs" active-class="active-nav" class="el-dropdown-link">
+            <iconDocs class="icon icon-animation" :class="{
+              'block': route.path === '/docs' ? true : false,
+              'hidden': route.path === '/docs' ? false : true,
+            }">
+            </iconDocs>
+            文稿
+          </RouterLink>
+        </div>
+
+        <template #dropdown>
+          <transition enter-active-class="transition ease-out duration-200"
+            enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100"
+            leave-active-class="transition ease-in duration-150" leave-from-class="transform opacity-100 scale-100"
+            leave-to-class="transform opacity-0 scale-95">
+            <el-dropdown-menu ref="dropdownMenu">
+              <div
+                class="absolute left-0 bg-default-currency transition-all duration-300 ease-in-out rounded-full opacity-40 z-10"
+                :style="{ top: `${sliderPosition + 3}px`, height: `${itemHeight}px`, width: '100%' }"></div>
+              <el-dropdown-item v-for="(category, index) in docCategory" :key="category"
+                @mouseover="updateSliderPosition(index)">{{ category }}</el-dropdown-item>
+            </el-dropdown-menu>
+          </transition>
+        </template>
+
+      </el-dropdown>
+      <div class=" nav-tab">
         <RouterLink to="/timeline" active-class="active-nav">
           <iconTimeLine class="icon icon-animation" :class="{
             'block': route.path === '/timeline' ? true : false,
@@ -139,7 +157,8 @@ import iconFriendLink from '@/components/icons/iconFriendLink.vue'
 import iconAbout from '@/components/icons/iconAbout.vue'
 import iconMore from '@/components/icons/iconMore.vue'
 import iconHomeMobile from '@/components/icons/iconHomeMobile.vue'
-import { useWindowSize } from '@vueuse/core';
+import { useWindowSize } from '@vueuse/core'
+import { DocCategory } from '@/enum/document'
 const route = useRoute()
 // Navigation bar background color gradient
 const currentNav = ref('')
@@ -156,6 +175,16 @@ const handleMouseMove = (event) => {
 const handleMouseLeave = () => {
   document.body.style.cursor = 'default'
   backgroundStyle.value = ``
+}
+// dropdown数据
+const docCategory = Object.values(DocCategory)
+console.log(docCategory)
+const itemHeight = 42
+const currentIndex = ref(0)
+const sliderPosition = computed(() => currentIndex.value * itemHeight)
+const updateSliderPosition = (index) => {
+  console.log('111')
+  currentIndex.value = index
 }
 // icon图标
 const windowWidth = ref(0);
@@ -228,5 +257,40 @@ const showDrawer = ref(false);
     opacity: 1;
     transform: translateX(0);
   }
+}
+</style>
+<style lang="scss">
+.el-dropdown-menu {
+  @apply bg-default-bg;
+
+  .el-dropdown-menu__item {
+    @apply text-default-btnText px-[40px] py-[10px] font-bold
+  }
+
+  .el-dropdown-menu__item:not(.is-disabled):focus,
+  .el-dropdown-menu__item:not(.is-disabled):hover {
+    @apply text-hover-btnText filter brightness-120 contrast-251 saturate-100;
+    background-color: transparent;
+    /*bg-default-currency*/
+  }
+
+  .sliding-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    /* 背景框的高度，可以根据实际情况调整 */
+    background-color: rgba(0, 0, 0, 0.1);
+    /* 背景框的颜色 */
+    z-index: -1;
+    /* 保证背景框在菜单项的后面 */
+    transition: transform 0.3s ease;
+    /* 平滑过渡 */
+  }
+}
+
+.el-dropdown__popper {
+  --el-dropdown-menuItem-hover-fill: var(--background-color);
 }
 </style>
