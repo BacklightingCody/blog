@@ -21,7 +21,11 @@ export const constantRouter = [
         path: '/docs',
         name: 'docs',
         component: () => import('@/views/docs/index.vue'),
-        children: []
+        children: [
+          {
+            
+          }
+        ]
       },
       {
         path: '/about',

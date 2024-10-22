@@ -12,7 +12,7 @@
           主页
         </RouterLink>
       </div>
-      <el-dropdown trigger="click">
+      <el-dropdown>
         <div class="nav-tab">
           <RouterLink to="/docs" active-class="active-nav" class="el-dropdown-link">
             <iconDocs class="icon icon-animation" :class="{
@@ -23,22 +23,15 @@
             文稿
           </RouterLink>
         </div>
-
         <template #dropdown>
-          <transition enter-active-class="transition ease-out duration-200"
-            enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100"
-            leave-active-class="transition ease-in duration-150" leave-from-class="transform opacity-100 scale-100"
-            leave-to-class="transform opacity-0 scale-95">
-            <el-dropdown-menu ref="dropdownMenu">
-              <div
-                class="absolute left-0 bg-default-currency transition-all duration-300 ease-in-out rounded-full opacity-40 z-10"
-                :style="{ top: `${sliderPosition + 3}px`, height: `${itemHeight}px`, width: '100%' }"></div>
-              <el-dropdown-item v-for="(category, index) in docCategory" :key="category"
-                @mouseover="updateSliderPosition(index)">{{ category }}</el-dropdown-item>
-            </el-dropdown-menu>
-          </transition>
+          <el-dropdown-menu ref="dropdownMenu">
+            <div
+              class="absolute left-0 bg-default-currency transition-all duration-300 ease-in-out rounded-full opacity-50 z-10 cursor-pointer"
+              :style="{ top: `${sliderPosition + 3}px`, height: `${itemHeight}px`, width: '100%' }"></div>
+            <el-dropdown-item v-for="(category, index) in docCategory" :key="category"
+              @mouseover="updateSliderPosition(index)">{{ category }}</el-dropdown-item>
+          </el-dropdown-menu>
         </template>
-
       </el-dropdown>
       <div class=" nav-tab">
         <RouterLink to="/timeline" active-class="active-nav">
@@ -183,7 +176,6 @@ const itemHeight = 42
 const currentIndex = ref(0)
 const sliderPosition = computed(() => currentIndex.value * itemHeight)
 const updateSliderPosition = (index) => {
-  console.log('111')
   currentIndex.value = index
 }
 // icon图标
@@ -264,13 +256,12 @@ const showDrawer = ref(false);
   @apply bg-default-bg;
 
   .el-dropdown-menu__item {
-    @apply text-default-btnText px-[40px] py-[10px] font-bold
+    @apply text-default-btnText px-[40px] py-[10px] font-bold;
   }
 
   .el-dropdown-menu__item:not(.is-disabled):focus,
   .el-dropdown-menu__item:not(.is-disabled):hover {
-    @apply text-hover-btnText filter brightness-120 contrast-251 saturate-100;
-    background-color: transparent;
+    @apply text-hover-btnText filter brightness-120 contrast-251 saturate-100 bg-transparent;
     /*bg-default-currency*/
   }
 
