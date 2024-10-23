@@ -12,7 +12,7 @@
           主页
         </RouterLink>
       </div>
-      <el-dropdown>
+      <el-dropdown @command="handleCommand">
         <div class="nav-tab">
           <RouterLink to="/docs" active-class="active-nav" class="el-dropdown-link">
             <iconDocs class="icon icon-animation" :class="{
@@ -20,16 +20,19 @@
               'hidden': route.path === '/docs' ? false : true,
             }">
             </iconDocs>
-            文稿
+            {{ docTitle }}
           </RouterLink>
         </div>
         <template #dropdown>
           <el-dropdown-menu ref="dropdownMenu">
             <div
-              class="absolute left-0 bg-default-currency transition-all duration-300 ease-in-out rounded-full opacity-50 z-10 cursor-pointer"
+              class="absolute left-0 bg-default-currency transition-all duration-300 ease-in-out rounded-full opacity-50 cursor-pointer"
               :style="{ top: `${sliderPosition + 3}px`, height: `${itemHeight}px`, width: '100%' }"></div>
-            <el-dropdown-item v-for="(category, index) in docCategory" :key="category"
-              @mouseover="updateSliderPosition(index)">{{ category }}</el-dropdown-item>
+            <el-dropdown-item v-for="(category, index) in docCategoryList" :key="category.route"
+              @mouseover="updateSliderPosition(index)" :command="category.route"
+              :class="{ 'active-nav': route.path === `/docs/${category.route}` ? true : false }">
+              {{ category.name }}
+            </el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>
@@ -151,8 +154,11 @@ import iconAbout from '@/components/icons/iconAbout.vue'
 import iconMore from '@/components/icons/iconMore.vue'
 import iconHomeMobile from '@/components/icons/iconHomeMobile.vue'
 import { useWindowSize } from '@vueuse/core'
-import { DocCategory } from '@/enum/document'
+import { docCategoryMap } from '@/enum/document'
+import { useRouter } from 'vue-router'
+import { ca } from 'element-plus/es/locale/index.mjs'
 const route = useRoute()
+const router = useRouter()
 // Navigation bar background color gradient
 const currentNav = ref('')
 const nav = ref()
@@ -170,14 +176,34 @@ const handleMouseLeave = () => {
   backgroundStyle.value = ``
 }
 // dropdown数据
-const docCategory = Object.values(DocCategory)
-console.log(docCategory)
+const docCategoryList = docCategoryMap
+const docTitle = ref('文稿')
 const itemHeight = 42
 const currentIndex = ref(0)
 const sliderPosition = computed(() => currentIndex.value * itemHeight)
 const updateSliderPosition = (index) => {
   currentIndex.value = index
 }
+const handleCommand = (command: string) => {
+  let match = false
+  for (let i = 0; i < docCategoryList.length; i++) {
+    if (docCategoryList[i].route == command) {
+      docTitle.value = docCategoryList[i].name
+      match = true
+      break
+    }
+    if (!match) {
+      docTitle.value = '文稿'
+    }
+  }
+  router.push(`/docs/${command}`)
+}
+// 处理离开当前dropdown路由，不能重置为文稿
+watch(() => router.currentRoute.value.path, (newPath) => {
+  if (!newPath.startsWith('/docs/')) {
+    docTitle.value = '文稿';  // 重置为 "文稿"
+  }
+});
 // icon图标
 const windowWidth = ref(0);
 const windowHeight = ref(0);

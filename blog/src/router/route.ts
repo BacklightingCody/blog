@@ -13,7 +13,7 @@ export const constantRouter = [
       // 时间轴
       {
         path: '/timeline',
-        // component: () => import('@/views/TimeLine/index.vue'),
+        component: () => import('@/views/TimeLine/index.vue'),
         name: 'timeline',
         children: []
       },
@@ -23,7 +23,34 @@ export const constantRouter = [
         component: () => import('@/views/docs/index.vue'),
         children: [
           {
-            
+            path: 'programming',
+            name: 'programming',
+            component: () => import('@/views/docs/programming/index.vue'),
+            children: []
+          }, 
+          {
+            path: 'technology',
+            name: 'technology',
+            component: () => import('@/views/docs/technology/index.vue'),
+            children: []
+          },
+          {
+            path: 'experience',
+            name: 'experience',
+            component: () => import('@/views/docs/technology/index.vue'),
+            children: []
+          },
+          {
+            path: 'recipe',
+            name: 'recipe',
+            component: () => import('@/views/docs/recipe/index.vue'),
+            children: []
+          },
+          {
+            path: 'motto',
+            name: 'motto',
+            component: () => import('@/views/docs/motto/index.vue'),
+            children: []
           }
         ]
       },

@@ -1,53 +1,73 @@
 <template>
   <div class="w-full">
-    <div class="flex flex-wrap flex-grow  gap-6 m-auto">
-      <CategoryCard v-for="category in categories" :key="category.name" :category="category" />
-    </div>
 
+    <template v-if="isDocsPage">
+      <h1 class="text-default-accent font-800 text-3xl my-10 text-center">文稿分类</h1>
+      <div class="flex flex-wrap gap-6 m-auto">
+        <CategoryCard v-for="category in categories" :key="category.name" :category="category"
+          class="flex-grow max-w-[calc(33.33%-16px)] min-w-[300px]">
+          <template #icon>
+            <!-- 根据分类动态渲染不同的图标 -->
+            <component :is="category.icon" />
+          </template>
+        </CategoryCard>
+      </div>
+    </template>
+    <RouterView v-else></RouterView>
+    <!-- <RouterView v-else></RouterView> -->
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue'
 import CategoryCard from '@/components/CategoryCard.vue'
+import { useRoute } from 'vue-router'
+// 导入不同的图标组件
+import iconProgramme from '@/components/icons/iconProgramme.vue'
+import iconTechnology from '@/components/icons/iconTechnology.vue'
+import iconFoodMenu from '@/components/icons/iconRecipe.vue'
+import iconPencil from '@/components/icons/iconPencil.vue'
+import iconRainbow from '@/components/icons/iconRainbow.vue'
 
+
+const route = useRoute()
+const isDocsPage = computed(() => route.path == '/docs')
+console.log(isDocsPage.value)
+// 数据源
 const categories = ref([
   {
-    name: 'Linux',
-    image: '/path/to/linux-image.png',
-    color: '#8BC34A',
-    flipped: false,
-    subcategories: ['Bash Scripting', 'System Administration', 'Networking']
+    name: 'Programme',
+    icon: iconProgramme,  // 指定图标组件
+    color: '#E34F26',
+    subcategories: ['Forms', 'Tables', 'Media']
   },
   {
-    name: 'Docker',
-    image: '/path/to/docker-image.png',
-    color: '#2196F3',
-    flipped: false,
-    subcategories: ['CoreElec环境 Docker...', 'Docker 简单的Go项...', 'Docker部署 tusd上...', 'Docker部署Nginx反...', 'Play With Docker ...']
+    name: 'Technology',
+    icon: iconTechnology,  // 指定图标组件
+    color: '#1572B6',
+    subcategories: ['Flexbox', 'Grid', 'Animations']
   },
   {
-    name: 'FastAdmin',
-    image: '/path/to/fastadmin-image.png',
-    color: '#FF9800',
-    flipped: false,
-    subcategories: ['Installation', 'Customization', 'Plugins']
+    name: 'Experience',
+    icon: iconRainbow,  // 指定图标组件
+    color: '#F7DF1E',
+    subcategories: ['ES6', 'DOM Manipulation', 'Events']
   },
   {
-    name: 'Hexo',
-    image: '/path/to/hexo-image.png',
-    color: '#9C27B0',
-    flipped: false,
-    subcategories: ['Themes', 'Plugins', 'Deployment']
+    name: 'Food Menu',
+    icon: iconFoodMenu,  // 指定图标组件
+    color: '#42B883',
+    subcategories: ['Components', 'Directives', 'Vue Router']
   },
   {
-    name: 'FastAdmin',
-    image: '/path/to/fastadmin-image.png',
-    color: '#FF9800',
-    flipped: false,
-    subcategories: ['Installation', 'Customization', 'Plugins']
-  },
+    name: 'A word of the day',
+    icon: iconPencil,  // 指定图标组件
+    color: '#339933',
+    subcategories: ['Express', 'File System', 'APIs']
+  }
 ])
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+/* 添加样式 */
+</style>

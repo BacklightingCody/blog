@@ -1,27 +1,14 @@
 <template>
-  <div class="category-card-container">
-    <div
-      class="relative w-full h-full transition-transform duration-700 transform-style-preserve-3d cursor-pointer bg-default-currency"
-      :class="{ 'rotate-y-180': flipped }" @click="flipCard">
-      <!-- 卡片正面 -->
-      <div class="front absolute w-full h-full backface-hidden">
-        <div class="w-full h-full rounded-lg shadow-lg flex flex-col items-center justify-center p-6"
-          :style="{ backgroundColor: props.category.color }">
-          <img :src="props.category.image" :alt="props.category.name" class="w-24 h-24 mb-4" />
-          <h2 class="text-2xl font-bold text-white">{{ props.category.name }}</h2>
-        </div>
-      </div>
-
-      <!-- 卡片背面 -->
-      <div class="back absolute w-full h-full backface-hidden rotate-y-180">
-        <div class="w-full h-full bg-white rounded-lg shadow-lg p-6 overflow-y-auto">
-          <h3 class="text-xl font-bold mb-4">{{ props.category.name }} Subcategories</h3>
-          <ul class="space-y-2">
-            <li v-for="subcategory in props.category.subcategories" :key="subcategory" class="text-sm">
-              {{ subcategory }}
-            </li>
-          </ul>
-        </div>
+  <div
+    class="category-card-container flex justify-center items-center w-[320px] h-[240px] perspect-1000px cursor-pointer"
+    @mousemove="handleMouseMove" @mouseleave="handleMouseLeave">
+    <div class="card-content w-full h-full bg-default-currency rounded-2xl text-default-text" :style="cardStyle">
+      <!-- 卡片正面内容 -->
+      <div class="flex flex-col items-center justify-center p-6">
+        <!-- 插槽，用于传递图标组件 -->
+        <slot name="icon"></slot>
+        <h2 class="text-2xl font-bold text-default-btnText hover:text-hover-btnText cursor-pointer mt-10">{{
+          props.category.name }}</h2>
       </div>
     </div>
   </div>
@@ -37,32 +24,46 @@ const props = defineProps({
   },
 })
 
-const flipped = ref(false)
+const cardStyle = ref({})
 
-const flipCard = () => {
-  flipped.value = !flipped.value
+const handleMouseMove = (event: MouseEvent) => {
+  const card = event.currentTarget as HTMLElement
+  const cardRect = card.getBoundingClientRect()
+
+  // 获取鼠标相对卡片中心的位置
+  const centerX = cardRect.left + cardRect.width / 2
+  const centerY = cardRect.top + cardRect.height / 2
+
+  const deltaX = event.clientX - centerX
+  const deltaY = event.clientY - centerY
+
+  // 根据鼠标偏移计算旋转角度
+  const rotateX = (deltaY / cardRect.height) * -30 // 根据Y轴位置旋转的角度
+  const rotateY = (deltaX / cardRect.width) * 30 // 根据X轴位置旋转的角度
+
+  cardStyle.value = {
+    transform: `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
+    transition: 'transform 0.3s ease-out',
+  }
+}
+
+const handleMouseLeave = () => {
+  // 当鼠标离开时恢复到原来的状态
+  cardStyle.value = {
+    transform: 'rotateX(0deg) rotateY(0deg)',
+    transition: 'transform 0.3s ease-out',
+  }
 }
 </script>
 
 <style scoped>
 .category-card-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 300px;
-  height: 200px;
-  perspective: 1000px;
+  transition: transform 0.3s ease-out;
 }
 
-.backface-hidden {
-  backface-visibility: hidden;
-}
-
-.rotate-y-180 {
-  transform: rotateY(180deg);
-}
-
-.transform-style-preserve-3d {
+.card-content {
   transform-style: preserve-3d;
+  transition: transform 0.1s ease-out;
+  will-change: transform;
 }
 </style>
