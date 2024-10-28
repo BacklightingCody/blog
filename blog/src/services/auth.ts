@@ -13,6 +13,7 @@ export const githubLoginApi = () => {
   //   method: 'get'
   // })
   window.location.href = `${import.meta.env.VITE_BACKEND_URL}/v0/auth/github/redirect`
+  console.log(import.meta.env.VITE_BACKEND_URL)
 }
 export const refreshTokenApi = async (data: { refreshToken: string }) => {
   return http.request({

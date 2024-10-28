@@ -47,7 +47,7 @@ export default defineConfig({
     cors: true, //允许跨域
     proxy: {
       '/api': {
-        target: 'http://localhost:8000',
+        target: 'http://localhost:3000',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, '')
       }
