@@ -122,7 +122,6 @@ function loop() {
 // Watch for loading state changes
 watch(() => globalStore.loading, async (newVal) => {
   if (newVal) {
-    console.log(newVal,'1111')
     await nextTick() // Ensure the DOM has been updated
     // Initialize canvas context
     ctx = canvas.value?.getContext('2d') || null
@@ -156,7 +155,6 @@ onMounted(() => {
 // // Lifecycle hooks
 // onMounted(() => {
 //   ctx = canvas.value?.getContext('2d') || null
-//   console.log(canvas.value)
 //   if (ctx) {
 //     ctx.scale(pixelRatio, pixelRatio)
 //     ctx.globalCompositeOperation = 'lighter'

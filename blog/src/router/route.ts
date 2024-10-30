@@ -37,7 +37,7 @@ export const constantRouter = [
           {
             path: 'experience',
             name: 'experience',
-            component: () => import('@/views/docs/technology/index.vue'),
+            component: () => import('@/views/docs/experience/index.vue'),
             children: []
           },
           {
