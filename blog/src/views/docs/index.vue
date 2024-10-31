@@ -1,7 +1,7 @@
 <template>
   <div class="w-full">
     <template v-if="isDocsPage">
-      <CategoryCardList :title="'文稿分类'" :categories="categories">
+      <CategoryCardList :title="'文稿分类'" :categories="categories" backgroundImage="https://cdn.pixabay.com/photo/2024/08/20/14/21/ai-generated-8983471_640.jpg">
       </CategoryCardList>
     </template>
     <RouterView v-else></RouterView>
@@ -26,7 +26,7 @@ import iconRainbow from '@/components/icons/iconRainbow.vue'
 const route = useRoute()
 const isDocsPage = computed(() => route.path == '/docs')
 // 数据源
-const categories = ref([
+const categories = [
   {
     name: 'Programme',
     icon: iconProgramme,  // 指定图标组件
@@ -56,7 +56,7 @@ const categories = ref([
     color: '#339933',
     subcategories: ['Express', 'File System', 'APIs']
   }
-])
+]
 </script>
 
 <style scoped lang="scss">

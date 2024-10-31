@@ -26,7 +26,7 @@ import iconNode from '@/components/icons/iconNode.vue'
 import iconNetwork from '@/components/icons/iconNetwork.vue'
 import iconAlgorithms from '@/components/icons/iconAlgorithms.vue'
 // 数据源：为每个分类指定不同的 icon 组件
-const categories = ref([
+const categories = [
   {
     name: 'HTML',
     icon: iconHTML,  // 指定图标组件
@@ -68,7 +68,7 @@ const categories = ref([
     color: '#00000',
     subcategories: ['Sorting', 'Searching', 'Graphs']
   }
-])
+]
 </script>
 
 <style scoped lang="scss">
