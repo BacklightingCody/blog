@@ -1,8 +1,8 @@
 <template>
-  <div class="circle relative flex justify-center items-center flex-shrink-0 ">
+  <div class="relative flex justify-center items-center flex-shrink-0 " :class="{ 'circle': rainbow }">
     <el-avatar :size="size" :src="props.src" :shape="shape" :fit="fit" @error="errorHandler">
       <img :src="props.src" v-if="props.src" />
-      <iconUser v-if="!props.src" class="user-default" @click="userLogin"/>
+      <iconUser v-if="!props.src" class="user-default" @click="userLogin" />
     </el-avatar>
   </div>
 </template>
@@ -13,10 +13,11 @@ const props = defineProps({
   src: { type: String, default: '' },
   size: { type: Number, default: 40 },
   shape: { type: String, default: 'circle' },
-  fit: { type: String, default: 'cover' }
+  fit: { type: String, default: 'cover' },
+  rainbow: { type: Boolean, default: true }
 })
 const errorHandler = () => true
-const userLogin=()=>{
+const userLogin = () => {
 
 }
 </script>
