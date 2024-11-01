@@ -31,30 +31,31 @@ const categories = [
     name: 'Programme',
     icon: iconProgramme,  // 指定图标组件
     color: '#E34F26',
+    backgroundImage:'/animial/animial1.jfif'
   },
   {
     name: 'Technology',
     icon: iconTechnology,  // 指定图标组件
     color: '#1572B6',
-    subcategories: ['Flexbox', 'Grid', 'Animations']
+    backgroundImage:'/animial/animial2.jfif'
   },
   {
     name: 'Experience',
     icon: iconRainbow,  // 指定图标组件
     color: '#F7DF1E',
-    subcategories: ['ES6', 'DOM Manipulation', 'Events']
+    backgroundImage:'/animial/animial3.jfif'
   },
   {
     name: 'Food Menu',
     icon: iconFoodMenu,  // 指定图标组件
     color: '#42B883',
-    subcategories: ['Components', 'Directives', 'Vue Router']
+    backgroundImage:'/animial/animial4.jfif'
   },
   {
     name: 'A word of the day',
     icon: iconPencil,  // 指定图标组件
     color: '#339933',
-    subcategories: ['Express', 'File System', 'APIs']
+    backgroundImage:'/animial/animial5.jfif'
   }
 ]
 </script>

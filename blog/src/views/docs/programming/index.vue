@@ -31,42 +31,42 @@ const categories = [
     name: 'HTML',
     icon: iconHTML,  // 指定图标组件
     color: '#E34F26',
-    subcategories: ['Forms', 'Tables', 'Media']
+    backgroundImage: '/animial/animial7.jfif'
   },
   {
     name: 'CSS',
     icon: iconCSS,  // 指定图标组件
     color: '#1572B6',
-    subcategories: ['Flexbox', 'Grid', 'Animations']
+    backgroundImage: '/animial/animial1.jfif'
   },
   {
     name: 'JavaScript',
     icon: iconJS,  // 指定图标组件
     color: '#F7DF1E',
-    subcategories: ['ES6', 'DOM Manipulation', 'Events']
+    backgroundImage: '/animial/animial2.jfif'
   },
   {
     name: 'Vue.js',
     icon: iconVue,  // 指定图标组件
     color: '#42B883',
-    subcategories: ['Components', 'Directives', 'Vue Router']
+    backgroundImage: '/animial/animial3.jfif'
   },
   {
     name: 'Node.js',
     icon: iconNode,  // 指定图标组件
     color: '#339933',
-    subcategories: ['Express', 'File System', 'APIs']
+    backgroundImage: '/animial/animial4.jfif'
   }, {
     name: 'Network',
     icon: iconNetwork,  // 指定图标组件
     color: '#339933',
-    subcategories: ['Express', 'File System', 'APIs']
+    backgroundImage: '/animial/animial5.jfif'
   },
   {
     name: 'Algorithms',
     icon: iconAlgorithms,
     color: '#00000',
-    subcategories: ['Sorting', 'Searching', 'Graphs']
+    backgroundImage: '/animial/animial6.jfif'
   }
 ]
 </script>

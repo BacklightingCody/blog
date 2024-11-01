@@ -21,25 +21,25 @@ const categories = [
     name: '高中',
     icon: iconHTML,  // 指定图标组件
     color: '#E34F26',
-    subcategories: ['Forms', 'Tables', 'Media']
+    backgroundImage: '/animial/animial1.jfif'
   },
   {
     name: '大学',
     icon: iconCSS,  // 指定图标组件
     color: '#1572B6',
-    subcategories: ['Flexbox', 'Grid', 'Animations']
+    backgroundImage: '/animial/animial2.jfif'
   },
   {
     name: 'JavaScript',
     icon: iconJS,  // 指定图标组件
     color: '#F7DF1E',
-    subcategories: ['ES6', 'DOM Manipulation', 'Events']
+    backgroundImage: '/animial/animial3.jfif'
   },
   {
     name: 'Vue.js',
     icon: iconVue,  // 指定图标组件
     color: '#42B883',
-    subcategories: ['Components', 'Directives', 'Vue Router']
+    backgroundImage: '/animial/animial4.jfif'
   },
 ]
 </script>

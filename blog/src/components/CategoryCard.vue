@@ -3,9 +3,10 @@
     class="category-card-container flex justify-center items-center w-[320px] h-[240px] perspect-1000px cursor-pointer"
     @mousemove="handleMouseMove" @mouseleave="handleMouseLeave">
     <div class="card-content w-full h-full rounded-2xl text-default-text relative"
-      :style="[cardStyle, { backgroundImage: `url(${backgroundImage})` }]">
+      :style="[cardStyle, { backgroundImage: `url(${category.backgroundImage})` }]">
       <!-- Overlay for background opacity -->
-      <div class="background-overlay" :style="{ backgroundColor: `rgba(${backFilter}, ${backFilter}, ${backFilter}, ${backgroundOpacity})` }"></div>
+      <div class="background-overlay"
+        :style="{ backgroundColor: `rgba(${backFilter}, ${backFilter}, ${backFilter}, ${backgroundOpacity})` }"></div>
       <div class="flex flex-col items-center justify-center p-6 z-10">
         <slot name="icon"></slot>
         <h2 class="text-2xl font-bold text-default-btnText hover:text-hover-btnText cursor-pointer mt-10">
@@ -27,10 +28,6 @@ const props = defineProps({
   category: {
     type: Object,
     required: true,
-  },
-  backgroundImage: {
-    type: String,
-    default: 'https://i.pinimg.com/564x/6d/d0/59/6dd059b19db716581b8ce6e2a2ab1485.jpg',
   },
   backgroundOpacity: {
     type: Number,
@@ -80,7 +77,7 @@ const handleMouseLeave = () => {
   position: relative;
   overflow: hidden;
   background-size: cover;
-  background-position: right top;
+  background-position: center center;
 }
 
 /* Overlay layer for background image opacity */
