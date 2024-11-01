@@ -1,21 +1,12 @@
 <template>
   <div class="w-full">
-    <h1 class="text-default-accent font-800 text-3xl my-10 text-center">编程</h1>
-    <div class="flex flex-wrap gap-6 m-auto">
-      <CategoryCard v-for="category in categories" :key="category.name" :category="category"
-        class="flex-grow max-w-[calc(33.33%-16px)] min-w-[300px]">
-        <template #icon>
-          <!-- 根据分类动态渲染不同的图标 -->
-          <component :is="category.icon" />
-        </template>
-      </CategoryCard>
-    </div>
+    <CategoryCardList title="经历" :categories="categories"></CategoryCardList>
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue'
-import CategoryCard from '@/components/CategoryCard.vue'
+import CategoryCardList from '../components/CategoryCardList.vue'
 
 // 导入不同的图标组件
 import iconHTML from '@/components/icons/iconHTML.vue'

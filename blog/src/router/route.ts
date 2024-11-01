@@ -26,31 +26,38 @@ export const constantRouter = [
             path: 'programming',
             name: 'programming',
             component: () => import('@/views/docs/programming/index.vue'),
-            children: []
-          }, 
+            meta: { identifier: 'programming' },
+          },
           {
             path: 'technology',
             name: 'technology',
             component: () => import('@/views/docs/technology/index.vue'),
-            children: []
+            meta: { identifier: 'technology' },
           },
           {
             path: 'experience',
             name: 'experience',
             component: () => import('@/views/docs/experience/index.vue'),
-            children: []
+            meta: { identifier: 'experience' },
           },
           {
             path: 'recipe',
             name: 'recipe',
             component: () => import('@/views/docs/recipe/index.vue'),
-            children: []
+            meta: { identifier: 'recipe' },
           },
           {
             path: 'motto',
             name: 'motto',
             component: () => import('@/views/docs/motto/index.vue'),
-            children: []
+            meta: { identifier: 'motto' },
+          },
+          {
+            path: ':category/article/:id',
+            name: 'article_detail',
+            component: () => import('@/views/docs/ArticleList.vue'),
+            props: true,
+            meta: { identifier: 'article_detail' },
           }
         ]
       },
