@@ -1,9 +1,11 @@
 /**
  * Modern CSS Reset Tweaks
  * ================================================== */
- /*为了消除警告 都加入了appearance:none;*/
+
+/* 为了消除警告 都加入了appearance:none; */
+
 html {
-  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 
   &:focus-within {
     scroll-behavior: smooth;
@@ -13,20 +15,20 @@ html {
 body {
   text-size-adjust: 100%;
   position: relative;
-
   width: 100%;
   min-height: 100vh;
-
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeSpeed;
+  text-rendering: optimizespeed;
 }
+
 #app {
   min-height: 100vh;
   height: 100%;
   display: flex;
   flex-direction: column;
 }
+
 /* Box sizing normalization */
 *,
 ::after,
@@ -34,12 +36,10 @@ body {
   box-sizing: border-box;
 }
 
-
 /* Elements that don't have a class get default styles */
 a:not([class]) {
   text-decoration-skip-ink: auto;
 }
-
 
 /**
  * CSS Reset Tweaks
@@ -168,8 +168,8 @@ blockquote,
 q {
   quotes: none;
 
-  &:before,
-  &:after {
+  &::before,
+  &::after {
     content: '';
     content: none;
   }
@@ -187,24 +187,24 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0 30px white inset;
+  box-shadow: 0 0 0 30px white inset;
 }
 
-input[type=search]::-webkit-search-cancel-button,
-input[type=search]::-webkit-search-decoration,
-input[type=search]::-webkit-search-results-button,
-input[type=search]::-webkit-search-results-decoration {
-  -webkit-appearance: none;
-  -moz-appearance: none;
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  appearance: none;
+  appearance: none;
   appearance:none;
 }
 
-input[type=search] {
-  -webkit-appearance: none;
-  -moz-appearance: none;
+input[type="search"] {
+  appearance: none;
+  appearance: none;
   appearance:none;
-  -webkit-box-sizing: content-box;
-  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  box-sizing: content-box;
   box-sizing: content-box;
 }
 
@@ -293,7 +293,7 @@ html input[type="button"],
 input[type="reset"],
 input[type="submit"] {
   appearance:none;
-  -webkit-appearance: button;
+  appearance: button;
   cursor: pointer;
   border: 0;
   background: transparent;
@@ -325,10 +325,10 @@ input[type="radio"] {
  *    (include `-moz` to future-proof).
  */
 input[type="search"] {
-  -webkit-appearance: textfield;
+  appearance: textfield;
   appearance:none;
-  -moz-box-sizing: content-box;
-  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+  box-sizing: content-box;
   box-sizing: content-box;
 }
 
@@ -338,7 +338,7 @@ input[type="search"] {
  */
 input[type="search"]::-webkit-search-cancel-button,
 input[type="search"]::-webkit-search-decoration {
-  -webkit-appearance: none;
+  appearance: none;
 }
 
 /**
@@ -491,7 +491,7 @@ button,
 [type="button"],
 [type="reset"],
 [type="submit"] {
-  -webkit-appearance: button;
+  appearance: button;
   appearance:none;
 }
 
@@ -512,7 +512,6 @@ button::-moz-focus-inner,
 legend {
   color: inherit;
   white-space: normal;
-
   display: block;
   border: 0;
   max-width: 100%;
@@ -550,10 +549,12 @@ progress {
  * 2. Correct the outline style in Safari.
  */
 [type="search"] {
-  -webkit-appearance: textfield;
+  appearance: textfield;
   appearance:none;
+
   /* 1 */
   outline-offset: -2px;
+
   /* 2 */
 }
 
@@ -561,7 +562,7 @@ progress {
  * Remove the inner padding in Chrome and Safari on macOS.
  */
 [type="search"]::-webkit-search-decoration {
-  -webkit-appearance: none;
+  appearance: none;
 }
 
 /**
@@ -569,9 +570,11 @@ progress {
  * 2. Change font properties to `inherit` in Safari.
  */
 ::-webkit-file-upload-button {
-  -webkit-appearance: button;
+  appearance: button;
+
   /* 1 */
   font: inherit;
+
   /* 2 */
 }
 

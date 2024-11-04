@@ -4,7 +4,8 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers' //引入element-plus
 import { VantResolver } from '@vant/auto-import-resolver' //引入vant
-// import eslintPlugin from 'vite-plugin-eslint'    //eslint插件
+import viteEslint from 'vite-plugin-eslint';   //eslint插件
+import viteStylelint from '@amatlash/vite-plugin-stylelint';
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
@@ -12,7 +13,8 @@ import path from 'path'
 export default defineConfig({
   plugins: [
     vue(),
-    // eslintPlugin(),
+    viteEslint(),
+    // viteStylelint({ exclude: /node_modules/ }),
     UnoCSS(),
     Components({
       resolvers: [ElementPlusResolver(), VantResolver()]

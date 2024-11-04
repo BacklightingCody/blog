@@ -13,7 +13,9 @@
     "test:unit:dev": "cypress open --component",
     "build-only": "vite build",
     "type-check": "vue-tsc --build --force",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
+    "lint": "npm run lint:script && npm run lint:style",
+    "lint:script": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
+    "lint:style": "stylelint --fix \"src/**/*.{css,scss}\"",
     "format": "prettier --write \"./**/*.{html,vue,ts,js,json,md}\""
   },
   "dependencies": {
@@ -30,11 +32,11 @@
     "sass": "^1.78.0",
     "universal-cookie": "^7.2.0",
     "vant": "^4.9.5",
-    "vite-plugin-eslint": "^1.8.1",
     "vue": "3.5",
     "vue-router": "^4.4.3"
   },
   "devDependencies": {
+    "@amatlash/vite-plugin-stylelint": "^1.2.0",
     "@iconify-json/mingcute": "^1.2.0",
     "@iconify/vue": "^4.1.2",
     "@rushstack/eslint-patch": "^1.10.4",
@@ -61,11 +63,15 @@
     "prettier": "^3.3.3",
     "scss": "^0.2.4",
     "start-server-and-test": "^2.0.6",
+    "stylelint": "^16.10.0",
+    "stylelint-config-standard": "^36.0.1",
+    "stylelint-config-standard-scss": "^13.1.0",
     "typescript": "~5.5.4",
-    "unocss": "^0.62.3",
+    "unocss": "^0.62.4",
     "unplugin-auto-import": "^0.18.2",
     "unplugin-vue-components": "^0.27.4",
-    "vite": "^5.4.3",
+    "vite": "^5.4.10",
+    "vite-plugin-eslint": "^1.8.1",
     "vite-plugin-svg-icons": "^2.0.1",
     "vue-tsc": "^2.1.6"
   }
