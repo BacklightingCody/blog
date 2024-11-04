@@ -22,6 +22,7 @@
     ],
     "target": "ESNext",
     "baseUrl": ".",
+    "outDir": "dist",
     "composite": true,
     "allowSyntheticDefaultImports": true, //允许从没有设置默认导出的模块中默认导入。
     "module": "ESNext",

@@ -3,14 +3,14 @@ require('@rushstack/eslint-patch/modern-module-resolution')
 import autoImportConfig from './.eslintrc-auto-import'
 module.exports = {
   root: true,
-  plugins: ['import', 'vue', '@typescript-eslint'],
+  plugins: ['import', 'vue', '@typescript-eslint', 'prettier'],
   env: {
     browser: true,
     es2021: true,
     node: true
   },
   overrides: [],
-  parser: 'vue-eslint-parser',
+  parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 'latest',
     parser: '@typescript-eslint/parser',
@@ -59,7 +59,8 @@ module.exports = {
     // ],
     'vue/multi-word-component-names': 'off',
     'vue/no-v-html': 'off',
-    'vue/require-toggle-inside-transition': 'off'
+    'vue/require-toggle-inside-transition': 'off',
+    "prettier/prettier": "error",
   },
   extends: [
     'eslint:recommended',
