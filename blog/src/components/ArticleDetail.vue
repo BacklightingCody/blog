@@ -4,12 +4,9 @@ import { Article } from '@/interface/Article'
 
 const props = defineProps<{ articles: Article[] }>()
 
-// const sortedArticles = computed(() => {
-//   return [...props.articles].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-// })
-const sortedArticles = [{ id: 1, title: 'HTML基础', category: 'html',date:'2024-11-8' },
-{ id: 2, title: 'CSS入门', category: 'css' ,date:'2024-11-8'},
-{ id: 3, title: 'JavaScript 高级篇', category: 'javascript',date:'2024-11-8' },]
+const sortedArticles = computed(() => {
+  return [...props.articles].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+})
 </script>
 
 <template>

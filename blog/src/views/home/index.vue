@@ -3,29 +3,38 @@
     <div class="mt-40 flex w-full" v-if="width > 640">
       <div class="left mt-20 w-60% flex flex-col justify-center">
         <h1 class="text-2xl lg:text-3xl text-default-text  ">
-          Hi, I'm backlighting👋。
+          Hi, I'm <span class="font-800">backlighting</span>👋。
         </h1>
         <h1 class="text-2xl lg:text-3xl  text-default-text ml-5 mt-8"> A Front-end &lt;developer/&gt;</h1>
-        <div class="flex">
-          <iconCircle url="https://music.163.com/#/user/home?id=32630738630" bgColor="#DE0014">
+        <div class="flex mt-5">
+          <iconCircle url="https://music.163.com/#/user/home?id=32630738630" toolTitle="网易云音乐">
             <iconCloudMusic></iconCloudMusic>
           </iconCircle>
-          <iconCircle url="https://space.bilibili.com/1274808675?spm_id_from=333.1007.0.00" bgColor="#FB7299">
+          <iconCircle url="https://space.bilibili.com/1274808675?spm_id_from=333.1007.0.00" toolTitle="Bilibili">
             <iconBilibili></iconBilibili>
           </iconCircle>
-          <iconCircle url="https://github.com/BacklightingCody">
+          <iconCircle url="https://github.com/BacklightingCody" toolTitle="Github">
             <iconGithub></iconGithub>
+          </iconCircle>
+          <iconCircle url="https://x.com/pitilessmi77034" toolTitle="Twitter">
+            <iconTwitter></iconTwitter>
+          </iconCircle>
+          <iconCircle url="https://www.douyin.com/user/self?from_tab_name=main" toolTitle="抖音">
+            <iconTikTok></iconTikTok>
           </iconCircle>
         </div>
       </div>
-      <div class="right w-40% flex items-center justify-center mt-10">
+      <div class="right w-40% flex flex-col mt-10">
         <Avatar :size='avatarSize' :rainbow="false" src="/avatar.jpg"></Avatar>
+        <div class="mt-6 text-2xl font-400 text-default-text text-center">
+          愿你我都能做生活的高手!
+        </div>
       </div>
     </div>
     <div v-else>
       <div class="top mt-40 w-full flex flex-col justify-center">
         <h1 class="text-center text-2xl lg:text-3xl text-default-text  ">
-          Hi, I'm backlighting👋。
+          Hi, I'm <span class="font-800">backlighting</span>👋。
         </h1>
         <h1 class="text-center text-2xl lg:text-3xl  text-default-text ml-5 mt-8"> A Front-end &lt;developer/&gt;</h1>
 
@@ -37,14 +46,20 @@
         愿你我都能做生活的高手!
       </div>
       <div class="flex bottom justify-center mt-5">
-        <iconCircle url="https://music.163.com/#/user/home?id=32630738630" bgColor="#DE0014">
+        <iconCircle url="https://music.163.com/#/user/home?id=32630738630" toolTitle="网易云音乐">
           <iconCloudMusic></iconCloudMusic>
         </iconCircle>
-        <iconCircle url="https://space.bilibili.com/1274808675?spm_id_from=333.1007.0.00" bgColor="#FB7299">
+        <iconCircle url="https://space.bilibili.com/1274808675?spm_id_from=333.1007.0.00" toolTitle="Bilibili">
           <iconBilibili></iconBilibili>
         </iconCircle>
-        <iconCircle url="https://github.com/BacklightingCody">
+        <iconCircle url="https://github.com/BacklightingCody" toolTitle="Github">
           <iconGithub></iconGithub>
+        </iconCircle>
+        <iconCircle url="https://x.com/pitilessmi77034" toolTitle="Twitter">
+          <iconTwitter></iconTwitter>
+        </iconCircle>
+        <iconCircle url="https://www.douyin.com/user/self?from_tab_name=main" toolTitle="抖音">
+          <iconTikTok></iconTikTok>
         </iconCircle>
       </div>
     </div>
@@ -58,7 +73,8 @@ import iconCircle from '@/components/iconCircle.vue';
 import iconCloudMusic from '@/components/icons/iconCloudMusic.vue';
 import iconBilibili from '@/components/icons/iconBilibili.vue';
 import iconGithub from '@/components/icons/iconGithub.vue';
-
+import iconTwitter from '@/components/icons/iconTwitter.vue'
+import iconTikTok from '@/components/icons/iconTikTok.vue';
 const windowSize = useWindowSize()
 const width = windowSize.width
 const height = windowSize.height

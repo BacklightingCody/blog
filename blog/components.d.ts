@@ -7,6 +7,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    ArticleDetail: typeof import('./src/components/ArticleDetail.vue')['default']
     ArticleLine: typeof import('./src/components/ArticleLine.vue')['default']
     Avatar: typeof import('./src/components/Avatar.vue')['default']
     CategoryCard: typeof import('./src/components/CategoryCard.vue')['default']
@@ -20,6 +21,7 @@ declare module 'vue' {
     ElHeader: typeof import('element-plus/es')['ElHeader']
     ElMain: typeof import('element-plus/es')['ElMain']
     ElSwitch: typeof import('element-plus/es')['ElSwitch']
+    ElTooltip: typeof import('element-plus/es')['ElTooltip']
     IconAbout: typeof import('./src/components/icons/iconAbout.vue')['default']
     IconAlgorithms: typeof import('./src/components/icons/iconAlgorithms.vue')['default']
     IconBilibili: typeof import('./src/components/icons/iconBilibili.vue')['default']
@@ -44,7 +46,9 @@ declare module 'vue' {
     IconRainbow: typeof import('./src/components/icons/iconRainbow.vue')['default']
     IconRecipe: typeof import('./src/components/icons/iconRecipe.vue')['default']
     IconTechnology: typeof import('./src/components/icons/iconTechnology.vue')['default']
+    IconTikTok: typeof import('./src/components/icons/iconTikTok.vue')['default']
     IconTimeLine: typeof import('./src/components/icons/iconTimeLine.vue')['default']
+    IconTwitter: typeof import('./src/components/icons/iconTwitter.vue')['default']
     IconUser: typeof import('./src/components/icons/iconUser.vue')['default']
     IconVue: typeof import('./src/components/icons/iconVue.vue')['default']
     InnerLoading: typeof import('./src/components/InnerLoading.vue')['default']

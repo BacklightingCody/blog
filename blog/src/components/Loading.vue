@@ -139,7 +139,6 @@ watch(() => globalStore.loading, async (newVal) => {
 
 // Lifecycle hooks
 onMounted(() => {
-  console.log('lxxxxx')
   // If the component is mounted and loading is true, start the animation
   ctx = canvas.value?.getContext('2d') || null
   if (ctx) {
