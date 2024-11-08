@@ -19,46 +19,33 @@ import iconAlgorithms from '@/components/icons/iconAlgorithms.vue'
 // 数据源：为每个分类指定不同的 icon 组件
 const categories = [
   {
-    name: 'HTML',
+    name: '清蒸',
     icon: iconHTML,  // 指定图标组件
     color: '#E34F26',
-    backgroundImage: '/animial/animial1.jfif'
+    backgroundImage: '/animial/animial1.jfif',
+    link:'/docs/gift/article'
   },
   {
-    name: 'CSS',
+    name: '油炸',
     icon: iconCSS,  // 指定图标组件
     color: '#1572B6',
-    backgroundImage: '/animial/animial2.jfif'
+    backgroundImage: '/animial/animial2.jfif',
+    link:'/docs/fry/article'
   },
   {
     name: 'JavaScript',
     icon: iconJS,  // 指定图标组件
     color: '#F7DF1E',
-    backgroundImage: '/animial/animial3.jfif'
+    backgroundImage: '/animial/animial3.jfif',
+    link:'/docs/teriyaki/article'
   },
   {
-    name: 'Vue.js',
+    name: '爆炒',
     icon: iconVue,  // 指定图标组件
     color: '#42B883',
-    backgroundImage: '/animial/animial4.jfif'
+    backgroundImage: '/animial/animial4.jfif',
+    link:'/docs/stir_fry/article'
   },
-  {
-    name: 'Node.js',
-    icon: iconNode,  // 指定图标组件
-    color: '#339933',
-    backgroundImage: '/animial/animial5.jfif'
-  }, {
-    name: 'Network',
-    icon: iconNetwork,  // 指定图标组件
-    color: '#339933',
-    backgroundImage: '/animial/animial6.jfif'
-  },
-  {
-    name: 'Algorithms',
-    icon: iconAlgorithms,
-    color: '#00000',
-    backgroundImage: '/animial/animial7.jfif'
-  }
 ]
 </script>
 
