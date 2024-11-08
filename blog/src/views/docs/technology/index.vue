@@ -1,6 +1,6 @@
 <template>
   <div class="w-full">
-    <CategoryCardList title="经历" :categories="categories"></CategoryCardList>
+    <CategoryCardList title="技术" :categories="categories"></CategoryCardList>
   </div>
 </template>
 

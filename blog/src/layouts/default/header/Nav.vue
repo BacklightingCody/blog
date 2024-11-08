@@ -202,6 +202,24 @@ const handleCommand = (command: string) => {
 watch(() => router.currentRoute.value.path, (newPath) => {
   if (!newPath.startsWith('/docs/')) {
     docTitle.value = '文稿';  // 重置为 "文稿"
+    return
+  }
+  switch (newPath) {
+    case '/docs/programming':
+      docTitle.value = '编程'
+      break
+    case '/docs/technology':
+      docTitle.value = '技术'
+      break
+    case '/docs/experience':
+      docTitle.value = '经历'
+      break
+    case '/docs/recipe':
+      docTitle.value = '菜谱'
+      break
+    case '/docs/motto':
+      docTitle.value = '一言'
+      break
   }
 });
 // icon图标

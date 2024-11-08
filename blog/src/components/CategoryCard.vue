@@ -1,23 +1,27 @@
 <template>
-  <div
-    class="category-card-container flex justify-center items-center w-[320px] h-[240px] perspect-1000px cursor-pointer"
-    @mousemove="handleMouseMove" @mouseleave="handleMouseLeave">
-    <div class="card-content w-full h-full rounded-2xl text-default-text relative"
-      :style="[cardStyle, { backgroundImage: `url(${category.backgroundImage})` }]">
-      <!-- Overlay for background opacity -->
-      <div class="background-overlay"
-        :style="{ backgroundColor: `rgba(${backFilter}, ${backFilter}, ${backFilter}, ${backgroundOpacity})` }"></div>
-      <div class="flex flex-col items-center justify-center p-6 z-10">
-        <slot name="icon"></slot>
-        <h2 class="text-2xl font-bold text-default-btnText hover:text-hover-btnText cursor-pointer mt-10">
-          {{ category.name }}
-        </h2>
+  <RouterLink :to="category.link" class="flex justify-center">
+    <div
+      class="category-card-container flex justify-center items-center w-[320px] h-[240px] perspect-1000px cursor-pointer"
+      @mousemove="handleMouseMove" @mouseleave="handleMouseLeave">
+
+      <div class="card-content w-full h-full rounded-2xl text-default-text relative"
+        :style="[cardStyle, { backgroundImage: `url(${category.backgroundImage})` }]">
+        <!-- Overlay for background opacity -->
+        <div class="background-overlay"
+          :style="{ backgroundColor: `rgba(${backFilter}, ${backFilter}, ${backFilter}, ${backgroundOpacity})` }"></div>
+        <div class="flex flex-col items-center justify-center p-6 z-10">
+          <slot name="icon"></slot>
+          <h2 class="text-2xl font-bold text-default-btnText hover:text-hover-btnText cursor-pointer mt-10">
+            {{ category.name }}
+          </h2>
+        </div>
       </div>
     </div>
-  </div>
+  </RouterLink>
 </template>
 
 <script setup lang="ts">
+import { RouterLink } from 'vue-router';
 import { ref } from 'vue'
 import { useGlobalStore } from '@/stores';
 const globalStore = useGlobalStore()
