@@ -22,7 +22,6 @@ const loginSubmit = (method: string) => {
   }
 }
 onMounted(async () => {
-  // console.log(import.meta.env.VITE_BACKEND_URL)
   const urlParams = new URLSearchParams(window.location.search)
   const userId = urlParams.get('user_id')
   const isLoggedFromUrl = urlParams.get('logged_in');

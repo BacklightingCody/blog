@@ -12,8 +12,8 @@ export const githubLoginApi = () => {
   //   url: '/auth/github/redirect',
   //   method: 'get'
   // })
-  window.location.href = `${import.meta.env.VITE_BACKEND_URL}/v0/auth/github/redirect`
-  console.log(import.meta.env.VITE_BACKEND_URL)
+  window.location.href = `${import.meta.env.VITE_API_BASE_URL}/v0/auth/github/redirect`
+  console.log(import.meta.env.VITE_API_BASE_URL)
 }
 export const refreshTokenApi = async (data: { refreshToken: string }) => {
   return http.request({

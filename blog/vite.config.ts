@@ -4,16 +4,21 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers' //引入element-plus
 import { VantResolver } from '@vant/auto-import-resolver' //引入vant
-import viteEslint from 'vite-plugin-eslint';   //eslint插件
+// import viteEslint from 'vite-plugin-eslint';   //eslint插件
 import viteStylelint from '@amatlash/vite-plugin-stylelint';
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
 // https://vitejs.dev/config/
 export default defineConfig({
+  define: {
+    'process.env': {
+      VITE_API_BASE_URL: process.env.VITE_API_BASE_URL
+    }
+  },
   plugins: [
     vue(),
-    viteEslint(),
+    // viteEslint(),
     // viteStylelint({ exclude: /node_modules/ }),
     UnoCSS(),
     Components({
@@ -49,9 +54,10 @@ export default defineConfig({
     cors: true, //允许跨域
     proxy: {
       '/api': {
-        target: 'http://localhost:3000',
+        // target: 'http://localhost:3000',
+        target: process.env.VITE_API_BASE_URL,
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, '')
+        rewrite: (path: any) => path.replace(/^\/api/, '')
       }
     }
   }
