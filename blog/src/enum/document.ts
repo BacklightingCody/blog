@@ -14,7 +14,7 @@ export enum DocCategoryRoute {
   Motto = 'motto'
 }
 
-export const docCategoryMap = Object.entries(DocCategory).map(([key, value]) => ({
+export const DocCategoryMap = Object.entries(DocCategory).map(([key, value]) => ({
   name: value, // 中文名
   route: DocCategoryRoute[key as keyof typeof DocCategoryRoute], // 对应路由
 }));

@@ -22,7 +22,7 @@ const loginSubmit = (method: string) => {
   }
 }
 onMounted(async () => {
-  console.log(import.meta.env.VITE_BACKEND_URL)
+  // console.log(import.meta.env.VITE_BACKEND_URL)
   const urlParams = new URLSearchParams(window.location.search)
   const userId = urlParams.get('user_id')
   const isLoggedFromUrl = urlParams.get('logged_in');
@@ -33,7 +33,6 @@ onMounted(async () => {
     userStore.userId = userId
     await userStore.getUserInfo(userId)
   } else if (userStore.userId) {
-    console.log('userStore.userId', userStore.userId)
     await userStore.getUserInfo(userStore.userId)
   }else{
     userStore.isLoggedIn = false

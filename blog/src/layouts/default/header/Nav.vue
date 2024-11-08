@@ -84,62 +84,69 @@
       </div>
     </div>
     <div v-else class="w-[50px] flex justify-center">
-      <iconHomeMobile @click="showDrawer = true" class="nav cursor-pointer text-default-icon" />
-      <div v-if="showDrawer" class="drawer-container" @click="showDrawer = false">
-        <div class="nav drawer-content">
-          <div class="nav-tab">
-            <RouterLink to="/" exact-active-class="active-nav">
-              <iconHome class="icon hidden icon-animation" :class="{ 'show-icon': route.path === '/' ? true : false }">
-              </iconHome>
-              主页
-            </RouterLink>
-          </div>
-          <div class="nav-tab">
-            <RouterLink to="/docs" active-class="active-nav">
-              <iconDocs class="icon hidden icon-animation"
-                :class="{ 'show-icon': route.path === '/docs' ? true : false }">
-              </iconDocs>
-              文稿
-            </RouterLink>
-          </div>
-          <div class="nav-tab">
-            <RouterLink to="/timeline" active-class="active-nav">
-              <iconTimeLine class="icon hidden icon-animation"
-                :class="{ 'show-icon': route.path === '/timeline' ? true : false }">
-              </iconTimeLine>
-              时光轴
-            </RouterLink>
-          </div>
-          <div class="nav-tab">
-            <RouterLink to="/chat" active-class="active-nav">
-              <iconOpenAI class="icon hidden icon-animation"
-                :class="{ 'show-icon': route.path === '/chat' ? true : false }"></iconOpenAI>
-              Chat
-            </RouterLink>
-          </div>
-          <div class="nav-tab">
-            <RouterLink to="/friend" active-class="active-nav">
-              <iconFriendLink class="icon hidden icon-animation"
-                :class="{ 'show-icon': route.path === '/friend' ? true : false }">
-              </iconFriendLink>
-              友链
-            </RouterLink>
-          </div>
-          <div class="nav-tab">
-            <RouterLink to="/about" active-class="active-nav">
-              <iconAbout class="icon hidden icon-animation"
-                :class="{ 'show-icon': route.path === '/about' ? true : false }"></iconAbout>关于
-            </RouterLink>
-          </div>
-          <div class="nav-tab">
-            <RouterLink to="/more" active-class="active-nav">
-              <iconMore class="icon hidden icon-animation"
-                :class="{ 'show-icon': route.path === '/more' ? true : false }">
-              </iconMore>更多
-            </RouterLink>
+      <iconHomeMobile @click="toggleDrawer" class="nav cursor-pointer text-default-icon" />
+      <transition name="drawer">
+        <div v-if="isShowDrawer" class="drawer-container" @click="hideDrawer">
+          <div class="nav drawer-content">
+            <div class="nav-tab">
+              <RouterLink to="/" exact-active-class="active-nav">
+                <iconHome class="icon icon-animation">
+                </iconHome>
+                主页
+              </RouterLink>
+            </div>
+
+            <div class="nav-tab">
+              <RouterLink to="/docs" active-class="active-nav">
+                <iconDocs class="icon icon-animation" </iconDocs>
+                  文稿
+              </RouterLink>
+              <ul class="sub-nav">
+                <li v-for="(category, index) in docCategoryList">
+                  <RouterLink :to="`/docs/${category.route}`" active-class="active-nav">
+                    {{ category.name }}
+                  </RouterLink>
+                </li>
+
+              </ul>
+            </div>
+
+            <div class="nav-tab">
+              <RouterLink to="/timeline" active-class="active-nav">
+                <iconTimeLine class="icon icon-animation" </iconTimeLine>
+                  时光轴
+              </RouterLink>
+            </div>
+
+            <div class="nav-tab">
+              <RouterLink to="/chat" active-class="active-nav">
+                <iconOpenAI class="icon icon-animation"></iconOpenAI>
+                Chat
+              </RouterLink>
+            </div>
+            <div class="nav-tab">
+              <RouterLink to="/friend" active-class="active-nav">
+                <iconFriendLink class="icon icon-animation">
+                </iconFriendLink>
+                友链
+              </RouterLink>
+            </div>
+
+            <div class="nav-tab">
+              <RouterLink to="/about" active-class="active-nav">
+                <iconAbout class="icon icon-animation"></iconAbout>关于
+              </RouterLink>
+            </div>
+
+            <div class="nav-tab">
+              <RouterLink to="/more" active-class="active-nav">
+                <iconMore class="icon icon-animation">
+                </iconMore>更多
+              </RouterLink>
+            </div>
           </div>
         </div>
-      </div>
+      </transition>
     </div>
   </div>
 </template>
@@ -154,9 +161,8 @@ import iconAbout from '@/components/icons/iconAbout.vue'
 import iconMore from '@/components/icons/iconMore.vue'
 import iconHomeMobile from '@/components/icons/iconHomeMobile.vue'
 import { useWindowSize } from '@vueuse/core'
-import { docCategoryMap } from '@/enum/document'
+import { DocCategoryMap } from '@/enum/document'
 import { useRouter } from 'vue-router'
-import { ca } from 'element-plus/es/locale/index.mjs'
 const route = useRoute()
 const router = useRouter()
 // Navigation bar background color gradient
@@ -176,7 +182,8 @@ const handleMouseLeave = () => {
   backgroundStyle.value = ``
 }
 // dropdown数据
-const docCategoryList = docCategoryMap
+const docCategoryList = DocCategoryMap  //category->name,route
+console.log(docCategoryList)
 const docTitle = ref('文稿')
 const itemHeight = 42
 const currentIndex = ref(0)
@@ -233,16 +240,21 @@ onMounted(() => {
 watch(width, () => {
   windowWidth.value = width.value;
 })
-const showDrawer = ref(false);
-
+const isShowDrawer = ref(false);
+const toggleDrawer = () => {
+  isShowDrawer.value = !isShowDrawer.value;
+}
+const hideDrawer = () => {
+  isShowDrawer.value = false;
+}
 </script>
 <style lang="scss" scoped>
 .nav {
   .nav-tab {
-    @apply h-full flex items-center;
+    @apply flex items-center;
 
     a {
-      @apply h-full text-default-btnText flex items-center flex-nowrap px-2 hover:(text-hover-btnText filter brightness-120 contrast-251 saturate-100);
+      @apply text-default-btnText flex items-center flex-nowrap px-2 hover:(text-hover-btnText filter brightness-120 contrast-251 saturate-100);
 
       .icon {
         @apply m-1
@@ -264,23 +276,42 @@ const showDrawer = ref(false);
 }
 
 .drawer-container {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  overflow-y: scroll;
-  transition: height 0.3s ease;
+  @apply fixed bottom-0 left-0 right-0 h-[500px] overflow-y-auto bg-default-bg border-t-[1px] border-t-solid border-default-border;
 
   .drawer-content {
-    background-color: var(--accent-color);
-    display: flex;
-    flex-direction: column;
-    height: 300px;
+    @apply flex flex-col mt-5;
 
     .nav-tab {
-      @apply flex justify-center
+      @apply block mt-5 text-xl;
+
+      .sub-nav {
+        @apply flex flex-wrap pl-3 mt-2;
+
+        li {
+          @apply w-1/2 mt-2;
+
+          a {
+            @apply block w-full px-0 text-lg text-center;
+          }
+        }
+      }
     }
   }
+}
+
+.drawer-enter-active,
+.drawer-leave-active {
+  transition: all 0.5s ease;
+}
+
+.drawer-enter-from,
+.drawer-leave-to {
+  transform: translateY(100%);
+}
+
+.drawer-enter-to,
+.drawer-leave-from {
+  transform: translateY(0);
 }
 
 @keyframes iconMoveAnimation {
