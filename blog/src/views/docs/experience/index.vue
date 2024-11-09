@@ -22,28 +22,28 @@ const categories = [
     icon: iconHTML,  // 指定图标组件
     color: '#E34F26',
     backgroundImage: '/animial/animial1.jfif',
-    link:'/experience/senior/article'
+    link:'/docs/experience/senior'
   },
   {
     name: '大学',
     icon: iconCSS,  // 指定图标组件
     color: '#1572B6',
     backgroundImage: '/animial/animial2.jfif',
-    link:'/experience/college/article'
+    link:'/docs/experience/college'
   },
   {
     name: '社会',
     icon: iconJS,  // 指定图标组件
     color: '#F7DF1E',
     backgroundImage: '/animial/animial3.jfif',
-    link:'/experience/society/article'
+    link:'/docs/experience/society'
   },
   {
     name: '生活',
     icon: iconVue,  // 指定图标组件
     color: '#42B883',
     backgroundImage: '/animial/animial4.jfif',
-    link:'/experience/life/article'
+    link:'/docs/experience/life'
   },
 ]
 </script>

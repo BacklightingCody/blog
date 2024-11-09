@@ -53,14 +53,14 @@ export const constantRouter = [
             meta: { identifier: 'motto' },
           },
           {
-            path: ':category/article',
+            path: ':category/:subcategory',
             name: 'article_list',
             component: () => import('@/components/ArticleLine.vue'),
             props: true, // 允许将动态参数作为 props 传递
             meta: { identifier: 'article_list' },
           },
           {
-            path: ':category/article/:id',
+            path: ':category/:subcategory/article:id',
             name: 'article_detail',
             component: () => import('@/components/ArticleDetail.vue'),
             props: true, // 允许将动态参数作为 props 传递
