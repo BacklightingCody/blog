@@ -22,48 +22,48 @@ const categories = [
     name: 'HTML',
     icon: iconHTML,  // 指定图标组件
     color: '#E34F26',
-    backgroundImage: '/animial/animial7.jfif',
+    backgroundImage: '/picture/animial/animial7.jfif',
     link: '/docs/programming/html'
   },
   {
     name: 'CSS',
     icon: iconCSS,  // 指定图标组件
     color: '#1572B6',
-    backgroundImage: '/animial/animial1.jfif',
+    backgroundImage: '/picture/animial/animial1.jfif',
     link: '/docs/programming/css'
   },
   {
     name: 'JavaScript',
     icon: iconJS,  // 指定图标组件
     color: '#F7DF1E',
-    backgroundImage: '/animial/animial2.jfif',
+    backgroundImage: '/picture/animial/animial2.jfif',
     link: '/docs/programming/javascript'
   },
   {
     name: 'Vue.js',
     icon: iconVue,  // 指定图标组件
     color: '#42B883',
-    backgroundImage: '/animial/animial3.jfif',
+    backgroundImage: '/picture/animial/animial3.jfif',
     link: '/docs/programming/vue'
   },
   {
     name: 'Node.js',
     icon: iconNode,  // 指定图标组件
     color: '#339933',
-    backgroundImage: '/animial/animial4.jfif',
+    backgroundImage: '/picture/animial/animial4.jfif',
     link: '/docs/programming/node'
   }, {
     name: 'Network',
     icon: iconNetwork,  // 指定图标组件
     color: '#339933',
-    backgroundImage: '/animial/animial5.jfif',
+    backgroundImage: '/picture/animial/animial5.jfif',
     link: '/docs/programming/network'
   },
   {
     name: 'Algorithms',
     icon: iconAlgorithms,
     color: '#00000',
-    backgroundImage: '/animial/animial6.jfif',
+    backgroundImage: '/picture/animial/animial6.jfif',
     link: '/docs/programming/algorithms'
   }
 ]

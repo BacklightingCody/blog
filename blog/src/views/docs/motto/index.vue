@@ -22,14 +22,14 @@ const categories = [
     name: 'Inspirational',
     icon: iconHTML,  // 指定图标组件
     color: '#E34F26',
-    backgroundImage: '/animial/animial1.jfif',
+    backgroundImage: '/picture/animial/animial1.jfif',
     link: '/docs/motto/Inspirational'
   },
   {
     name: 'innovation',
     icon: iconCSS,  // 指定图标组件
     color: '#1572B6',
-    backgroundImage: '/animial/animial2.jfif',
+    backgroundImage: '/picture/animial/animial2.jfif',
     link: '/docs/motto/innovation'
   },
 ]
