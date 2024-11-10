@@ -31,7 +31,7 @@
       "@/*": ["src/*"],
       "~/*": ["src/types/*"]
     },
-    "types": ["vite/client"],
+    "types": ["vite/client","vite-plugin-md"],
     // "typeRoots": ["./node_modules/","./src/types/"],
     "jsx": "preserve", // 在 .tsx文件里支持JSX
     // "outDir": "./dist",

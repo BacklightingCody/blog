@@ -19,7 +19,6 @@ const props = defineProps({
 })
 const globalStore = useGlobalStore()
 
-console.log(globalStore.theme,'11111')
 const tooltipColor = computed(() => {
   return globalStore.theme === 'dark' ? 'light' : 'dark'
 })

@@ -21,9 +21,6 @@ const props = defineProps<{
   title: string;
   categories: CategoryList[]; // 使用定义的接口
 }>()
-
-console.log(props.title)
-console.log(props.categories)
 </script>
 
 <style scoped>

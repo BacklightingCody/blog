@@ -6,6 +6,7 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers' //引入
 import { VantResolver } from '@vant/auto-import-resolver' //引入vant
 // import viteEslint from 'vite-plugin-eslint';   //eslint插件
 import viteStylelint from '@amatlash/vite-plugin-stylelint';
+import Markdown from 'vite-plugin-md'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
@@ -17,7 +18,16 @@ export default defineConfig({
     }
   },
   plugins: [
-    vue(),
+    vue({
+      include: [/\.vue$/, /\.md$/]
+    }),
+    Markdown({
+      markdownItOptions: {
+        html: true, // 允许 HTML 标签
+        linkify: true, // 自动将 URL 转换为链接
+        typographer: true // 美化标点符号
+      }
+    }),
     // viteEslint(),
     // viteStylelint({ exclude: /node_modules/ }),
     UnoCSS(),
