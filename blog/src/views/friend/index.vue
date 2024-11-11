@@ -1,7 +1,7 @@
 <template>
   <div class="w-full h-full">
     <div>
-      <CategoryCardList title="朋友们" :categories="categories"></CategoryCardList>
+      <CategoryCardList title="朋友们" :categories="categories" :isNewTab="true"></CategoryCardList>
     </div>
   </div>
 </template>

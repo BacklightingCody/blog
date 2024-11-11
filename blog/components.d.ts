@@ -13,7 +13,6 @@ declare module 'vue' {
     CategoryCard: typeof import('./src/components/CategoryCard.vue')['default']
     CategoryCardList: typeof import('./src/components/CategoryCardList.vue')['default']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
-    ElButton: typeof import('element-plus/es')['ElButton']
     ElContainer: typeof import('element-plus/es')['ElContainer']
     ElDropdown: typeof import('element-plus/es')['ElDropdown']
     ElDropdownItem: typeof import('element-plus/es')['ElDropdownItem']

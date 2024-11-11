@@ -1,23 +1,50 @@
 <template>
-  <RouterLink :to="category.link" class="flex justify-center">
-    <div
-      class="category-card-container flex justify-center items-center perspect-1000px cursor-pointer"
-      @mousemove="handleMouseMove" @mouseleave="handleMouseLeave" :style="{ width: width + 'px', height: height + 'px' }">
+  <div>
+    <template v-if="!isNewTab">
+      <RouterLink :to="category.link" class="flex justify-center">
+        <div class="category-card-container flex justify-center items-center perspect-1000px cursor-pointer"
+          @mousemove="handleMouseMove" @mouseleave="handleMouseLeave"
+          :style="{ width: width + 'px', height: height + 'px' }">
 
-      <div class="card-content w-full h-full rounded-2xl text-default-text relative"
-        :style="[cardStyle, { backgroundImage: `url(${category.backgroundImage})` }]">
-        <!-- Overlay for background opacity -->
-        <div class="background-overlay"
-          :style="{ backgroundColor: `rgba(${backFilter}, ${backFilter}, ${backFilter}, ${backgroundOpacity})` }"></div>
-        <div class="flex flex-col items-center justify-center p-6 z-10">
-          <slot name="icon"></slot>
-          <h2 class="text-2xl font-bold text-default-btnText hover:text-hover-btnText cursor-pointer mt-10">
-            {{ category.name }}
-          </h2>
+          <div class="card-content w-full h-full rounded-2xl text-default-text relative"
+            :style="[cardStyle, { backgroundImage: `url(${category.backgroundImage})` }]">
+            <!-- Overlay for background opacity -->
+            <div class="background-overlay"
+              :style="{ backgroundColor: `rgba(${backFilter}, ${backFilter}, ${backFilter}, ${backgroundOpacity})` }">
+            </div>
+            <div class="flex flex-col items-center justify-center p-6 z-10">
+              <slot name="icon"></slot>
+              <h2 class="text-2xl font-bold text-default-btnText hover:text-hover-btnText cursor-pointer mt-10">
+                {{ category.name }}
+              </h2>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  </RouterLink>
+      </RouterLink>
+    </template>
+    <template v-else>
+      <a :href="category.link" target="_blank" class="flex justify-center">
+        <div class="category-card-container flex justify-center items-center perspect-1000px cursor-pointer"
+          @mousemove="handleMouseMove" @mouseleave="handleMouseLeave"
+          :style="{ width: width + 'px', height: height + 'px' }">
+
+          <div class="card-content w-full h-full rounded-2xl text-default-text relative"
+            :style="[cardStyle, { backgroundImage: `url(${category.backgroundImage})` }]">
+            <!-- Overlay for background opacity -->
+            <div class="background-overlay"
+              :style="{ backgroundColor: `rgba(${backFilter}, ${backFilter}, ${backFilter}, ${backgroundOpacity})` }">
+            </div>
+            <div class="flex flex-col items-center justify-center p-6 z-10">
+              <slot name="icon"></slot>
+              <h2 class="text-2xl font-bold text-default-btnText hover:text-hover-btnText cursor-pointer mt-10">
+                {{ category.name }}
+              </h2>
+            </div>
+          </div>
+        </div>
+      </a>
+    </template>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -44,6 +71,10 @@ const props = defineProps({
   height: {
     type: Number,
     default: 240
+  },
+  isNewTab: {
+    type: Boolean,
+    default: false
   }
 })
 console.log(props.width)
