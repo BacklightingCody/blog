@@ -2,6 +2,7 @@
 import { ref, computed, onMounted } from 'vue'
 import { useRoute, RouterLink } from 'vue-router'
 import { Article, ArticleList } from '@/interface/Article'
+import iconHTML from '@/components/icons/iconHTML.vue';
 // 使用 import.meta.glob 动态导入所有 Markdown 文件
 const articles = import.meta.glob('@/posts/**/*.md')
 
@@ -56,26 +57,67 @@ console.log(sortedArticles.value)
 
 <template>
   <div class="max-w-2xl mx-auto p-4">
-    <h1 class="text-xl text-default-text font-600 my-5 ">加油，共 <span class="text-2xl font-800">{{ articleList.total
+    <h1 class="text-2xl text-default-text font-600 my-10 ">加油，共 <span class="text-3xl font-800">{{ articleList.total
         }}</span> 文章</h1>
-    <ul class="relative border-l border-gray-200 dark:border-gray-700">
-      <li v-for="(article, index) in sortedArticles" :key="index" class="mb-10 ml-6">
-        <span
-          class="absolute flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full -left-3 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
-          <svg class="w-3 h-3 text-blue-800 dark:text-blue-300" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+    <el-timeline class="relative">
+      <el-timeline-item v-for="(article, index) in sortedArticles" :key="index">
+        <!-- <span
+          class="absolute flex items-center justify-center w-[20px] h-[20px] bg-blue-100 rounded-full -left-1 top-2 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
+          <svg class="w-[15px] h-[15px] text-blue-800 dark:text-blue-300" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
             viewBox="0 0 20 20">
             <path
               d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
           </svg>
-        </span>
-        <router-link :to="`${curPath}/${article.id}`"
-          class="flex items-center mb-1 text-lg font-semibold text-gray-900 dark:text-white">
-          {{ article.title }}
+        </span> -->
+        <router-link :to="`${curPath}/${article.id}`" class="flex justify-between mb-2 text-xl font-semibold">
+          <span class="text-default-text cursor-pointer article-title">{{ article.title }}</span>
+          <time class="mb-2 text-sm ml-2 font-normal text-default-text leading-relaxed">
+            {{ article.date }}
+          </time>
         </router-link>
-        <time class="block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
-          {{ article.date }}
-        </time>
-      </li>
-    </ul>
+
+      </el-timeline-item>
+    </el-timeline>
   </div>
 </template>
+
+<style lang="scss" scoped>
+//动画效果
+.article-title {
+  position: relative;
+  display: inline-block;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    /* 下划线位置 */
+    height: 3px;
+    /* 下划线粗细 */
+    width: 100%;
+    background-color: var(--currency-color);
+    transform-origin: left;
+    /* 动画起点 */
+    transform: scaleX(0);
+    /* 初始状态 */
+    transition: transform 0.4s ease;
+    /* 延展和缩回时间 */
+  }
+
+  &:hover::after {
+    transform: scaleX(1);
+  }
+}
+</style>
+
+<style lang="scss">
+.el-timeline-item {
+  .el-timeline-item__tail{
+    border-left:1px solid var(--currgb-color);
+  }
+  .el-timeline-item__node {
+    background-color: var(--currgb-color);
+  }
+}
+</style>
