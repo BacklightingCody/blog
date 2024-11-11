@@ -31,35 +31,35 @@ const categories = [
     name: 'Programme',
     icon: iconProgramme,  // 指定图标组件
     color: '#E34F26',
-    backgroundImage:'/animial/animial1.jfif',
+    backgroundImage:'/picture/animial/animial1.jfif',
     link:'/docs/programming'
   },
   {
     name: 'Technology',
     icon: iconTechnology,  // 指定图标组件
     color: '#1572B6',
-    backgroundImage:'/animial/animial2.jfif',
+    backgroundImage:'/picture/animial/animial2.jfif',
     link:'/docs/technology'
   },
   {
     name: 'Experience',
     icon: iconRainbow,  // 指定图标组件
     color: '#F7DF1E',
-    backgroundImage:'/animial/animial3.jfif',
+    backgroundImage:'/picture/animial/animial3.jfif',
     link:'/docs/experience'
   },
   {
     name: 'Food Menu',
     icon: iconFoodMenu,  // 指定图标组件
     color: '#42B883',
-    backgroundImage:'/animial/animial4.jfif',
+    backgroundImage:'/picture/animial/animial4.jfif',
     link:'/docs/recipe'
   },
   {
     name: 'A word of the day',
     icon: iconPencil,  // 指定图标组件
     color: '#339933',
-    backgroundImage:'/animial/animial5.jfif',
+    backgroundImage:'/picture/animial/animial5.jfif',
     link:'/docs/motto'
   }
 ]
