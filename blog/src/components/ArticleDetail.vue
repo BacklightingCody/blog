@@ -1,6 +1,5 @@
 <template>
-  <div class="article-detail">
-    <Article1></Article1>
+  <div class="article-detail text-default-text">
     <component v-if="markdownContent" :is="markdownContent" />
     <div v-else>Loading...</div>
   </div>
@@ -15,7 +14,7 @@ const markdownContent = ref(null)
 onMounted(async () => {
   try {
     const { category, subcategory, id } = route.params
-    console.log(category,subcategory,id)
+    console.log(category, subcategory, id)
     // 使用动态导入加载 Markdown 文件
     const module = await import(`@/posts/${category}/${subcategory}/article${id}.md`)
     markdownContent.value = module.default
