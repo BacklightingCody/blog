@@ -24,6 +24,7 @@ export default defineConfig({
         icon: 'var(--icon-color)',
         border: 'var(--border-color)',
         currency: 'var(--currency-color)',
+        currgb: 'var(--currgb-color)',
         accent: 'var(--accent-color)'
       },
       active: {
