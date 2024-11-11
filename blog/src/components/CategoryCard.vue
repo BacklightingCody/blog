@@ -1,8 +1,8 @@
 <template>
   <RouterLink :to="category.link" class="flex justify-center">
     <div
-      class="category-card-container flex justify-center items-center w-[320px] h-[240px] perspect-1000px cursor-pointer"
-      @mousemove="handleMouseMove" @mouseleave="handleMouseLeave">
+      class="category-card-container flex justify-center items-center perspect-1000px cursor-pointer"
+      @mousemove="handleMouseMove" @mouseleave="handleMouseLeave" :style="{ width: width + 'px', height: height + 'px' }">
 
       <div class="card-content w-full h-full rounded-2xl text-default-text relative"
         :style="[cardStyle, { backgroundImage: `url(${category.backgroundImage})` }]">
@@ -37,8 +37,16 @@ const props = defineProps({
     type: Number,
     default: 0.5,
   },
+  width: {
+    type: Number,
+    default: 320
+  },
+  height: {
+    type: Number,
+    default: 240
+  }
 })
-
+console.log(props.width)
 const cardStyle = ref({
   transform: 'rotateX(0deg) rotateY(0deg)',
   transition: 'transform 0.3s ease-out',

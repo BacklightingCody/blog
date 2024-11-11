@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-default-bg pt-[10px]! h-[900px] sm:px-10 md:px-20 lg:px-30">
+  <div class="bg-default-bg pt-[10px]! sm:px-10 md:px-20 lg:px-30 mb-10">
     <RouterView></RouterView>
   </div>
 </template>

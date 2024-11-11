@@ -12,7 +12,7 @@
 <script setup>
 import { ref } from 'vue'
 
-import CategoryCardList from './components/CategoryCardList.vue'
+import CategoryCardList from '@/components/CategoryCardList.vue'
 
 import { useRoute } from 'vue-router'
 // 导入不同的图标组件

@@ -6,7 +6,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import CategoryCardList from '../components/CategoryCardList.vue'
+import CategoryCardList from '@/components/CategoryCardList.vue'
 
 // 导入不同的图标组件
 import iconHTML from '@/components/icons/iconHTML.vue'
