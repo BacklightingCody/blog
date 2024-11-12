@@ -60,7 +60,7 @@ export const constantRouter = [
             meta: { identifier: 'article_list' },
           },
           {
-            path: ':category/:subcategory/article:id',
+            path: ':category/:subcategory/:article',
             name: 'article_detail',
             component: () => import('@/components/ArticleDetail.vue'),
             props: true, // 允许将动态参数作为 props 传递

@@ -37,11 +37,11 @@ const categories = [
     link:'/docs/experience/life'
   },
   {
-    name: '阅读',
+    name: 'Reading',
     icon: iconReading,  // 指定图标组件
     color: '#E34F26',
     backgroundImage: '/picture/animial/animial17.jfif',
-    link:'/docs/experience/senior'
+    link:'/docs/experience/reading'
   },
 ]
 </script>

@@ -13,10 +13,11 @@ const markdownContent = ref(null)
 
 onMounted(async () => {
   try {
-    const { category, subcategory, id } = route.params
-    console.log(category, subcategory, id)
+    const { category, subcategory, article } = route.params
+    console.log(subcategory,article)
+    console.log(category, subcategory, article,'kxc')
     // 使用动态导入加载 Markdown 文件
-    const module = await import(`@/posts/${category}/${subcategory}/article${id}.md`)
+    const module = await import(`@/posts/${category}/${subcategory}/${article}.md`)
     markdownContent.value = module.default
   } catch (error) {
     console.error('Failed to load article:', error)

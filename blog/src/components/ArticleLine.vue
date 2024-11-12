@@ -24,7 +24,9 @@ onMounted(() => {
     .filter((path) => path.includes(`/posts/${category}/${subcategory}/`))
     .map((path) => {
       const fileName = path.split('/').pop() || 'unknown'
-      const id = fileName.replace('.md', '')
+      console.log(fileName)
+      const id = fileName.split('.')[0]
+      console.log(id)
       return {
         id,
         title: fileName.replace('.md', ''),
@@ -42,7 +44,9 @@ onMounted(() => {
 
   // 跳转路由监控
   watch(() => route.path, (newPath) => {
+    
     curPath.value = newPath
+    console.log('curpath:',curPath.value)
   },
     { immediate: true }
   )
