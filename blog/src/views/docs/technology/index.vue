@@ -8,63 +8,49 @@
 import { ref } from 'vue'
 import CategoryCardList from '@/components/CategoryCardList.vue'
 // 导入不同的图标组件
-import iconHTML from '@/components/icons/iconHTML.vue'
-import iconCSS from '@/components/icons/iconCSS.vue'
-import iconJS from '@/components/icons/iconJs.vue'
-import iconVue from '@/components/icons/iconVue.vue'
-import iconNode from '@/components/icons/iconNode.vue'
-import iconNetwork from '@/components/icons/iconNetwork.vue'
-import iconAlgorithms from '@/components/icons/iconAlgorithms.vue'
+import iconScience from '@/components/icons/iconScience.vue'
+import iconComponentLib from '@/components/icons/iconComponentLib.vue'
+import iconAI from '@/components/icons/iconAI.vue'
+import iconLargeModel from '@/components/icons/iconLargeModel.vue'
+import iconDefault from '@/components/icons/iconDefault.vue'
 // 数据源：为每个分类指定不同的 icon 组件
 const categories = [
   {
     name: 'science',
-    icon: iconHTML,  // 指定图标组件
+    icon: iconScience,
     color: '#E34F26',
-    backgroundImage: '/picture/animial/animial7.jfif',
+    backgroundImage: '/picture/technology/technology1.jfif',
     link: '/docs/technology/science'
   },
   {
-    name: 'Front-end',
-    icon: iconCSS,  // 指定图标组件
-    color: '#1572B6',
-    backgroundImage: '/picture/animial/animial1.jfif',
-    link: '/docs/technology/front_end'
-  },
-  {
-    name: 'Backend',
-    icon: iconJS,  // 指定图标组件
-    color: '#F7DF1E',
-    backgroundImage: '/picture/animial/animial2.jfif',
-    link: '/docs/technology/back_end'
-  },
-  {
     name: 'Lib',
-    icon: iconVue,  // 指定图标组件
+    icon: iconComponentLib,
     color: '#42B883',
-    backgroundImage: '/picture/animial/animial3.jfif',
+    backgroundImage: '/picture/technology/technology3.jfif',
     link: '/docs/technology/library'
   },
   {
     name: 'AI',
-    icon: iconNode,  // 指定图标组件
+    icon: iconAI,
     color: '#339933',
-    backgroundImage: '/picture/animial/animial4.jfif',
+    backgroundImage: '/picture/technology/technology4.jfif',
     link: '/docs/technology/AI'
-  }, {
-    name: 'Data Structure',
-    icon: iconNetwork,  // 指定图标组件
-    color: '#339933',
-    backgroundImage: '/picture/animial/animial5.jfif',
-    link: '/docs/technology/data_structure'
   },
   {
     name: 'Large Model',
-    icon: iconAlgorithms,
+    icon: iconLargeModel,
     color: '#00000',
-    backgroundImage: '/picture/animial/animial6.jfif',
+    backgroundImage: '/picture/technology/technology2.jfif',
     link: '/docs/technology/large_model'
-  }
+  },
+  {
+    name: 'uncertainty',
+    icon: iconDefault,
+    color: '#339933',
+    backgroundImage: '/picture/technology/technology5.jfif',
+    link: '/docs/technology/data_structure'
+  },
+
 ]
 </script>
 

@@ -9,41 +9,30 @@ import { ref } from 'vue'
 import CategoryCardList from '@/components/CategoryCardList.vue'
 
 // 导入不同的图标组件
-import iconHTML from '@/components/icons/iconHTML.vue'
-import iconCSS from '@/components/icons/iconCSS.vue'
-import iconJS from '@/components/icons/iconJs.vue'
-import iconVue from '@/components/icons/iconVue.vue'
-import iconNode from '@/components/icons/iconNode.vue'
-import iconNetwork from '@/components/icons/iconNetwork.vue'
-import iconAlgorithms from '@/components/icons/iconAlgorithms.vue'
+import iconSteam from '@/components/icons/iconSteam.vue';
+import iconFry from '@/components/icons/iconFry.vue';
+import iconStirFry from '@/components/icons/iconStirFry.vue';
 // 数据源：为每个分类指定不同的 icon 组件
 const categories = [
   {
     name: '清蒸',
-    icon: iconHTML,  // 指定图标组件
+    icon: iconSteam,  // 指定图标组件
     color: '#E34F26',
-    backgroundImage: '/picture/animial/animial1.jfif',
+    backgroundImage: '/picture/recipe/recipe1.jfif',
     link:'/docs/recipe/steam'
   },
   {
     name: '油炸',
-    icon: iconCSS,  // 指定图标组件
+    icon: iconFry,  // 指定图标组件
     color: '#1572B6',
-    backgroundImage: '/picture/animial/animial2.jfif',
+    backgroundImage: '/picture/recipe/recipe2.jfif',
     link:'/docs/recipe/fry'
   },
   {
-    name: 'JavaScript',
-    icon: iconJS,  // 指定图标组件
-    color: '#F7DF1E',
-    backgroundImage: '/picture/animial/animial3.jfif',
-    link:'/docs/recipe/teriyaki'
-  },
-  {
     name: '爆炒',
-    icon: iconVue,  // 指定图标组件
+    icon: iconStirFry,  // 指定图标组件
     color: '#42B883',
-    backgroundImage: '/picture/animial/animial4.jfif',
+    backgroundImage: '/picture/recipe/recipe3.jfif',
     link:'/docs/recipe/stir_fry'
   },
 ]
