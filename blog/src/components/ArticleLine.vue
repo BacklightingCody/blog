@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import { useRoute, RouterLink } from 'vue-router'
-import { Article, ArticleList } from '@/interface/Article'
-import iconHTML from '@/components/icons/iconHTML.vue';
+import { Article, ArticleList, ArticleModule } from '@/interface/Article'
+import matter from 'gray-matter'
 // 使用 import.meta.glob 动态导入所有 Markdown 文件
 const articles = import.meta.glob('@/posts/**/*.md')
 
@@ -16,23 +16,25 @@ const articleList = ref<ArticleList>({
   total: 0
 })
 
-onMounted(() => {
+onMounted(async () => {
   const { category, subcategory } = route.params
 
-  // 初始化 `articleList`，只包含匹配当前分类和子分类的文章
-  const filteredArticles = Object.keys(articles)
-    .filter((path) => path.includes(`/posts/${category}/${subcategory}/`))
-    .map((path) => {
-      const fileName = path.split('/').pop() || 'unknown'
-      console.log(fileName)
-      const id = fileName.split('.')[0]
-      console.log(id)
-      return {
-        id,
-        title: fileName.replace('.md', ''),
-        date: '2024-11-08'  // 示例日期，可改为实际提取的日期
-      } as Article
-    })
+  const filteredArticles = await Promise.all(
+    Object.keys(articles)
+      .filter((path) => path.includes(`/posts/${category}/${subcategory}/`))
+      .map(async (path) => {
+        const file = await articles[path]()
+        const id = path.split('/').pop().replace('.md', '')
+        const article = file as ArticleModule;
+        const title = article.frontmatter.title
+        const date = article.frontmatter.date
+        return {
+          id,
+          title: title || id,
+          date: date || Date.now
+        } as Article
+      })
+  )
 
   // 更新 articleList
   articleList.value = {
@@ -44,9 +46,9 @@ onMounted(() => {
 
   // 跳转路由监控
   watch(() => route.path, (newPath) => {
-    
+
     curPath.value = newPath
-    console.log('curpath:',curPath.value)
+    console.log('curpath:', curPath.value)
   },
     { immediate: true }
   )
@@ -117,9 +119,10 @@ console.log(sortedArticles.value)
 
 <style lang="scss">
 .el-timeline-item {
-  .el-timeline-item__tail{
-    border-left:1px solid var(--currgb-color);
+  .el-timeline-item__tail {
+    border-left: 1px solid var(--currgb-color);
   }
+
   .el-timeline-item__node {
     background-color: var(--currgb-color);
   }

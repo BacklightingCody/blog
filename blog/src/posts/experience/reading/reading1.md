@@ -1,3 +1,8 @@
+---
+title: ChatGPT的本质与影响
+editLink: true
+date: 2023-04-07
+---
 # ChatGPT 的本质与影响
 
 ## 一、ChatGPT 的本质

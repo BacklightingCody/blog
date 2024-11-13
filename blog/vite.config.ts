@@ -24,6 +24,7 @@ export default defineConfig({
     }),
     Markdown({
       markdownItOptions: {
+        frontmatter: true,
         html: true, // 允许 HTML 标签
         linkify: true, // 自动将 URL 转换为链接
         typographer: true // 美化标点符号
