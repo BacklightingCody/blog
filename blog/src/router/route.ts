@@ -91,7 +91,13 @@ export const constantRouter = [
         name: 'more',
         component: () => import('@/views/more/index.vue'),
         children: []
-      }
+      },
+      {
+        path: '/:pathMatch(.*)*',
+        name: 'NotFound',
+        component: () => import('@/views/NotFound.vue'),
+        children: []
+      },
     ]
   }
 ]
