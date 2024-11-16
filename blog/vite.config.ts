@@ -8,6 +8,8 @@ import { VantResolver } from '@vant/auto-import-resolver' //引入vant
 import viteStylelint from '@amatlash/vite-plugin-stylelint';
 import Markdown from 'vite-plugin-md'
 import MarkdownPages from 'vite-plugin-pages'
+import markdownItAnchor from 'markdown-it-anchor'
+import markdownItToc from 'markdown-it-table-of-contents'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
@@ -20,19 +22,22 @@ export default defineConfig({
   },
   plugins: [
     vue({
-      include: [/\.vue$/, /\.md$/]
+      include: [/\.vue$/, /\.md$/], // 支持 .vue 和 .md 文件
     }),
-    Markdown({
-      markdownItOptions: {
-        frontmatter: true,
-        html: true, // 允许 HTML 标签
-        linkify: true, // 自动将 URL 转换为链接
-        typographer: true // 美化标点符号
+    Markdown(
+      {
+        markdownItSetup(md) {
+          md.use(markdownItAnchor)
+          md.use(markdownItToc, {
+            includeLevel: [2, 3], // 指定生成 TOC 的标题级别
+          })
+        },
+        wrapperClasses: 'markdown-body',
       }
-    }),
+    ), // Markdown 支持 Vue 文件系统
     MarkdownPages({
-      dirs: 'posts', // 指定目录，插件会扫描此目录下的文件
-      extensions: ['md'], // 扩展名设置为 md 文件
+      dirs: 'posts', // 扫描 posts 目录
+      extensions: ['md'], // 扫描 Markdown 文件
     }),
     // viteEslint(),
     // viteStylelint({ exclude: /node_modules/ }),

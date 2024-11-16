@@ -38,9 +38,15 @@ importers:
       gray-matter:
         specifier: ^4.0.3
         version: 4.0.3
+      markdown-it-anchor:
+        specifier: ^9.2.0
+        version: 9.2.0(@types/markdown-it@14.1.2)(markdown-it@13.0.2)
       markdown-it-container:
         specifier: ^4.0.0
         version: 4.0.0
+      markdown-it-table-of-contents:
+        specifier: ^0.8.0
+        version: 0.8.0
       marked:
         specifier: ^15.0.0
         version: 15.0.0
@@ -189,6 +195,9 @@ importers:
       vite-plugin-svg-icons:
         specifier: ^2.0.1
         version: 2.0.1(vite@5.4.10(@types/node@22.8.7)(sass@1.80.6))
+      vite-plugin-vue:
+        specifier: ^0.0.1
+        version: 0.0.1
       vitepress:
         specifier: ^1.5.0
         version: 1.5.0(@algolia/client-search@5.13.0)(@types/node@22.8.7)(async-validator@4.2.5)(axios@1.7.7)(nprogress@0.2.0)(postcss@8.4.47)(sass@1.80.6)(search-insights@2.17.2)(typescript@5.5.4)(universal-cookie@7.2.2)
@@ -3409,8 +3418,18 @@ packages:
   mark.js@8.11.1:
     resolution: {integrity: sha512-1I+1qpDt4idfgLQG+BNWmrqku+7/2bi5nLf4YwF8y8zXvmfiTBY3PV3ZibfrjBueCByROpuBjLLFCajqkgYoLQ==}
 
+  markdown-it-anchor@9.2.0:
+    resolution: {integrity: sha512-sa2ErMQ6kKOA4l31gLGYliFQrMKkqSO0ZJgGhDHKijPf0pNFM9vghjAh3gn26pS4JDRs7Iwa9S36gxm3vgZTzg==}
+    peerDependencies:
+      '@types/markdown-it': '*'
+      markdown-it: '*'
+
   markdown-it-container@4.0.0:
     resolution: {integrity: sha512-HaNccxUH0l7BNGYbFbjmGpf5aLHAMTinqRZQAEQbMr2cdD3z91Q6kIo1oUn1CQndkT03jat6ckrdRYuwwqLlQw==}
+
+  markdown-it-table-of-contents@0.8.0:
+    resolution: {integrity: sha512-ihgUROZLw4ZsojxXrNZJP+VxYL4yTino51TP7eVYccEwgsYGC6CNXxv5G5JI89NhUb52wiRaMhEtWpiMAeRirA==}
+    engines: {node: '>6.4.0'}
 
   markdown-it@13.0.2:
     resolution: {integrity: sha512-FtwnEuuK+2yVU7goGn/MJ0WBZMM9ZPgU9spqlFs7/A/pDIUNSOQZhUgOqYCficIuR2QaFnrt8LHqBWsbTAoI5w==}
@@ -4843,6 +4862,10 @@ packages:
     resolution: {integrity: sha512-6ktD+DhV6Rz3VtedYvBKKVA2eXF+sAQVaKkKLDSqGUfnhqXl3bj5PPkVTl3VexfTuZy66PmINi8Q6eFnVfRUmA==}
     peerDependencies:
       vite: '>=2.0.0'
+
+  vite-plugin-vue@0.0.1:
+    resolution: {integrity: sha512-PhAy+v+t6W3JAeqFxf6w/hGyURZ2qvrJMS/HTeCPLnfllz+O5wNP49TcAb4MROeif93kKIOigtDFJowaLuU+0w==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
 
   vite@4.5.5:
     resolution: {integrity: sha512-ifW3Lb2sMdX+WU91s3R0FyQlAyLxOzCSCP37ujw0+r5POeHPwe6udWVIElKQq8gk3t7b8rkmvqC6IHBpCff4GQ==}
@@ -8599,7 +8622,14 @@ snapshots:
 
   mark.js@8.11.1: {}
 
+  markdown-it-anchor@9.2.0(@types/markdown-it@14.1.2)(markdown-it@13.0.2):
+    dependencies:
+      '@types/markdown-it': 14.1.2
+      markdown-it: 13.0.2
+
   markdown-it-container@4.0.0: {}
+
+  markdown-it-table-of-contents@0.8.0: {}
 
   markdown-it@13.0.2:
     dependencies:
@@ -10298,6 +10328,8 @@ snapshots:
       vite: 5.4.10(@types/node@22.8.7)(sass@1.80.6)
     transitivePeerDependencies:
       - supports-color
+
+  vite-plugin-vue@0.0.1: {}
 
   vite@4.5.5(@types/node@22.8.7)(sass@1.80.6):
     dependencies:

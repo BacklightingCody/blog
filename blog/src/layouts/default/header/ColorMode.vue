@@ -72,7 +72,7 @@ const handleToggleMode = async (event: MouseEvent) => {
   const animation = docElement.animate(
     { clipPath: clipPath },
     {
-      duration: 500,
+      duration: 400,
       easing: 'ease-in-out',
     }
   )

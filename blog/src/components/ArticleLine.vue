@@ -3,6 +3,7 @@ import { ref, computed, onMounted } from 'vue'
 import { useRoute, RouterLink } from 'vue-router'
 import { Article, ArticleList, ArticleModule } from '@/interface/Article'
 import matter from 'gray-matter'
+import { getCurrentTime } from '@/utils/time/useCurTime'
 // 使用 import.meta.glob 动态导入所有 Markdown 文件
 const articles = import.meta.glob('@/posts/**/*.md')
 
@@ -31,7 +32,7 @@ onMounted(async () => {
         return {
           id,
           title: title || id,
-          date: date || Date.now
+          date: date || getCurrentTime()
         } as Article
       })
   )
