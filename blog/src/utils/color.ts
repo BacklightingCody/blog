@@ -1,21 +1,23 @@
 // 生成随机颜色的函数
 export const generateRandomColor = () => {
-  // 生成一个鲜艳的颜色
-  const r = Math.floor(Math.random() * 256)
-  const g = Math.floor(Math.random() * 256)
-  const b = Math.floor(Math.random() * 256)
-  let alpha = 0.2
-  // 确保颜色足够饱和
-  const max = Math.max(r, g, b)
-  const scale = 255 / max
+  // 随机生成 RGB 值，限制范围避免太深的颜色
+  const min = 100; // 最低值，防止颜色太暗
+  const max = 255; // 最高值
 
-  const newR = Math.min(255, Math.floor(r * scale))
-  const newG = Math.min(255, Math.floor(g * scale))
-  const newB = Math.min(255, Math.floor(b * scale))
-  const rgba = `rgba(${newR}, ${newG}, ${newB},${alpha})`
-  const rgb = `rgb(${newR}, ${newG}, ${newB})`
-  return { rgba, rgb }
-}
+  let r, g, b;
+  do {
+    r = Math.floor(Math.random() * (max - min) + min);
+    g = Math.floor(Math.random() * (max - min) + min);
+    b = Math.floor(Math.random() * (max - min) + min);
+  } while (Math.abs(r - g) < 30 && Math.abs(g - b) < 30 && Math.abs(r - b) < 30);
+  // 避免 R、G、B 差异过小导致颜色偏灰
+
+  const alpha = 0.7; // 透明度
+  const rgba = `rgba(${r}, ${g}, ${b}, ${alpha})`;
+  const rgb = `rgb(${r}, ${g}, ${b})`;
+
+  return { rgba, rgb };
+};
 
 // 生成一组随机颜色
 export const generateRandomColors = (count) => {
