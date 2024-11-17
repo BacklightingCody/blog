@@ -4,6 +4,7 @@
     <header class="article-header text-default-text text-center">
       <h1>{{ articleTitle }}</h1>
       <p class="article-date">发布日期：{{ articleDate }}</p>
+      <ColorMap />
     </header>
     <main class="article-content">
       <component v-if="markdownContent" :is="markdownContent" />
@@ -16,6 +17,7 @@
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { formatDateFromISO } from '@/utils/time/useCurTime'
+import ColorMap from '@/components/ColorMap.vue'
 const route = useRoute()
 
 const markdownContent = ref(null) // Markdown 主内容
@@ -131,7 +133,8 @@ onMounted(async () => {
 
 
 :deep(a) {
-  color: var(--text-color)
+  color: var(--text-color);
+  font-weight: bold;
 }
 
 @media screen and (max-width: 800px) {

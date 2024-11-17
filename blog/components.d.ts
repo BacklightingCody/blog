@@ -12,6 +12,7 @@ declare module 'vue' {
     Avatar: typeof import('./src/components/Avatar.vue')['default']
     CategoryCard: typeof import('./src/components/CategoryCard.vue')['default']
     CategoryCardList: typeof import('./src/components/CategoryCardList.vue')['default']
+    ColorMap: typeof import('./src/components/ColorMap.vue')['default']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElContainer: typeof import('element-plus/es')['ElContainer']
     ElDropdown: typeof import('element-plus/es')['ElDropdown']
