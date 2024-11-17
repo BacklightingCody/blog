@@ -8,8 +8,9 @@ import { VantResolver } from '@vant/auto-import-resolver' //引入vant
 import viteStylelint from '@amatlash/vite-plugin-stylelint';
 import Markdown from 'vite-plugin-md'
 import MarkdownPages from 'vite-plugin-pages'
-import markdownItAnchor from 'markdown-it-anchor'
+// @ts-ignore: 暂时忽略类型检查
 import markdownItToc from 'markdown-it-table-of-contents'
+import markdownItAnchor from 'markdown-it-anchor'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
@@ -29,10 +30,11 @@ export default defineConfig({
         markdownItSetup(md) {
           md.use(markdownItAnchor)
           md.use(markdownItToc, {
-            includeLevel: [2, 3], // 指定生成 TOC 的标题级别
+            includeLevel: [1, 2, 3], // 指定生成 TOC 的标题级别
           })
         },
-        wrapperClasses: 'markdown-body',
+        wrapperClasses: 'markdown-body', // 自定义外部容器类
+        frontmatter: true, // 启用 frontmatter
       }
     ), // Markdown 支持 Vue 文件系统
     MarkdownPages({

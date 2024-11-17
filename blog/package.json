@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@capacitor/screen-orientation": "^6.0.2",
+    "@types/markdown-it-container": "^2.0.10",
     "@vitepress-demo-preview/component": "^2.3.2",
     "@vitepress-demo-preview/plugin": "^1.2.3",
     "@vueuse/components": "^11.0.3",
@@ -30,6 +31,7 @@
     "axios": "^1.7.7",
     "element-plus": "^2.8.2",
     "gray-matter": "^4.0.3",
+    "markdown-it": "^14.1.0",
     "markdown-it-anchor": "^9.2.0",
     "markdown-it-container": "^4.0.0",
     "markdown-it-table-of-contents": "^0.8.0",

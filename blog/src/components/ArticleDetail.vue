@@ -1,14 +1,10 @@
 <template>
-  <div class="article-detail flex flex-col gap-[20px] p-10 bg-default-currency text-default-text">
+  <div class="article-detail relative flex flex-col gap-[20px] p-10 mx-5 bg-default-currency text-default-text">
     <!-- 外部容器布局 -->
     <header class="article-header text-default-text text-center">
       <h1>{{ articleTitle }}</h1>
       <p class="article-date">发布日期：{{ articleDate }}</p>
     </header>
-    <aside class="article-toc text-default-text" v-if="markdownToc">
-      <h2>目录</h2>
-      <div v-html="markdownToc" />
-    </aside>
     <main class="article-content">
       <component v-if="markdownContent" :is="markdownContent" />
       <div v-else>Loading...</div>
@@ -19,32 +15,25 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
-
+import { formatDateFromISO } from '@/utils/time/useCurTime'
 const route = useRoute()
 
 const markdownContent = ref(null) // Markdown 主内容
-const markdownToc = ref(null) // Markdown 的 TOC（目录）
+const markdownToc = ref(null) // Markdown 的 TOC（目录）,暂时无法获取
 const articleTitle = ref('') // 文章标题
 const articleDate = ref('') // 文章发布日期
 
 onMounted(async () => {
   try {
     const { category, subcategory, article } = route.params
-    console.log(category, subcategory, article, 'Loading article...')
-
     // 动态加载 Markdown 文件
     const module = await import(`@/posts/${category}/${subcategory}/${article}.md`)
     markdownContent.value = module.default
 
     // 解析 frontmatter 的元数据
-    const { frontmatter, toc } = module
-    console.log(toc)
+    const { frontmatter } = module
     articleTitle.value = frontmatter.title || '无标题'
-    articleDate.value = frontmatter.date || '未知日期'
-
-    // 动态生成 TOC 内容
-    markdownToc.value = toc
-    console.log('TOC Content:', markdownToc.value)
+    articleDate.value = formatDateFromISO(frontmatter.date) || '未知日期'
   } catch (error) {
     console.error('Failed to load article:', error)
   }
@@ -53,28 +42,23 @@ onMounted(async () => {
 
 <style scoped>
 .article-detail {
-  max-width: 1000px;
-  margin: 0 auto;
+  margin-right: 200px;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 1);
 }
 
-
 .article-header .article-date {
-  font-size: 0.9rem;
-  color: #999;
-  margin-top: 0.5em;
+  font-size: 14px;
+  color: var(--text-color);
 }
 
 .article-content {
-  margin-top: 20px;
-  line-height: 2;
+  line-height: 1.5;
 }
 
 /* Markdown 样式 */
 :deep(h1) {
-  font-size: 2em;
-  margin-bottom: 1em;
+  font-size: 1.75em;
 }
 
 :deep(h2) {
@@ -83,7 +67,7 @@ onMounted(async () => {
 }
 
 :deep(p) {
-  margin: 1em 0;
+  margin: 1.5em 0;
   line-height: 1.6;
 }
 
@@ -98,5 +82,73 @@ onMounted(async () => {
   padding: 1em;
   border-radius: 5px;
   overflow-x: auto;
+}
+
+:deep(.table-of-contents) {
+  ul {
+    padding: 20px 0 20px 20px;
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    position: fixed;
+    top: 100px;
+    right: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 1);
+
+    &::before {
+      content: '目录';
+      font-size: 16px;
+      text-align: start;
+    }
+
+    li {
+      position: relative;
+      font-size: 12px;
+      margin: 5px 0;
+
+      ul {
+        padding: 0;
+        position: relative;
+        width: 300px;
+        top: 0px;
+        left: 20px;
+        border-radius: 0px;
+        box-shadow: none;
+
+        li {
+          margin: 2px 0;
+        }
+
+        &::before {
+          content: '';
+        }
+      }
+
+    }
+  }
+}
+
+
+:deep(a) {
+  color: var(--text-color)
+}
+
+@media screen and (max-width: 800px) {
+  .article-detail {
+    margin: 0;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 1);
+  }
+  :deep(.table-of-contents){
+    ul{
+      position: relative;
+      width: 100%;
+      padding: 10px;
+      top:0;
+      right:0;
+      
+    }
+  }
 }
 </style>
