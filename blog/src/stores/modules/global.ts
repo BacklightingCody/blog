@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import { updateCSSVariables, generateRandomColors } from '@/utils/color'
+import { modifyCurColor, generateRandomColors } from '@/utils/color'
 
 export const useGlobalStore = defineStore(
   'global',
@@ -8,11 +8,13 @@ export const useGlobalStore = defineStore(
     // 主题管理
     const oldTheme = localStorage.getItem('theme')
     const theme = ref(oldTheme || 'default') // 默认主题
-    const colors = ref(generateRandomColors(5)) // 产生一组颜色
-    
+    const curColor = ref('rgba(166, 108, 138, 0.7)')
+
     const changeMode = (mode: string) => {
       theme.value = mode
-      updateCSSVariables(theme)
+      const { rgba, rgb } = modifyCurColor(undefined, theme.value)
+      console.log(rgba)
+      curColor.value = rgba
     }
 
     // 加载 loading 管理
@@ -26,6 +28,7 @@ export const useGlobalStore = defineStore(
 
     return {
       theme,
+      curColor,
       changeMode,
       loading,
       showLoader,

@@ -54,29 +54,38 @@ export const adjustColorBrightness = (color, amount) => {
   )
 }
 
-// 动态更新CSS变量
-export const updateCSSVariables = (theme) => {
-  const { rgba, rgb } = generateRandomColor()
-  const root = document.documentElement
-  if (theme.value === 'dark') {
-    // root.style.setProperty('--background-color', '#2c303f')
-    // root.style.setProperty('--btn-color', '#08cd7c')
-    // root.style.setProperty('--btn-text-color', '#aae7ff')
-    // root.style.setProperty('--text-color', '#E2E2E5')
-    // root.style.setProperty('--icon-color', '#03a2fe')
-    // root.style.setProperty('--accent-color', '#705ad6')
-    // root.style.setProperty('--active-color', '#ff785a')
-    root.style.setProperty('--currency-color', rgba)
-    root.style.setProperty('--currgb-color', rgb)
+export const modifyCurColor = (color?: string, theme?: string) => {
+  const root = document.documentElement;
+  const { rgba, rgb } = generateRandomColor();
+  if (color) {
+    // 如果传入了 color，则根据其透明度设置对应的 CSS 变量
+    root.style.setProperty('--currency-color', color);
+  } else if (theme) {
+    // 如果没有传入 color，而传入了 theme，则根据 theme 随机生成颜色
+    if (theme === 'dark') {
+      root.style.setProperty('--currency-color', rgba);
+      root.style.setProperty('--currgb-color', rgb);
+    } else {
+      root.style.setProperty('--currency-color', rgba);
+      root.style.setProperty('--currgb-color', rgb);
+    }
   } else {
-    // root.style.setProperty('--background-color', '#f5f5f7')
-    // root.style.setProperty('--btn-color', '#007BFF')
-    // root.style.setProperty('--btn-text-color', '#005575')
-    // root.style.setProperty('--text-color', '#2c2c2e')
-    // root.style.setProperty('--icon-color', '#FF8C00')
-    // root.style.setProperty('--accent-color', '#8a72d9')
-    // root.style.setProperty('--active-color', '#ff7b42')
-    root.style.setProperty('--currency-color', rgba)
-    root.style.setProperty('--currgb-color', rgb)
+    console.error('Either a color or theme must be provided.');
   }
+  return { rgba, rgb }
+};
+export function parseRGBA(rgbaString) {
+  const regex = /rgba?\((\d+),\s*(\d+),\s*(\d+),?\s*(\d*\.?\d+)?\)/;
+  const match = rgbaString.match(regex);
+
+  if (match) {
+    return {
+      r: parseInt(match[1], 10),
+      g: parseInt(match[2], 10),
+      b: parseInt(match[3], 10),
+      a: match[4] !== undefined ? parseFloat(match[4]) : 0.7, // 默认不透明
+    };
+  }
+
+  throw new Error('Invalid RGBA string');
 }
