@@ -2,8 +2,7 @@
 import UnoCSS from 'unocss/vite' //引入unocss
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
-// @ts-ignore
-import preloadImages from './plugins/preloadImage';
+import preloadImages from './plugins/preloadImage.ts';
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers' //引入element-plus
 import { VantResolver } from '@vant/auto-import-resolver' //引入vant
 // import viteEslint from 'vite-plugin-eslint';   //eslint插件
