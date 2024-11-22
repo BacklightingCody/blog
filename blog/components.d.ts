@@ -29,6 +29,7 @@ declare module 'vue' {
     IconAI: typeof import('./src/components/icons/iconAI.vue')['default']
     IconAlgorithms: typeof import('./src/components/icons/iconAlgorithms.vue')['default']
     IconBilibili: typeof import('./src/components/icons/iconBilibili.vue')['default']
+    IconBrowser: typeof import('./src/components/icons/iconBrowser.vue')['default']
     IconCircle: typeof import('./src/components/iconCircle.vue')['default']
     IconCloudMusic: typeof import('./src/components/icons/iconCloudMusic.vue')['default']
     IconComponentLib: typeof import('./src/components/icons/iconComponentLib.vue')['default']

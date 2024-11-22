@@ -16,6 +16,7 @@ import iconVue from '@/components/icons/iconVue.vue'
 import iconNode from '@/components/icons/iconNode.vue'
 import iconNetwork from '@/components/icons/iconNetwork.vue'
 import iconAlgorithms from '@/components/icons/iconAlgorithms.vue'
+import iconBrowser from '@/components/icons/iconBrowser.vue'
 // 数据源：为每个分类指定不同的 icon 组件
 const categories = [
   {
@@ -65,6 +66,13 @@ const categories = [
     color: '#00000',
     backgroundImage: '/picture/animial/animial6.jfif',
     link: '/docs/programming/algorithms'
+  },
+  {
+    name: 'Browser',
+    icon: iconBrowser,
+    color: '#000000',
+    backgroundImage: '/picture/animial/animial8.jfif',
+    link: '/docs/programming/browser'
   }
 ]
 </script>
