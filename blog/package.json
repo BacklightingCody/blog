@@ -30,6 +30,7 @@
     "animate.css": "^4.1.1",
     "axios": "^1.7.7",
     "element-plus": "^2.8.2",
+    "fast-glob": "^3.3.2",
     "gray-matter": "^4.0.3",
     "markdown-it": "^14.1.0",
     "markdown-it-anchor": "^9.2.0",
