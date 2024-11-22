@@ -1,15 +1,15 @@
 import { Plugin } from 'vite'
 import fg from 'fast-glob'
-import { de } from 'element-plus/es/locale/index.mjs'
 
 interface preloadImagesOptions {
   dir: string,
-  attrs: {
-    rel: 'preload' | 'prefetch'
+  attrs?: {
+    rel?: 'preload' | 'prefetch'
   }
 }
 const preloadImages = (opt: preloadImagesOptions): Plugin => {
   const { dir, attrs = {} } = opt
+  console.log(attrs)
   return {
     name: 'vite-plugin-preload-images',
     transformIndexHtml(html, ctx) {
@@ -17,15 +17,16 @@ const preloadImages = (opt: preloadImagesOptions): Plugin => {
         //获取指定的public资源位置
         cwd: ctx.server?.config.publicDir
       })
+      console.log("flies", files)
       const images = files.map(file => ctx.server?.config.base + file)
-      
-      return images.map(item => {
+      console.log("images", images)
+      return images.map(href => {
         return {
           tag: 'link',
           attrs: {
             rel: 'prefetch',
             as: 'image',
-            href: item,
+            href: href,
             ...attrs,
           }
         }
