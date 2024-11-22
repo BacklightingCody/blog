@@ -1,5 +1,6 @@
 import { Plugin } from 'vite'
 import fg from 'fast-glob'
+import { de } from 'element-plus/es/locale/index.mjs'
 
 interface preloadImagesOptions {
   dir: string,
@@ -7,7 +8,7 @@ interface preloadImagesOptions {
     rel: 'preload' | 'prefetch'
   }
 }
-export const preloadImages = (opt: preloadImagesOptions): Plugin => {
+const preloadImages = (opt: preloadImagesOptions): Plugin => {
   const { dir, attrs = {} } = opt
   return {
     name: 'vite-plugin-preload-images',
@@ -32,3 +33,5 @@ export const preloadImages = (opt: preloadImagesOptions): Plugin => {
     }
   }
 }
+
+export default preloadImages
