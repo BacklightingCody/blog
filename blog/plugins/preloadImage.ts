@@ -1,5 +1,5 @@
 import { Plugin } from 'vite'
-import fg from 'fast-glob'
+import fg from 'fast-glob';
 
 interface preloadImagesOptions {
   dir: string,
@@ -9,7 +9,7 @@ interface preloadImagesOptions {
 }
 const preloadImages = (opt: preloadImagesOptions): Plugin => {
   const { dir, attrs = {} } = opt
-  console.log(attrs)
+  // console.log(attrs)
   return {
     name: 'vite-plugin-preload-images',
     transformIndexHtml(html, ctx) {

@@ -18,7 +18,6 @@
     "outDir": "dist",
     "composite": true,
     "allowSyntheticDefaultImports": true, //允许从没有设置默认导出的模块中默认导入。
-    "allowImportingTsExtensions": true, //允许以.ts 扩展名导入模块。
     "module": "ESNext",
     "moduleResolution": "bundler",
     "esModuleInterop": true,
@@ -41,10 +40,11 @@
     "jsx": "preserve", // 在 .tsx文件里支持JSX
     // "outDir": "./dist",
     "emitDeclarationOnly": true, //如果你只需要生成 .d.ts 文件而不希望生成 .js 文件
+    "declaration": true
   },
   "include": [
-    "src/",
+    "src/**/*",
     "vite.config.ts",
-    "plugins/"
+    "plugins/preloadImage.ts"
   ],
 }
