@@ -2,6 +2,8 @@
 import UnoCSS from 'unocss/vite' //引入unocss
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
+// @ts-ignore
+import preloadImages from './plugins/preloadImage';
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers' //引入element-plus
 import { VantResolver } from '@vant/auto-import-resolver' //引入vant
 // import viteEslint from 'vite-plugin-eslint';   //eslint插件
@@ -41,6 +43,12 @@ export default defineConfig({
       dirs: 'posts', // 扫描 posts 目录
       extensions: ['md'], // 扫描 Markdown 文件
     }),
+    preloadImages({
+      dir: 'picture/**/*.{jpg,png,svg,jfif}',
+      attrs: {
+        rel: 'preload'
+      }
+    }),
     // viteEslint(),
     // viteStylelint({ exclude: /node_modules/ }),
     UnoCSS(),
@@ -58,6 +66,7 @@ export default defineConfig({
     })
   ],
   resolve: {
+    extensions: ['.ts', '.js'],
     alias: {
       '@': path.resolve(__dirname, './src'),
       '~': path.resolve(__dirname, './src/types')
