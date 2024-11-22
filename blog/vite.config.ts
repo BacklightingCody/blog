@@ -23,9 +23,16 @@ export default defineConfig({
       VITE_API_BASE_URL: process.env.VITE_API_BASE_URL
     }
   },
+  publicDir: 'public',
   plugins: [
     vue({
       include: [/\.vue$/, /\.md$/], // 支持 .vue 和 .md 文件
+    }),
+    preloadImages({
+      dir: 'picture/**/*.{jpg,png,svg,jfif}',
+      attrs: {
+        rel: 'preload'
+      }
     }),
     Markdown(
       {
@@ -42,12 +49,6 @@ export default defineConfig({
     MarkdownPages({
       dirs: 'posts', // 扫描 posts 目录
       extensions: ['md'], // 扫描 Markdown 文件
-    }),
-    preloadImages({
-      dir: 'picture/**/*.{jpg,png,svg,jfif}',
-      attrs: {
-        rel: 'preload'
-      }
     }),
     // viteEslint(),
     // viteStylelint({ exclude: /node_modules/ }),
