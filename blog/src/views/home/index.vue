@@ -37,7 +37,7 @@
           class="my-5 text-transparent bg-clip-text bg-gradient-to-r from-green-500 via-yellow-500 to-blue-500 text-2xl">
           Commit 时光拼图
         </h1>
-        <img src="https://ghchart.rshah.org/BacklightingCody" alt="GitHub Contributions" class="w-full">
+        <img src="https://ghchart.rshah.org/BacklightingCody" alt="GitHub Contributions" class="w-full" rel="preload">
       </div>
     </div>
     <div v-else>
