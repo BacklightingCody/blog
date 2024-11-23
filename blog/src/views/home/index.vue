@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-auto  h-[500px] flex-shrink-0">
+  <div class="mx-auto  flex-shrink-0">
     <div class="mt-30 w-full" v-if="width > 640">
       <div class="home-top flex">
         <div class="left mt-20 w-60% flex flex-col justify-center">

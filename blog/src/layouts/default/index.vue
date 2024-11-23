@@ -20,7 +20,7 @@ watch(width, () => {
     <el-header class="fixed w-full border-box h-[70px]! z-50">
       <Header></Header>
     </el-header>
-    <el-main class="p-0! pt-[70px]!">
+    <el-main class="p-0! mt-[70px]!">
       <Main></Main>
     </el-main>
     <el-footer class="p-0!">
@@ -52,8 +52,6 @@ body {
   background-color: var(--background-color);
   /* 滚动条轨道的颜色 */
 }
-
 </style>
-<style lang="scss" scoped>
-
+<style scoped>
 </style>
