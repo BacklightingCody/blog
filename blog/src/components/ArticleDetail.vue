@@ -1,6 +1,5 @@
 <template>
   <div class="article-detail relative flex flex-col gap-[20px] p-10 mx-5 bg-default-currency text-default-text">
-    <!-- 外部容器布局 -->
     <header class="article-header text-default-text text-center">
       <h1>{{ articleTitle }}</h1>
       <p class="article-date">发布日期：{{ articleDate }}</p>
@@ -12,7 +11,6 @@
     </main>
   </div>
 </template>
-
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
@@ -21,15 +19,14 @@ import ColorMap from '@/components/ColorMap.vue'
 const route = useRoute()
 
 const markdownContent = ref(null) // Markdown 主内容
-const markdownToc = ref(null) // Markdown 的 TOC（目录）,暂时无法获取
 const articleTitle = ref('') // 文章标题
 const articleDate = ref('') // 文章发布日期
 
 onMounted(async () => {
   try {
     const { category, subcategory, article } = route.params
-    // 动态加载 Markdown 文件
-    const module = await import(`@/posts/${category}/${subcategory}/${article}.md`)
+    // 动态加载文章的 index.md 文件
+    const module = await import(`@/posts/${category}/${subcategory}/${article}/index.md`)
     markdownContent.value = module.default
 
     // 解析 frontmatter 的元数据
@@ -42,7 +39,7 @@ onMounted(async () => {
 })
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .article-detail {
   margin-right: 200px;
   border-radius: 8px;
@@ -60,17 +57,30 @@ onMounted(async () => {
 
 /* Markdown 样式 */
 :deep(h1) {
-  font-size: 1.75em;
+  font-size: 2em;
 }
 
 :deep(h2) {
+  font-size: 1.75em;
+  margin: 1em 0;
+}
+
+:deep(h3) {
   font-size: 1.5em;
   margin: 1em 0;
 }
 
+:deep(img) {
+  margin: 15px 0px;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  width: 70%;
+  height: auto;
+}
+
 :deep(p) {
   margin: 1.5em 0;
-  line-height: 1.6;
+  line-height: 2;
 }
 
 :deep(code) {
@@ -86,8 +96,25 @@ onMounted(async () => {
   overflow-x: auto;
 }
 
+:deep(ul) {
+  list-style: disc;
+
+  li {
+    margin: 8px 0;
+  }
+}
+
+:deep(ol) {
+  list-style: decimal;
+
+  li {
+    margin: 8px 0;
+  }
+}
+
 :deep(.table-of-contents) {
   ul {
+    list-style-type: upper-roman;
     padding: 20px 0 20px 20px;
     display: flex;
     flex-direction: column;
@@ -101,12 +128,14 @@ onMounted(async () => {
     &::before {
       content: '目录';
       font-size: 16px;
+      font-weight: 800;
       text-align: start;
+      margin-bottom: 10px;
     }
 
     li {
       position: relative;
-      font-size: 12px;
+      font-size: 13px;
       margin: 5px 0;
 
       ul {
@@ -143,14 +172,15 @@ onMounted(async () => {
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 1);
   }
-  :deep(.table-of-contents){
-    ul{
+
+  :deep(.table-of-contents) {
+    ul {
       position: relative;
       width: 100%;
       padding: 10px;
-      top:0;
-      right:0;
-      
+      top: 0;
+      right: 0;
+
     }
   }
 }

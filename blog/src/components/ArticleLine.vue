@@ -5,7 +5,7 @@ import { Article, ArticleList, ArticleModule } from '@/interface/Article'
 import matter from 'gray-matter'
 import { getCurrentTime,formatDateFromISO } from '@/utils/time/useCurTime'
 // 使用 import.meta.glob 动态导入所有 Markdown 文件
-const articles = import.meta.glob('@/posts/**/*.md')
+const articles = import.meta.glob('@/posts/**/index.md')
 
 const route = useRoute()
 const curPath = ref('')
@@ -25,7 +25,7 @@ onMounted(async () => {
       .filter((path) => path.includes(`/posts/${category}/${subcategory}/`))
       .map(async (path) => {
         const file = await articles[path]()
-        const id = path.split('/').pop().replace('.md', '')
+        const id = path.split('/').slice(-2, -1)[0]
         const article = file as ArticleModule;
         const title = article.frontmatter.title
         const date = article.frontmatter.date
