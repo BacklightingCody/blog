@@ -40,47 +40,51 @@ const enableTransitions = () =>
 
 // 切换主题模式并应用动画
 const handleToggleMode = async (event: MouseEvent) => {
-  const { clientX: x, clientY: y } = event
+  const { pageX: x, pageY: y } = event;
   const enableTransitions = () =>
     'startViewTransition' in document &&
-    window.matchMedia('(prefers-reduced-motion: no-preference)').matches
+    window.matchMedia('(prefers-reduced-motion: no-preference)').matches;
 
   if (!enableTransitions()) {
-    toggleMode()
-    return
+    toggleMode();
+    return;
   }
 
-  const clipPath = [
-    `circle(0px at ${x}px ${y}px)`,
-    `circle(${Math.hypot(
-      Math.max(x, window.innerWidth - x),
-      Math.max(y, window.innerHeight - y)
-    )}px at ${x}px ${y}px)`,
-  ]
+  const maxX = Math.max(x, window.innerWidth - x);
+  const maxY = Math.max(y, window.innerHeight - y);
+  const initialClipPath = `circle(0px at ${x}px ${y}px)`;
+  const finalClipPath = `circle(${Math.hypot(maxX, maxY)}px at ${x}px ${y}px)`;
 
-  // 提前设置动画样式
-  const docElement = document.documentElement
-  docElement.style.clipPath = clipPath[0]
+  const docElement = document.documentElement;
 
-  const doc = document as Document & { startViewTransition?: (callback: () => void) => { ready: Promise<void> } }
+  // 将clipPath初始化设置放入requestAnimationFrame
+  requestAnimationFrame(() => {
+    docElement.style.clipPath = initialClipPath;
 
-  await doc.startViewTransition?.(async () => {
-    toggleMode()
-    await nextTick()
-  })?.ready
+    const doc = document as Document & {
+      startViewTransition?: (callback: () => void) => { ready: Promise<void> };
+    };
 
-  const animation = docElement.animate(
-    { clipPath: clipPath },
-    {
-      duration: 400,
-      easing: 'ease-in-out',
-    }
-  )
+    doc.startViewTransition?.(async () => {
+      toggleMode();
+      await nextTick();
+    })?.ready.then(() => {
+      // 在过渡完成后，设置最终动画
+      const animation = docElement.animate(
+        { clipPath: [initialClipPath, finalClipPath] },
+        {
+          duration: 400,
+          easing: 'ease-in-out',
+        }
+      );
 
-  animation.onfinish = () => {
-    docElement.style.clipPath = ''
-  }
-}
+      animation.onfinish = () => {
+        docElement.style.clipPath = '';
+      };
+    });
+  });
+};
+
 
 
 // 切换逻辑
@@ -115,6 +119,4 @@ const toggleMode = () => {
 .dark::view-transition-old(root) {
   z-index: 9999;
 }
-
-
 </style>
