@@ -70,6 +70,11 @@ onMounted(async () => {
   margin: 1em 0;
 }
 
+:deep(h4) {
+  font-size: 1.3em;
+  margin: 1em 0;
+}
+
 :deep(img) {
   margin: 15px 0px;
   margin-left: 50%;
@@ -79,8 +84,35 @@ onMounted(async () => {
 }
 
 :deep(p) {
-  margin: 1.5em 0;
+  margin: 10px 0;
   line-height: 2;
+}
+
+:deep(table) {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+
+  th {
+    padding: 10px;
+    border: 2px solid var(--table-color);
+    text-align: left;
+    background-color: var(--accent-color);
+  }
+
+  td {
+    padding: 10px;
+    border: 2px solid var(--table-color);
+    text-align: left;
+  }
+
+  tr:hover {
+    background-color: var(--accent-color);
+  }
+}
+
+:deep(strong) {
+  font-weight: 600;
 }
 
 :deep(code) {
@@ -100,7 +132,7 @@ onMounted(async () => {
   list-style: disc;
 
   li {
-    margin: 8px 0;
+    line-height: 2
   }
 }
 
@@ -113,12 +145,16 @@ onMounted(async () => {
 }
 
 :deep(.table-of-contents) {
+  position: relative;
   ul {
     list-style-type: upper-roman;
-    padding: 20px 0 20px 20px;
+    padding: 20px 0 20px 25px;
     display: flex;
     flex-direction: column;
     width: 250px;
+    height: 500px;
+    overflow-y: scroll;
+    overflow-x: hidden;
     position: fixed;
     top: 100px;
     right: 30px;
@@ -137,11 +173,16 @@ onMounted(async () => {
       position: relative;
       font-size: 13px;
       margin: 5px 0;
-
+      line-height: 1.5;
+      &::marker{
+        display: block;
+        width: 30px;
+      }
       ul {
         padding: 0;
         position: relative;
         width: 300px;
+        height: auto;
         top: 0px;
         left: 20px;
         border-radius: 0px;
@@ -162,8 +203,33 @@ onMounted(async () => {
 
 
 :deep(a) {
+  position: relative;
+  display: inline-block;
   color: var(--text-color);
   font-weight: bold;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    /* 下划线位置 */
+    height: 3px;
+    /* 下划线粗细 */
+    width: 100%;
+    background-color: var(--currgb-color);
+    transform-origin: left;
+    /* 动画起点 */
+    transform: scaleX(0);
+    /* 初始状态 */
+    transition: transform 0.4s ease;
+    /* 延展和缩回时间 */
+  }
+
+  &:hover::after {
+    transform: scaleX(1);
+  }
+
 }
 
 @media screen and (max-width: 800px) {
