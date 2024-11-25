@@ -1,5 +1,6 @@
 <template>
-  <div class="article-detail relative flex flex-col gap-[20px] p-10 mx-5 bg-default-currency text-default-text">
+  <div class="article-detail relative flex flex-col gap-[20px] p-10 mx-5 bg-default-currency text-default-text"
+    ref="contentDetail">
     <header class="article-header text-default-text text-center">
       <h1>{{ articleTitle }}</h1>
       <p class="article-date">发布日期：{{ articleDate }}</p>
@@ -8,6 +9,9 @@
     <main class="article-content">
       <component v-if="markdownContent" :is="markdownContent" />
       <div v-else>Loading...</div>
+      <div v-if="isModalOpen" class="image-modal" @click="closeModal">
+        <img :src="selectedImage" alt="Zoomed Image" />
+      </div>
     </main>
   </div>
 </template>
@@ -28,7 +32,19 @@ onMounted(async () => {
     // 动态加载文章的 index.md 文件
     const module = await import(`@/posts/${category}/${subcategory}/${article}/index.md`)
     markdownContent.value = module.default
-
+    // 使用 nextTick 确保组件渲染后获取 DOM 元素
+    nextTick(() => {
+      const contentDetail = document.querySelector('.article-detail')
+      const images = contentDetail?.querySelectorAll('img') || []
+      console.log(images)
+      // 为每个图片绑定点击事件
+      images.forEach(img => {
+        img.addEventListener('click', () => {
+          openModal(img.src)
+          console.log(img.src)
+        })
+      })
+    })
     // 解析 frontmatter 的元数据
     const { frontmatter } = module
     articleTitle.value = frontmatter.title || '无标题'
@@ -37,6 +53,20 @@ onMounted(async () => {
     console.error('Failed to load article:', error)
   }
 })
+
+const isModalOpen = ref(false);
+const selectedImage = ref(null);
+const contentRef = useTemplateRef('contentDetail')
+const openModal = (src) => {
+  selectedImage.value = src;
+  isModalOpen.value = true;
+};
+
+const closeModal = () => {
+  isModalOpen.value = false;
+  selectedImage.value = null;
+};
+
 
 
 </script>
@@ -251,12 +281,15 @@ onMounted(async () => {
 
   :deep(.table-of-contents) {
     ul {
+      overflow: auto;
       position: relative;
       width: 100%;
-      padding: 10px;
+      height: 100%;
+      padding: 20px;
       top: 0;
+      left: 0;
+      bottom: 0;
       right: 0;
-
     }
   }
 }
@@ -265,5 +298,34 @@ onMounted(async () => {
   color: #654321;
   font-size: 40px;
   background-color: #E8F5E9;
+}
+
+.image-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+}
+
+.image-modal img {
+  width: 90%;
+  height: 90%;
+  object-fit: contain;
+  animation: zoomIn 0.3s linear;
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 </style>
