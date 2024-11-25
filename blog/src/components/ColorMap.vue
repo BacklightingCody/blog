@@ -95,7 +95,6 @@ watch(() => globalStore.curColor, (newValue) => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 300px;
 }
 
 .preview {
