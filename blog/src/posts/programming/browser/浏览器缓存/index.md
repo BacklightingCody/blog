@@ -29,12 +29,12 @@ tag: [browser]
 
 ### 使用流程
 
-![浏览器缓存流程](./image10.png)
+![浏览器缓存流程](./image1.png)
 
 ## 强缓存
 
 强缓存，利用HTTP的返回头中的expires和cache-control两个字段来控制，用来表示资源的缓存时间（缓存的有效期）。并且强缓存如果命中，浏览器直接从自己的缓存中读取资源，不会发请求到服务器。
-![浏览器强缓存](./image1.png)
+![浏览器强缓存](./image2.png)
 
 ### expires
 
@@ -70,7 +70,7 @@ Cache-Control 与 Expires 可以在服务端配置同时启用，同时启用的
 协商缓存就是由服务器来确定缓存资源是否可用，所以客户端与服务器端要通过某种标识来进行通信，从而让服务器判断请求资源是否可以缓存访问。
 
 这主要涉及到下面两组 header 字段，这两组搭档都是成对出现的，即第一次请求的响应头带上某个字段（ Last-Modified 或者 Etag ），则后续请求则会带上对应的请求字段（ If-Modified-Since 或者 If-None-Match ），若响应头没有 Last-Modified 或者 Etag 字段，则请求头也不会有对应的字段。
-![浏览器协商缓存](./image2.png)
+![浏览器协商缓存](./image3.png)
 
 ### Last-Modify/If-Modify-Since
 
