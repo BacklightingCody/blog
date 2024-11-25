@@ -37,6 +37,8 @@ onMounted(async () => {
     console.error('Failed to load article:', error)
   }
 })
+
+
 </script>
 
 <style scoped lang="scss">
@@ -108,6 +110,11 @@ onMounted(async () => {
 
   tr:hover {
     background-color: var(--accent-color);
+
+    td {
+      color: #fff;
+    }
+
   }
 }
 
@@ -146,6 +153,7 @@ onMounted(async () => {
 
 :deep(.table-of-contents) {
   position: relative;
+
   ul {
     list-style-type: upper-roman;
     padding: 20px 0 20px 25px;
@@ -174,10 +182,12 @@ onMounted(async () => {
       font-size: 13px;
       margin: 5px 0;
       line-height: 1.5;
-      &::marker{
+
+      &::marker {
         display: block;
         width: 30px;
       }
+
       ul {
         padding: 0;
         position: relative;
@@ -249,5 +259,11 @@ onMounted(async () => {
 
     }
   }
+}
+
+:deep(::selection) {
+  color: #654321;
+  font-size: 40px;
+  background-color: #E8F5E9;
 }
 </style>
