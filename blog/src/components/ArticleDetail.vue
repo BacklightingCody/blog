@@ -39,7 +39,14 @@ onMounted(async () => {
         addTitleClassToHeadings()
         const titles = contentDetail.querySelectorAll('.title')
         const paragraphs = contentDetail.querySelectorAll('p');
-        const lis = contentDetail.querySelectorAll('li');
+        const lis = contentDetail.querySelectorAll('li')
+        const relLis = Array.from(lis).filter(li => {
+          return !li.closest('.table-of-contents');
+        })
+        // const relTitles = Array.from(titles).filter((element, index, array) => {
+        //   // 判断是否为最后一个元素，并且类名包含 "title"
+        //   return !(index === array.length - 1 && element.classList.contains('title'));
+        // });
         const images = contentDetail?.querySelectorAll('img') || []
         // 为每个图片绑定点击事件
         images.forEach(img => {
@@ -59,20 +66,20 @@ onMounted(async () => {
         })
 
         paragraphs.forEach((paragraph) => {
-          const lines = paragraph.innerText.split('\n');
+          const lines = paragraph.innerHTML.split('\n');
           paragraph.innerHTML = '';
           lines.forEach((line, index) => {
             if (line.trim() !== '') {
               const lineWrapper = document.createElement('div');
               lineWrapper.classList.add('line');
               lineWrapper.style.setProperty('--delay', `${index * 0.1}s`)
-              lineWrapper.innerText = line;
+              lineWrapper.innerHTML = line;
               paragraph.appendChild(lineWrapper);
             }
           });
         });
 
-        lis.forEach((li) => {
+        relLis.forEach((li) => {
           const lines = li.innerText.split('\n');
           li.innerHTML = '';
           lines.forEach((line, index) => {
@@ -400,19 +407,22 @@ function addTitleClassToHeadings() {
   opacity: 0;
   animation: dropIn 0.5s var(--delay) cubic-bezier(0.42, 0, 0.77, 1.7) forwards;
   /* 动画时长 0.5s */
+
 }
 
 
 
 :deep(.title) {
   display: flex;
+
   span {
-    text-shadow: 1px 1px #533d4a, 2px 2px #533d4a, 3px 3px #533d4a;
+    text-shadow: 1px 1px var(--shadow-color), 2px 2px var(--shadow-color), 3px 3px var(--shadow-color);
     opacity: 0;
     animation: dropIn 0.5s cubic-bezier(0.42, 0, 0.77, 1.7) forwards var(--delay);
   }
 }
-:deep(h1){
-  justify-content: center;  //对大标题居中
+
+:deep(h1) {
+  justify-content: center; //对大标题居中
 }
 </style>
