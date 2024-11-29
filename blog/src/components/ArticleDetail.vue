@@ -23,8 +23,8 @@ import ColorMap from '@/components/ColorMap.vue'
 const route = useRoute()
 
 const markdownContent = ref(null) // Markdown 主内容
-const articleTitle = ref('') // 文章标题
-const articleDate = ref('') // 文章发布日期
+const articleTitle = ref('')
+const articleDate = ref('')
 
 onMounted(async () => {
   try {
@@ -35,15 +35,59 @@ onMounted(async () => {
     // 使用 nextTick 确保组件渲染后获取 DOM 元素
     nextTick(() => {
       const contentDetail = document.querySelector('.article-detail')
-      const images = contentDetail?.querySelectorAll('img') || []
-      console.log(images)
-      // 为每个图片绑定点击事件
-      images.forEach(img => {
-        img.addEventListener('click', () => {
-          openModal(img.src)
-          console.log(img.src)
+      if (contentDetail) {
+        addTitleClassToHeadings()
+        const titles = contentDetail.querySelectorAll('.title')
+        const paragraphs = contentDetail.querySelectorAll('p');
+        const lis = contentDetail.querySelectorAll('li');
+        const images = contentDetail?.querySelectorAll('img') || []
+        // 为每个图片绑定点击事件
+        images.forEach(img => {
+          img.addEventListener('click', () => {
+            openModal(img.src)
+            console.log(img.src)
+          })
         })
-      })
+
+        titles.forEach((title) => {
+          const result = title.textContent.split('').map((char) => `<span>${char}</span>`).join('')
+          title.innerHTML = result
+          const spans = title.querySelectorAll('span')
+          for (let i = 0; i < spans.length; i++) {
+            spans[i].style.setProperty('--delay', `${i * 0.3}s`)
+          }
+        })
+
+        paragraphs.forEach((paragraph) => {
+          const lines = paragraph.innerText.split('\n');
+          paragraph.innerHTML = '';
+          lines.forEach((line, index) => {
+            if (line.trim() !== '') {
+              const lineWrapper = document.createElement('div');
+              lineWrapper.classList.add('line');
+              lineWrapper.style.setProperty('--delay', `${index * 0.1}s`)
+              lineWrapper.innerText = line;
+              paragraph.appendChild(lineWrapper);
+            }
+          });
+        });
+
+        lis.forEach((li) => {
+          const lines = li.innerText.split('\n');
+          li.innerHTML = '';
+          lines.forEach((line, index) => {
+            if (line.trim() !== '') {
+              const lineWrapper = document.createElement('div');
+              lineWrapper.classList.add('line');
+              lineWrapper.style.setProperty('--delay', `${index * 0.2}s`)
+              lineWrapper.innerText = line;
+              li.appendChild(lineWrapper);
+            }
+          });
+        })
+
+      }
+
     })
     // 解析 frontmatter 的元数据
     const { frontmatter } = module
@@ -68,7 +112,14 @@ const closeModal = () => {
 };
 
 
-
+function addTitleClassToHeadings() {
+  // 获取所有 h 标签
+  const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+  // 遍历每个标签，添加 title 类
+  headings.forEach(heading => {
+    heading.classList.add('title');
+  });
+}
 </script>
 
 <style scoped lang="scss">
@@ -90,6 +141,7 @@ const closeModal = () => {
 /* Markdown 样式 */
 :deep(h1) {
   font-size: 2em;
+
 }
 
 :deep(h2) {
@@ -327,5 +379,40 @@ const closeModal = () => {
     transform: scale(1);
     opacity: 1;
   }
+}
+
+@keyframes dropIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-200%);
+    /* 从上方开始 */
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    /* 到正常位置 */
+  }
+}
+
+/* 为每一行文字设置动画样式 */
+:deep(.line) {
+  opacity: 0;
+  animation: dropIn 0.5s var(--delay) cubic-bezier(0.42, 0, 0.77, 1.7) forwards;
+  /* 动画时长 0.5s */
+}
+
+
+
+:deep(.title) {
+  display: flex;
+  span {
+    text-shadow: 1px 1px #533d4a, 2px 2px #533d4a, 3px 3px #533d4a;
+    opacity: 0;
+    animation: dropIn 0.5s cubic-bezier(0.42, 0, 0.77, 1.7) forwards var(--delay);
+  }
+}
+:deep(h1){
+  justify-content: center;  //对大标题居中
 }
 </style>
