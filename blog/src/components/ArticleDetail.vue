@@ -12,6 +12,12 @@
       <div v-if="isModalOpen" class="image-modal" @click="closeModal">
         <img :src="selectedImage" alt="Zoomed Image" />
       </div>
+      <button @click="showCardHandler"
+        class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-6">
+        分享给朋友
+      </button>
+      <GenerateCard v-if="isShowCard" :title="articleTitle" :author="articleAuthor" :publishDate="articleDate"
+        :excerpt="articleExcerpt" :image="'/picture/animial/animial2.jfif'" />
     </main>
   </div>
 </template>
@@ -20,11 +26,15 @@ import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { formatDateFromISO } from '@/utils/time/useCurTime'
 import ColorMap from '@/components/ColorMap.vue'
+import GenerateCard from './GenerateCard.vue'
 const route = useRoute()
 
 const markdownContent = ref(null) // Markdown 主内容
 const articleTitle = ref('')
 const articleDate = ref('')
+const articleAuthor = ref('')
+const articleExcerpt = ref('')
+const articleImage = ref('')
 
 onMounted(async () => {
   try {
@@ -98,8 +108,10 @@ onMounted(async () => {
     })
     // 解析 frontmatter 的元数据
     const { frontmatter } = module
-    articleTitle.value = frontmatter.title || '无标题'
-    articleDate.value = formatDateFromISO(frontmatter.date) || '未知日期'
+    articleTitle.value = frontmatter.title || ''
+    articleDate.value = formatDateFromISO(frontmatter.date) || ''
+    articleAuthor.value = frontmatter.author || 'backlighting'
+    articleExcerpt.value = frontmatter.description || ''
   } catch (error) {
     console.error('Failed to load article:', error)
   }
@@ -118,6 +130,10 @@ const closeModal = () => {
   selectedImage.value = null;
 };
 
+const isShowCard = ref(false);
+const showCardHandler = () => {
+  isShowCard.value = !isShowCard.value;
+};
 
 function addTitleClassToHeadings() {
   // 获取所有 h 标签

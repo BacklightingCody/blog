@@ -26,6 +26,7 @@ declare module 'vue' {
     ElTimeline: typeof import('element-plus/es')['ElTimeline']
     ElTimelineItem: typeof import('element-plus/es')['ElTimelineItem']
     ElTooltip: typeof import('element-plus/es')['ElTooltip']
+    GenerateCard: typeof import('./src/components/GenerateCard.vue')['default']
     IconAbout: typeof import('./src/components/icons/iconAbout.vue')['default']
     IconAI: typeof import('./src/components/icons/iconAI.vue')['default']
     IconAlgorithms: typeof import('./src/components/icons/iconAlgorithms.vue')['default']

@@ -1,6 +1,6 @@
 ---
 title: 浏览器渲染原理
-description: 浏览器的渲染原理
+description: 浏览器渲染决定网页加载与交互体验。网络线程接收 HTML 文档后，经渲染主线程开启多阶段流水线式渲染：HTML 解析构建 DOM 树并预加载资源，CSS 解析构建 CSSOM 树，再经样式计算、布局、分层、绘制、分块、光栅化、画等步骤，各环节协作，最终呈现网页。
 editLink: true
 date: 2024-11-17
 tag: [browser]
