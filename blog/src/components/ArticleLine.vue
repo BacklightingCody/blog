@@ -4,6 +4,8 @@ import { useRoute, RouterLink } from 'vue-router'
 import { Article, ArticleList, ArticleModule } from '@/interface/Article'
 import matter from 'gray-matter'
 import { getCurrentTime,formatDateFromISO } from '@/utils/time/useCurTime'
+import iconReturn from './icons/iconReturn.vue'
+import BackButton from './BackButton.vue'
 // 使用 import.meta.glob 动态导入所有 Markdown 文件
 const articles = import.meta.glob('@/posts/**/index.md')
 
@@ -63,7 +65,8 @@ console.log(sortedArticles.value)
 </script>
 
 <template>
-  <div class="max-w-2xl mx-auto p-4">
+  <div class="relative max-w-2xl mx-auto p-4">
+    <BackButton :buttonStyle="{width:'60px',height:'60px', borderRadius:'50%' }"><iconReturn></iconReturn></BackButton>
     <h1 class="text-2xl text-default-text font-600 my-10 ">加油，共 <span class="text-3xl font-800">{{ articleList.total
         }}</span> 文章</h1>
     <el-timeline class="relative">

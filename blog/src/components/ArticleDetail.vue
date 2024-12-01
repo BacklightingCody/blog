@@ -1,6 +1,7 @@
 <template>
   <div class="article-detail relative flex flex-col gap-[20px] p-10 mx-5 bg-default-currency text-default-text"
     ref="contentDetail">
+    <BackButton :buttonStyle="{width:'60px',height:'60px', borderRadius:'50%' }"><iconReturn></iconReturn></BackButton>
     <header class="article-header text-default-text text-center">
       <h1>{{ articleTitle }}</h1>
       <p class="article-date">发布日期：{{ articleDate }}</p>
@@ -17,7 +18,7 @@
         分享给朋友
       </button>
       <GenerateCard v-if="isShowCard" :title="articleTitle" :author="articleAuthor" :publishDate="articleDate"
-        :excerpt="articleExcerpt" :image="'/picture/animial/animial2.jfif'" />
+        :excerpt="articleExcerpt" :image="articleImage" />
     </main>
   </div>
 </template>
@@ -27,6 +28,9 @@ import { useRoute } from 'vue-router'
 import { formatDateFromISO } from '@/utils/time/useCurTime'
 import ColorMap from '@/components/ColorMap.vue'
 import GenerateCard from './GenerateCard.vue'
+import {getRandomPicture} from '@/utils/useGeneratePicture'
+import iconReturn from './icons/iconReturn.vue'
+import BackButton from './BackButton.vue'
 const route = useRoute()
 
 const markdownContent = ref(null) // Markdown 主内容
@@ -34,7 +38,7 @@ const articleTitle = ref('')
 const articleDate = ref('')
 const articleAuthor = ref('')
 const articleExcerpt = ref('')
-const articleImage = ref('')
+const articleImage = getRandomPicture()
 
 onMounted(async () => {
   try {
