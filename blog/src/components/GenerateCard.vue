@@ -48,7 +48,7 @@ const props = defineProps({
   author: { type: String, required: true },
   publishDate: { type: String, required: true },
   excerpt: { type: String, required: true },
-  image: { type: String, required: true },
+  image: { type: String, required: true,default: "/picture/urbanHuman/human4.jpg" },
   footer: { type: String, default: "backlighting.cn" }, // 默认值为一个示例地址
 });
 
