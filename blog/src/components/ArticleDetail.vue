@@ -199,6 +199,12 @@ function addTitleClassToHeadings() {
   line-height: 2;
 }
 
+:deep(hr){
+  margin: 20px 0;
+  background: var(--text-color);
+  height: 0.5px;
+}
+
 :deep(table) {
   width: 100%;
   border-collapse: collapse;
