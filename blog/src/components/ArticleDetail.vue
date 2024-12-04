@@ -1,7 +1,9 @@
 <template>
   <div class="article-detail relative flex flex-col gap-[20px] p-10 mx-5 bg-default-currency text-default-text"
     ref="contentDetail">
-    <BackButton :buttonStyle="{width:'60px',height:'60px', borderRadius:'50%' }"><iconReturn></iconReturn></BackButton>
+    <BackButton :buttonStyle="{ width: '60px', height: '60px', borderRadius: '50%' }">
+      <iconReturn></iconReturn>
+    </BackButton>
     <header class="article-header text-default-text text-center">
       <h1>{{ articleTitle }}</h1>
       <p class="article-date">发布日期：{{ articleDate }}</p>
@@ -28,7 +30,7 @@ import { useRoute } from 'vue-router'
 import { formatDateFromISO } from '@/utils/time/useCurTime'
 import ColorMap from '@/components/ColorMap.vue'
 import GenerateCard from './GenerateCard.vue'
-import {getRandomPicture} from '@/utils/useGeneratePicture'
+import { getRandomPicture } from '@/utils/useGeneratePicture'
 import iconReturn from './icons/iconReturn.vue'
 import BackButton from './BackButton.vue'
 const route = useRoute()
@@ -61,14 +63,7 @@ onMounted(async () => {
         //   // 判断是否为最后一个元素，并且类名包含 "title"
         //   return !(index === array.length - 1 && element.classList.contains('title'));
         // });
-        const images = contentDetail?.querySelectorAll('img') || []
-        // 为每个图片绑定点击事件
-        images.forEach(img => {
-          img.addEventListener('click', () => {
-            openModal(img.src)
-            console.log(img.src)
-          })
-        })
+
 
         titles.forEach((title) => {
           const result = title.textContent.split('').map((char) => `<span>${char}</span>`).join('')
@@ -106,7 +101,14 @@ onMounted(async () => {
             }
           });
         })
-
+        const images = contentDetail?.querySelectorAll('img') || []
+        // 为每个图片绑定点击事件
+        images.forEach(img => {
+          img.addEventListener('click', () => {
+            openModal(img.src)
+            // console.log(img.src)
+          })
+        })
       }
 
     })
@@ -199,7 +201,7 @@ function addTitleClassToHeadings() {
   line-height: 2;
 }
 
-:deep(hr){
+:deep(hr) {
   margin: 20px 0;
   background: var(--text-color);
   height: 0.5px;
