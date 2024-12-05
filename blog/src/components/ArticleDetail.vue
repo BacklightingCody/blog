@@ -240,16 +240,19 @@ function addTitleClassToHeadings() {
 }
 
 :deep(code) {
-  background-color: #f4f4f4;
+  color: var(--text-color);
+  font-weight: 700;
   padding: 0.2em 0.4em;
   border-radius: 3px;
 }
 
 :deep(pre) {
-  background-color: #f4f4f4;
   padding: 1em;
   border-radius: 5px;
   overflow-x: auto;
+  background-color: var(--background-color);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 :deep(ul) {
