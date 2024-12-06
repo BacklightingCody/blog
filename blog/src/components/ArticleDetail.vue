@@ -423,13 +423,11 @@ function addTitleClassToHeadings() {
   0% {
     opacity: 0;
     transform: translateY(-200%);
-    /* 从上方开始 */
   }
 
   100% {
     opacity: 1;
     transform: translateY(0);
-    /* 到正常位置 */
   }
 }
 
@@ -437,8 +435,6 @@ function addTitleClassToHeadings() {
 :deep(.line) {
   opacity: 0;
   animation: dropIn 0.5s var(--delay) cubic-bezier(0.42, 0, 0.77, 1.7) forwards;
-  /* 动画时长 0.5s */
-
 }
 
 

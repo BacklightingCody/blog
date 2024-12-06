@@ -1,26 +1,27 @@
 <template>
   <div class="mx-auto  flex-shrink-0">
     <div class="mt-30 w-full" v-if="width > 640">
-      <div class="home-top flex">
+      <div class="home-top flex" ref="homeTop">
         <div class="left mt-20 w-60% flex flex-col justify-center">
-          <h1 class="text-2xl lg:text-3xl text-default-text  ">
-            Hi, I'm <span class="font-800">backlighting</span>👋。
+          <h1 class="animated-title text-2xl lg:text-3xl text-default-text ">
+            Hi, I'm <i class="font-800">backlighting</i>👋。
           </h1>
-          <h1 class="text-2xl lg:text-3xl  text-default-text ml-5 mt-8"> A Front-end &lt;developer/&gt;</h1>
+          <h1 class="animated-title text-2xl lg:text-3xl  text-default-text ml-5 mt-8"> A Front-end &lt;developer/&gt;
+          </h1>
           <div class="flex mt-5">
-            <iconCircle url="https://music.163.com/#/user/home?id=32630738630" toolTitle="网易云音乐">
+            <iconCircle url="https://music.163.com/#/user/home?id=32630738630" toolTitle="网易云音乐"   class="icon-item">
               <iconCloudMusic></iconCloudMusic>
             </iconCircle>
-            <iconCircle url="https://space.bilibili.com/1274808675?spm_id_from=333.1007.0.00" toolTitle="Bilibili">
+            <iconCircle url="https://space.bilibili.com/1274808675?spm_id_from=333.1007.0.00" toolTitle="Bilibili"   class="icon-item">
               <iconBilibili></iconBilibili>
             </iconCircle>
-            <iconCircle url="https://github.com/BacklightingCody" toolTitle="Github">
+            <iconCircle url="https://github.com/BacklightingCody" toolTitle="Github"   class="icon-item">
               <iconGithub></iconGithub>
             </iconCircle>
-            <iconCircle url="https://x.com/pitilessmi77034" toolTitle="Twitter">
+            <iconCircle url="https://x.com/pitilessmi77034" toolTitle="Twitter"   class="icon-item">
               <iconTwitter></iconTwitter>
             </iconCircle>
-            <iconCircle url="https://www.douyin.com/user/self?from_tab_name=main" toolTitle="抖音">
+            <iconCircle url="https://www.douyin.com/user/self?from_tab_name=main" toolTitle="抖音"   class="icon-item">
               <iconTikTok></iconTikTok>
             </iconCircle>
           </div>
@@ -45,7 +46,7 @@
         <h1 class="text-center text-2xl lg:text-3xl text-default-text  ">
           Hi, I'm <span class="font-800">backlighting</span>👋。
         </h1>
-        <h1 class="text-center text-2xl lg:text-3xl  text-default-text ml-5 mt-8"> A Front-end &lt;developer/&gt;</h1>
+        <h1 class="text-center text-2xl lg:text-3xl  text-default-text  mt-8"> A Front-end &lt;developer/&gt;</h1>
 
       </div>
       <div class="home-middle my-10">
@@ -101,6 +102,21 @@ const avatarSize = computed(() => {
   return width.value > 1023 ? 300 : 200
 })
 
+const homeTopRef = useTemplateRef('homeTop')
+
+onMounted(() => {
+  homeTopRef.value?.querySelectorAll('.animated-title').forEach((title, index) => {
+    const element = title as HTMLElement; //进行类型断言，html标签存在style属性
+    element.style.setProperty('--delay', `${index * 0.3}s`); // 每行延迟 0.5 秒
+    // 添加类名以触发动画
+    element.classList.add('animated-line');
+  });
+  homeTopRef.value.querySelectorAll('.icon-item').forEach((icon, index) => {
+    const element = icon as HTMLElement; 
+    element.style.setProperty('--delay', `${index * 0.3}s`);
+    element.classList.add('animated-line');
+  });
+});
 
 </script>
 <style lang="scss" scoped>
@@ -131,4 +147,31 @@ const avatarSize = computed(() => {
   transform: translate(-50%, -50%) scale(0.5);
   opacity: 1;
 }
+
+@keyframes dropIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-200%);
+    /* 从上方开始 */
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    /* 到正常位置 */
+  }
+}
+
+:deep(.animated-line) {
+  display: flex;
+  opacity: 0;
+  /* 初始状态隐藏 */
+  animation: dropIn 0.6s cubic-bezier(0.42, 0, 0.77, 1.7) forwards var(--delay, 0s);
+}
+
+:deep(i) {
+  margin: 0 10px;
+}
+
+
 </style>
