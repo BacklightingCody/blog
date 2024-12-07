@@ -1,12 +1,12 @@
 <template>
   <div class="article-detail relative flex flex-col gap-[20px] p-10 mx-5 bg-default-currency text-default-text"
-    ref="contentDetail">
+    ref="contentContainer">
     <BackButton :buttonStyle="{ width: '60px', height: '60px', borderRadius: '50%' }">
       <iconReturn></iconReturn>
     </BackButton>
     <header class="article-header text-default-text text-center">
       <h1>{{ articleTitle }}</h1>
-      <p class="article-date">发布日期：{{ articleDate }}</p>
+      <p class="article-date">发布日期：{{ articleDate }}  &nbsp;&nbsp;本文字数：{{ wordCount }}</p>
       <ColorMap />
     </header>
     <main class="article-content">
@@ -35,12 +35,14 @@ import iconReturn from './icons/iconReturn.vue'
 import BackButton from './BackButton.vue'
 const route = useRoute()
 
+const contentContainer = useTemplateRef('contentContainer')
 const markdownContent = ref(null) // Markdown 主内容
 const articleTitle = ref('')
 const articleDate = ref('')
 const articleAuthor = ref('')
 const articleExcerpt = ref('')
 const articleImage = getRandomPicture()
+const wordCount = ref(0);
 
 onMounted(async () => {
   try {
@@ -48,10 +50,26 @@ onMounted(async () => {
     // 动态加载文章的 index.md 文件
     const module = await import(`@/posts/${category}/${subcategory}/${article}/index.md`)
     markdownContent.value = module.default
+
     // 使用 nextTick 确保组件渲染后获取 DOM 元素
     nextTick(() => {
       const contentDetail = document.querySelector('.article-detail')
       if (contentDetail) {
+        // 统计文章字数
+        function calculateWordCount(text) {
+          // 去除 HTML 标签和首尾多余空格
+          const plainText = text.replace(/<[^>]+>/g, '').trim();
+
+          // 精确匹配统计的内容：中文字符、数字、标点符号
+          const matchedCharacters = plainText.match(/[\u4e00-\u9fa5\u3000-\u303F\uFF00-\uFFEF0-9，。！？、：；“”‘’（）【】《》〈〉'"。,!?]/g);
+
+          // 如果匹配到了，返回匹配的字符数量；否则返回 0
+          return matchedCharacters ? matchedCharacters.length : 0;
+        }
+        const plainText = contentContainer.value?.textContent.trim();
+        console.log(plainText)
+        wordCount.value = calculateWordCount(plainText);
+        // 动画样式
         addTitleClassToHeadings()
         const titles = contentDetail.querySelectorAll('.title')
         const paragraphs = contentDetail.querySelectorAll('p');
@@ -125,7 +143,7 @@ onMounted(async () => {
 
 const isModalOpen = ref(false);
 const selectedImage = ref(null);
-const contentRef = useTemplateRef('contentDetail')
+
 const openModal = (src) => {
   selectedImage.value = src;
   isModalOpen.value = true;
@@ -153,6 +171,7 @@ function addTitleClassToHeadings() {
 
 <style scoped lang="scss">
 .article-detail {
+  font-size: 18px;
   margin-right: 200px;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 1);
