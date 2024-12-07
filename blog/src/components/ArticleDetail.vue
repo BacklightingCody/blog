@@ -22,6 +22,7 @@
       <GenerateCard v-if="isShowCard" :title="articleTitle" :author="articleAuthor" :publishDate="articleDate"
         :excerpt="articleExcerpt" :image="articleImage" />
     </main>
+    <BackTop />
   </div>
 </template>
 <script setup lang="ts">
@@ -33,6 +34,7 @@ import GenerateCard from './GenerateCard.vue'
 import { getRandomPicture } from '@/utils/useGeneratePicture'
 import iconReturn from './icons/iconReturn.vue'
 import BackButton from './BackButton.vue'
+import BackTop from './BackTop.vue'
 const route = useRoute()
 
 const contentContainer = useTemplateRef('contentContainer')

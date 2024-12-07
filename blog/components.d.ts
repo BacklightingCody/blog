@@ -12,6 +12,7 @@ declare module 'vue' {
     ArticleLine: typeof import('./src/components/ArticleLine.vue')['default']
     Avatar: typeof import('./src/components/Avatar.vue')['default']
     BackButton: typeof import('./src/components/BackButton.vue')['default']
+    BackTop: typeof import('./src/components/BackTop.vue')['default']
     CategoryCard: typeof import('./src/components/CategoryCard.vue')['default']
     CategoryCardList: typeof import('./src/components/CategoryCardList.vue')['default']
     ColorMap: typeof import('./src/components/ColorMap.vue')['default']
