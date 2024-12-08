@@ -163,7 +163,6 @@ onMounted(() => {
 }
 
 :deep(.animated-line) {
-  display: flex;
   opacity: 0;
   /* 初始状态隐藏 */
   animation: dropIn 0.6s cubic-bezier(0.42, 0, 0.77, 1.7) forwards var(--delay, 0s);
@@ -172,6 +171,12 @@ onMounted(() => {
 :deep(i) {
   margin: 0 10px;
 }
+
+:deep(.icon-item){
+  opacity: 0;
+  animation: dropIn 0.6s cubic-bezier(0.42, 0, 0.77, 1.7) forwards var(--delay);
+}
+
 
 
 </style>
