@@ -77,7 +77,7 @@ const props = defineProps({
     default: false
   }
 })
-console.log(props.width)
+// console.log(props.width)
 const cardStyle = ref({
   transform: 'rotateX(0deg) rotateY(0deg)',
   transition: 'transform 0.3s ease-out',
