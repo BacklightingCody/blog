@@ -7,7 +7,8 @@ import { getCurrentTime,formatDateFromISO } from '@/utils/time/useCurTime'
 import iconReturn from './icons/iconReturn.vue'
 import BackButton from './BackButton.vue'
 // 使用 import.meta.glob 动态导入所有 Markdown 文件
-const articles = import.meta.glob('@/posts/**/index.md')
+const allArticles = import.meta.glob('@/posts/**/**/index.md')
+const articleCache = new Map<string, Article[]>();
 
 const route = useRoute()
 const curPath = ref('')
@@ -19,14 +20,25 @@ const articleList = ref<ArticleList>({
   total: 0
 })
 
-onMounted(async () => {
-  const { category, subcategory } = route.params
+async function loadArticles(category:string,subcategory:string){
+  const cacheKey = `${category}/${subcategory}`;
+  if (articleCache.has(cacheKey)) {
+    articleList.value = {
+      category,
+      subcategory,
+      articles: articleCache.get(cacheKey)!,
+      total: articleCache.get(cacheKey)!.length,
+    };
+    return;
+  }
+  const relevantPaths = Object.keys(allArticles).filter((path) =>
+    path.includes(`/posts/${category}/${subcategory}/`)
+  );
 
   const filteredArticles = await Promise.all(
-    Object.keys(articles)
-      .filter((path) => path.includes(`/posts/${category}/${subcategory}/`))
+   relevantPaths
       .map(async (path) => {
-        const file = await articles[path]()
+        const file = await allArticles[path]()
         const id = path.split('/').slice(-2, -1)[0]
         const article = file as ArticleModule;
         const title = article.frontmatter.title
@@ -38,7 +50,7 @@ onMounted(async () => {
         } as Article
       })
   )
-
+  articleCache.set(cacheKey, filteredArticles);
   // 更新 articleList
   articleList.value = {
     category: category as string,
@@ -46,22 +58,32 @@ onMounted(async () => {
     articles: filteredArticles,
     total: filteredArticles.length
   }
+}
 
-  // 跳转路由监控
-  watch(() => route.path, (newPath) => {
+let stopWatcher: ReturnType<typeof watch>;
 
-    curPath.value = newPath
-    console.log('curpath:', curPath.value)
-  },
+onMounted(() => {
+const { category, subcategory } = route.params;
+if (category && subcategory) loadArticles(category as string, subcategory as string);
+  stopWatcher = watch(
+    () => route.path,
+    (newPath) => {
+      const { category, subcategory } = route.params;
+      curPath.value = newPath;
+      if (category && subcategory) loadArticles(category as string, subcategory as string);
+    },
     { immediate: true }
-  )
-})
+  );
+});
+
+onBeforeUnmount(() => {
+  if (stopWatcher) stopWatcher();
+});
 
 // 排序文章列表
 const sortedArticles = computed(() => {
   return [...articleList.value.articles].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 })
-console.log(sortedArticles.value)
 </script>
 
 <template>
