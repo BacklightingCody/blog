@@ -19,28 +19,28 @@ const categories = [
     name: '大学',
     icon: iconUniversity,  // 指定图标组件
     color: '#1572B6',
-    backgroundImage: '/picture/animial/animial12.jfif',
+    backgroundImage: '/picture/animial/animial12.avif',
     link:'/docs/experience/college'
   },
   {
     name: '社会',
     icon: iconSociety,  // 指定图标组件
     color: '#F7DF1E',
-    backgroundImage: '/picture/animial/animial13.jfif',
+    backgroundImage: '/picture/animial/animial13.avif',
     link:'/docs/experience/society'
   },
   {
     name: '生活',
     icon: iconLife,  // 指定图标组件
     color: '#42B883',
-    backgroundImage: '/picture/animial/animial14.jfif',
+    backgroundImage: '/picture/animial/animial14.avif',
     link:'/docs/experience/life'
   },
   {
     name: 'Reading',
     icon: iconReading,  // 指定图标组件
     color: '#E34F26',
-    backgroundImage: '/picture/animial/animial17.jfif',
+    backgroundImage: '/picture/animial/animial17.avif',
     link:'/docs/experience/reading'
   },
 ]

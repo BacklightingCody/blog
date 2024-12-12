@@ -29,7 +29,7 @@ export default defineConfig({
       include: [/\.vue$/, /\.md$/], // 支持 .vue 和 .md 文件
     }),
     preloadImages({
-      dir: ["picture/**/*.{jpg,png,svg,jfif}","avatar.jpg","icon404.png","backlighting.svg"],
+      dir: ["picture/**/*.{jpg,png,svg,jfif,avif}","avatar.jpg","icon404.png","backlighting.svg"],
       attrs: {
         rel: 'preload'
       }
