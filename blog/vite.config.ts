@@ -76,6 +76,7 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
+        api: 'modern-compiler', 
         includePaths: [path.resolve(__dirname, 'src/sass')],
         additionalData: '@use "@/sass//themes/_theme.scss" as *;'
       }
