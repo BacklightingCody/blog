@@ -77,8 +77,6 @@ const exportCard = () => {
 </script>
 
 <style scoped>
-/*@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&family=Noto+Serif+SC&display=swap');*/
-
 * {
   font-family: 'Noto Sans SC', sans-serif;
 }

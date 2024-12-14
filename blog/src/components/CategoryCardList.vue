@@ -14,7 +14,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from 'vue'
 import CategoryCard from '@/components/CategoryCard.vue' // 确保导入了你的CategoryCard组件
 import { CategoryList } from '@/views/docs/interface/categoryList'
 import { ca } from 'element-plus/es/locale/index.mjs';

@@ -11,7 +11,6 @@
   </div>
 </template>
 <script setup lang="ts">
-import { defineProps } from 'vue'
 import { useGlobalStore } from '@/stores';
 const props = defineProps({
   toolTitle: { type: String, required: true },
