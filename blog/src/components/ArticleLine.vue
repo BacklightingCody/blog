@@ -2,14 +2,12 @@
 import { ref, computed, onMounted } from 'vue'
 import { useRoute, RouterLink } from 'vue-router'
 import { Article, ArticleList, ArticleModule } from '@/interface/Article'
-import matter from 'gray-matter'
 import { getCurrentTime,formatDateFromISO } from '@/utils/time/useCurTime'
 import iconReturn from './icons/iconReturn.vue'
 import BackButton from './BackButton.vue'
 // 使用 import.meta.glob 动态导入所有 Markdown 文件
-const allArticles = import.meta.glob('@/posts/**/**/index.md')
+const allArticles = import.meta.glob('@/posts/**/**/**/index.md',{eager:false})
 const articleCache = new Map<string, Article[]>();
-
 const route = useRoute()
 const curPath = ref('')
 
@@ -34,9 +32,8 @@ async function loadArticles(category:string,subcategory:string){
   const relevantPaths = Object.keys(allArticles).filter((path) =>
     path.includes(`/posts/${category}/${subcategory}/`)
   );
-
   const filteredArticles = await Promise.all(
-   relevantPaths
+    relevantPaths
       .map(async (path) => {
         const file = await allArticles[path]()
         const id = path.split('/').slice(-2, -1)[0]
@@ -63,8 +60,8 @@ async function loadArticles(category:string,subcategory:string){
 let stopWatcher: ReturnType<typeof watch>;
 
 onMounted(() => {
-const { category, subcategory } = route.params;
-if (category && subcategory) loadArticles(category as string, subcategory as string);
+  const { category, subcategory } = route.params;
+  if (category && subcategory) loadArticles(category as string, subcategory as string);
   stopWatcher = watch(
     () => route.path,
     (newPath) => {
