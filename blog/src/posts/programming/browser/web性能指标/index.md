@@ -156,7 +156,7 @@ CLS 用于衡量在网页的整个生命周期内发生的每一次意外布局�
 
 为了提供良好的用户体验，网站应尽力使 CLS 得分不高于 0.1。为确保大多数用户都能达到此目标值，一个合适的衡量阈值是网页加载时间的第 75 个百分位数，并按移动设备和桌面设备进行细分。合适的 CLS 值为 0.1 或更低。差的值大于 0.25。
 
-## Interaction&nbsp;to&nbsp;N1ext&nbsp;Paint (INP)
+## Interaction&nbsp;to&nbsp;Next&nbsp;Paint (INP)
 
 ---
 

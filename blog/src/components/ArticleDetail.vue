@@ -210,7 +210,7 @@ function addTitleClassToHeadings() {
 }
 
 :deep(img) {
-  margin: 15px 0px;
+  margin: 20px 0px;
   margin-left: 50%;
   transform: translateX(-50%);
   width: 70%;
