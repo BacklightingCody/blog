@@ -12,7 +12,7 @@ export const githubLoginApi = () => {
   //   url: '/auth/github/redirect',
   //   method: 'get'
   // })
-  window.location.href = `${import.meta.env.VITE_API_BASE_URL}/v0/auth/github/redirect`
+  window.location.href = `${import.meta.env.VITE_API_BASE_URL}/auth/github/redirect`
   console.log(import.meta.env.VITE_API_BASE_URL)
 }
 export const refreshTokenApi = async (data: { refreshToken: string }) => {

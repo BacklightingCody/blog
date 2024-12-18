@@ -86,13 +86,13 @@ export default defineConfig({
     port: 5173, //设置服务启动端口号
     open: false, //设置服务器启动时是否自动打开浏览器
     cors: true, //允许跨域
-    proxy: {
-      '/api': {
-        // target: 'http://localhost:3000',
-        target: process.env.VITE_API_BASE_URL,
-        changeOrigin: true,
-        rewrite: (path: any) => path.replace(/^\/api/, '')
-      }
-    }
+    // proxy: {
+    //   '/api': {
+    //     // target: 'http://localhost:3000',
+    //     target: process.env.VITE_API_BASE_URL,
+    //     changeOrigin: true,
+    //     rewrite: (path: any) => path.replace(/^\/api/, '')
+    //   }
+    // }
   }
 })
