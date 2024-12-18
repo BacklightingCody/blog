@@ -29,6 +29,7 @@ export const useUserStore = defineStore(
         isLoggedIn.value = true
         return true
       } else {
+        ElMessage.error('获取用户信息失败')
         clearUserInfo()
         return false
       }
