@@ -26,6 +26,12 @@
   </div>
 </template>
 <script setup lang="ts">
+import Prism from 'prismjs'; 
+import 'prismjs/components/prism-javascript'
+import 'prismjs/themes/prism-tomorrow.css';
+import 'prismjs/components/prism-javascript';
+import 'prismjs/components/prism-css';
+import 'prismjs/components/prism-markup';
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { formatDateFromISO } from '@/utils/time/useCurTime'
@@ -69,10 +75,11 @@ onMounted(async () => {
           return matchedCharacters ? matchedCharacters.length : 0;
         }
         const plainText = contentContainer.value?.textContent.trim();
-        console.log(plainText)
         wordCount.value = calculateWordCount(plainText);
         // 动画样式
         addTitleClassToHeadings()
+        Prism.highlightAll();
+
         const titles = contentDetail.querySelectorAll('.title')
         const paragraphs = contentDetail.querySelectorAll('p');
         const lis = contentDetail.querySelectorAll('li')
@@ -130,7 +137,6 @@ onMounted(async () => {
           })
         })
       }
-
     })
     // 解析 frontmatter 的元数据
     const { frontmatter } = module
@@ -241,14 +247,17 @@ function addTitleClassToHeadings() {
   }
 
   td {
+    color: var(--text-color);
     padding: 10px;
     border: 2px solid var(--table-color);
     text-align: left;
+    code{
+      color: var(--text-color);
+    }
   }
 
   tr:hover {
     background-color: var(--accent-color);
-
     td {
       color: #fff;
     }
@@ -260,21 +269,52 @@ function addTitleClassToHeadings() {
   font-weight: 600;
 }
 
-:deep(code) {
-  color: var(--text-color);
-  font-weight: 700;
-  padding: 0.2em 0.4em;
-  border-radius: 3px;
+:deep(pre) {
+  overflow: hidden !important;
+  position: relative;
+  code{ 
+      display: inline-block;
+      padding-bottom: 20px;
+      position: relative;
+      top: 20px;
+  }
+  &::before {
+      content: "";
+      position: absolute;
+      background: red;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      top: 10px;
+      left: 15px;
+      transform: translate(-50%);
+  }
+  &::after {
+      content: "";
+      position: absolute;
+      background: sandybrown;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      top: 10px;
+      left: 30px;
+      transform: translate(-50%);
+  }
+  code:first-child{
+      &::after{
+          content: "";
+          position: absolute;
+          background: limegreen;
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          top: -28px;
+          left: 28px;
+          transform: translate(-50%);
+      }
+  }
 }
 
-:deep(pre) {
-  padding: 1em;
-  border-radius: 5px;
-  overflow-x: auto;
-  background-color: var(--background-color);
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
 
 :deep(ul) {
   list-style: disc;
@@ -473,4 +513,24 @@ function addTitleClassToHeadings() {
 :deep(h1) {
   justify-content: center; //对大标题居中
 }
+
+:deep(pre) {
+  background-color: var(--code-background-color);
+  border-radius: 5px;
+  padding: 1em;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow-x: auto;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+:deep(code) {
+  display: inline-block;
+  font-family: 'Courier New', monospace;
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+  color: var(--code-text-color);
+  font-weight: 300;
+}
+
 </style>

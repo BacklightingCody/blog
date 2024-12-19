@@ -119,11 +119,11 @@ console.log(arr.constructor === Array); // false
 1. Array.isArray()：用于检测一个对象是否是数组。
 2. isNaN() 和 Number.isNaN()：检测是否为 NaN;isNaN()是ES6新增的，用于判断一个值是否为NaN，它返回一个布尔值，与Number.isNaN()不同，它不会将字符串转换为数字再比较。
 
-```js
-console.log(Number.isNaN(NaN));    // true
-console.log(isNaN("hello"));       // true (因为 "hello" 转换为数字是 NaN)
-console.log(Number.isNaN("hello"));// false (不会转换类型)
-```
+    ```js
+    console.log(Number.isNaN(NaN));    // true
+    console.log(isNaN("hello"));       // true (因为 "hello" 转换为数字是 NaN)
+    console.log(Number.isNaN("hello"));// false (不会转换类型)
+    ```
 
 3. isFinite()：检测是否为有限数值
 4. Object.is()：用于比较两个值是否相等，与 === 的区别在于，它比较两个值是否为同一个对象。并且NaN是相等的。
@@ -132,10 +132,10 @@ console.log(Number.isNaN("hello"));// false (不会转换类型)
 
 | **方法**                        | **精确性** | **适用场景**           | **性能**    |
 |----------------------------------|------------|-------------------------|-------------|
-| `typeof`                         | 较低       | 基本类型和函数检测     | 高性能      |
-| `Object.prototype.toString.call()` | 高         | 精确检测任意类型       | 性能适中    |
-| `instanceof`                     | 中         | 检测对象实例关系       | 高性能      |
-| `Array.isArray()`                | 高         | 专门用于数组检测       | 高性能      |
+| typeof                         | 较低       | 基本类型和函数检测     | 高性能      |
+| Object.prototype.toString.call() | 高         | 精确检测任意类型       | 性能适中    |
+| instanceof                     | 中         | 检测对象实例关系       | 高性能      |
+| Array.isArray()                | 高         | 专门用于数组检测       | 高性能      |
 | 构造函数检测                      | 中         | 检测对象类型           | 高性能      |
 
 还有一些使用建议：
