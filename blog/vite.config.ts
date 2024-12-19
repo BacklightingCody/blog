@@ -13,6 +13,7 @@ import MarkdownPages from 'vite-plugin-pages'
 // @ts-ignore: 暂时忽略类型检查
 import markdownItToc from 'markdown-it-table-of-contents'
 import markdownItAnchor from 'markdown-it-anchor'
+import { prismjsPlugin } from 'vite-plugin-prismjs'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
@@ -29,10 +30,16 @@ export default defineConfig({
       include: [/\.vue$/, /\.md$/], // 支持 .vue 和 .md 文件
     }),
     preloadImages({
-      dir: ["picture/**/*.{jpg,png,svg,jfif,avif}","avatar.jpg","icon404.png","backlighting.svg"],
+      dir: ["picture/**/*.{jpg,png,svg,jfif,avif}", "avatar.jpg", "icon404.png", "backlighting.svg"],
       attrs: {
         rel: 'preload'
       }
+    }),
+    prismjsPlugin({
+      languages: 'all',
+      plugins: ['line-numbers', 'show-language',  'copy-to-clipboard', 'inline-color'],
+      theme: 'tomorrow',
+      css: true,
     }),
     Markdown(
       {
@@ -76,7 +83,7 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        api: 'modern-compiler', 
+        api: 'modern-compiler',
         includePaths: [path.resolve(__dirname, 'src/sass')],
         additionalData: '@use "@/sass//themes/_theme.scss" as *;'
       }
