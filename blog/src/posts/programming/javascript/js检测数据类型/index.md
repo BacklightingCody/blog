@@ -9,6 +9,8 @@ tag: [js]
 
 ## 引言
 
+---
+
 在JavaScript开发中，检测数据类型是非常常见的需求。无论是基本类型的判断，还是复杂对象的识别，选择合适的方法不仅能够避免潜在的 bug，还能提升代码的可读性和可维护性。本文将从多种方法出发，介绍通常的场景。
 
 ## 为什么需要检测数据类型
@@ -119,7 +121,7 @@ console.log(arr.constructor === Array); // false
 1. Array.isArray()：用于检测一个对象是否是数组。
 2. isNaN() 和 Number.isNaN()：检测是否为 NaN;isNaN()是ES6新增的，用于判断一个值是否为NaN，它返回一个布尔值，与Number.isNaN()不同，它不会将字符串转换为数字再比较。
 
-    ```js
+    ```javascript
     console.log(Number.isNaN(NaN));    // true
     console.log(isNaN("hello"));       // true (因为 "hello" 转换为数字是 NaN)
     console.log(Number.isNaN("hello"));// false (不会转换类型)

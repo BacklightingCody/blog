@@ -318,9 +318,9 @@ function addTitleClassToHeadings() {
 
 :deep(ul) {
   list-style: disc;
-
+  
   li {
-    line-height: 2
+    line-height: 2;
   }
 }
 
@@ -329,6 +329,17 @@ function addTitleClassToHeadings() {
 
   li {
     margin: 8px 0;
+  }
+}
+
+:deep(li){
+  ul{
+    list-style-type: circle;
+    li{
+      ul{
+        list-style-type: square;
+      }
+    }
   }
 }
 
@@ -530,7 +541,24 @@ function addTitleClassToHeadings() {
   padding: 0.2em 0.4em;
   border-radius: 3px;
   color: var(--code-text-color);
-  font-weight: 300;
+  font-weight: 400;
 }
 
+:deep(blockquote) {
+  border-left: 4px solid #42b983; 
+  background-color: #f4f9f4; 
+  color: #333;
+  padding: 1rem 1.5rem; 
+  margin: 1rem 0; 
+  font-size: 1.1rem; 
+  border-radius: 4px; 
+  font-style: italic; 
+  line-height: 1.5;
+}
+
+:deep(blockquote)::before {
+  content: "tip: "; 
+  font-weight: bold; 
+  color: #42b983; 
+}
 </style>
