@@ -53,12 +53,10 @@ const scrollToTop = () => {
 
 // 挂载和卸载事件监听
 onMounted(() => {
-  console.log(1)
   window.addEventListener("scroll", handleScroll);
 });
 
 onUnmounted(() => {
-  console.log(1)
   window.removeEventListener("scroll", handleScroll);
 });
 </script>

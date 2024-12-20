@@ -83,7 +83,7 @@ watch(width, () => {
 <template>
   <div class="header-container" ref="header" :class="{ isborder: showHeaderBorder }">
     <div class="blur-background"></div>
-    <avatar class="m-2.5" :size="windowWidth > 768 ? 40 : 30" src="/avatar.jpg"></avatar>
+    <Avatar class="m-2.5" :size="windowWidth > 768 ? 'middle' : 'small'" src="/avatar.jpg"></Avatar>
     <Signature :width="windowWidth > 768 ? '150px' : '100px'" :height="windowWidth > 768 ? '50px' : '40px'"
       class="relative top-[5px] ml-[15px]"></Signature>
     <Nav class="mx-auto h-[40px]!  border-b-[1px] border-solid border-gray-400 border-op-0"
@@ -92,8 +92,8 @@ watch(width, () => {
     <div class="w-[100px] h-[60px] flex items-center">
       <ColorMode></ColorMode>
       <!-- <div><el-button type="success" class="text-black ml-2" size="small" @click="loginSubmit">登录</el-button></div> -->
-      <avatar :src="userAvatar" :size="windowWidth > 768 ? 40 : 30" @click="loginSubmit('github')" class="ml-2">
-      </avatar>
+      <Avatar :src="userAvatar" :size="windowWidth > 768 ? 'middle' : 'small'" @click="loginSubmit('github')" class="ml-2">
+      </Avatar>
     </div>
   </div>
 </template>

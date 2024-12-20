@@ -22,6 +22,19 @@
       <GenerateCard v-if="isShowCard" :title="articleTitle" :author="articleAuthor" :publishDate="articleDate"
         :excerpt="articleExcerpt" :image="articleImage" />
     </main>
+    <footer>
+        <div class="w-full">
+          <CommentList
+            :comment-count="commentCount"
+            :comments="comments"
+            :current-user="currentUser"
+            @add-comment="handleAddComment"
+            @add-reply="handleAddReply"
+            @like-comment="handleLikeComment"
+          />
+        </div>
+    </footer>
+   
     <BackTop />
   </div>
 </template>
@@ -32,9 +45,11 @@ import 'prismjs/themes/prism-tomorrow.css';
 import 'prismjs/components/prism-javascript';
 import 'prismjs/components/prism-css';
 import 'prismjs/components/prism-markup';
-import { ref, onMounted } from 'vue'
+import { ref, onMounted } from 'vue';
+import { useUserStore } from '@/stores';
 import { useRoute } from 'vue-router'
-import { formatDateFromISO } from '@/utils/time/useCurTime'
+import { formatDateFromISO,getCurTimeWithFullDate } from '@/utils/time/useCurTime';
+import CommentList from './CommentList.vue';
 import ColorMap from '@/components/ColorMap.vue'
 import GenerateCard from './GenerateCard.vue'
 import { getRandomPicture } from '@/utils/useGeneratePicture'
@@ -42,6 +57,7 @@ import iconReturn from './icons/iconReturn.vue'
 import BackButton from './BackButton.vue'
 import BackTop from './BackTop.vue'
 const route = useRoute()
+
 
 const contentContainer = useTemplateRef('contentContainer')
 const markdownContent = ref(null) // Markdown 主内容
@@ -175,6 +191,115 @@ function addTitleClassToHeadings() {
     heading.classList.add('title');
   });
 }
+
+// 当前用户信息
+const currentUser = ref({
+  id: 1,
+  nickname: '11',
+  avatar: '/avatar.jpg',
+  badges: ['作者','lv1']
+})
+
+// 评论总数
+const commentCount = ref(2687)
+
+// 评论数据
+const comments = ref([
+  {
+    id: 1,
+    user: {
+      id: 2,
+      nickname: '小天鹅',
+      avatar: '/picture/animial/animial1.avif',
+      badges: ['1圈圈']
+    },
+    content: '小婷这个热搜转包了以后我是填土你填......😆 😆 😆',
+    likes: 108,
+    time: '6天前',
+    replies: [
+      {
+        id: 2,
+        user: {
+          id: 3,
+          nickname: '闲适123567',
+          avatar: '/picture/animial/animial2.avif'
+        },
+        content: '你还等着',
+        likes: 2,
+        time: '6天前',
+        replyTo: 'kxc'
+      },
+      {
+        id: 3,
+        user: {
+          id: 4,
+          nickname: '用户167801569',
+          avatar: '/picture/animial/animial3.avif'
+        },
+        content: '@社多小窝 小婷能，实点，茶叶开始说吗',
+        likes: 0,
+        time: '2天前',
+        replyTo: '社多小窝'
+      }
+    ]
+  }
+])
+
+// 处理添加评论
+const handleAddComment = (content) => {
+  const newComment = {
+    id: Date.now(),
+    user: currentUser.value,
+    content,
+    likes: 0,
+    time: getCurTimeWithFullDate(),
+    replies: []
+  }
+  comments.value.unshift(newComment)
+  commentCount.value++
+}
+
+// 处理添加回复
+const handleAddReply = (commentId, content, replyTo) => {
+  console.log(commentId, content, replyTo)
+  const comment = comments.value.find(c => c.id === commentId)
+  if (comment) {
+    const newReply = {
+      id: Date.now(),
+      user: currentUser.value,
+      content,
+      likes: 0,
+      time: getCurTimeWithFullDate(),
+      replyTo
+    }
+    comment.replies.push(newReply)
+    commentCount.value++
+  }
+}
+
+// 处理点赞
+const handleLikeComment = (commentId, isReply = false) => {
+  if (!isReply) {
+    const comment = comments.value.find(c => c.id === commentId)
+    if (comment) comment.likes++
+  } else {
+    comments.value.forEach(comment => {
+      const reply = comment.replies.find(r => r.id === commentId)
+      if (reply) reply.likes++
+    })
+  }
+}
+
+onMounted(()=>{
+  const userStore = useUserStore()
+  // console.log(userStore.userId)
+  // console.log(userStore.username)
+  // console.log(userStore.isLoggedIn)
+  if(userStore.isLoggedIn){
+    currentUser.value.nickname = userStore.username
+  }
+  
+})
 </script>
 
 <style scoped lang="scss">
@@ -215,7 +340,7 @@ function addTitleClassToHeadings() {
   margin: 1em 0;
 }
 
-:deep(img) {
+:deep(.article-content img) {
   margin: 20px 0px;
   margin-left: 50%;
   transform: translateX(-50%);

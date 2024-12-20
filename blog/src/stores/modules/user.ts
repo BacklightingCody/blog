@@ -38,12 +38,12 @@ export const useUserStore = defineStore(
     const setUserInfo = (user: {
       avatarUrl: string
       id: string
-      name: string
+      username: string
       // token?: string
     }) => {
       avatar.value = user.avatarUrl
       userId.value = user.id
-      username.value = user.name
+      username.value = user.username
       // setToken(user.token, 'access')
       // isLoggedIn.value = true
     }

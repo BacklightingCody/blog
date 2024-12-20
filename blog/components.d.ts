@@ -7,15 +7,19 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    ArticleComment: typeof import('./src/components/ArticleComment.vue')['default']
     ArticleDetail: typeof import('./src/components/ArticleDetail.vue')['default']
     ArticleImage: typeof import('./src/components/ArticleImage.vue')['default']
     ArticleLine: typeof import('./src/components/ArticleLine.vue')['default']
+    ArticleReview: typeof import('./src/components/ArticleReview.vue')['default']
     Avatar: typeof import('./src/components/Avatar.vue')['default']
     BackButton: typeof import('./src/components/BackButton.vue')['default']
     BackTop: typeof import('./src/components/BackTop.vue')['default']
     CategoryCard: typeof import('./src/components/CategoryCard.vue')['default']
     CategoryCardList: typeof import('./src/components/CategoryCardList.vue')['default']
     ColorMap: typeof import('./src/components/ColorMap.vue')['default']
+    CommentItem: typeof import('./src/components/CommentItem.vue')['default']
+    CommentList: typeof import('./src/components/CommentList.vue')['default']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElContainer: typeof import('element-plus/es')['ElContainer']
     ElDropdown: typeof import('element-plus/es')['ElDropdown']
@@ -28,6 +32,8 @@ declare module 'vue' {
     ElTimeline: typeof import('element-plus/es')['ElTimeline']
     ElTimelineItem: typeof import('element-plus/es')['ElTimelineItem']
     ElTooltip: typeof import('element-plus/es')['ElTooltip']
+    EmojiPicker: typeof import('./src/components/EmojiPicker.vue')['default']
+    EmojyPicker: typeof import('./src/components/EmojyPicker.vue')['default']
     GenerateCard: typeof import('./src/components/GenerateCard.vue')['default']
     IconAbout: typeof import('./src/components/icons/iconAbout.vue')['default']
     IconAI: typeof import('./src/components/icons/iconAI.vue')['default']
@@ -79,5 +85,6 @@ declare module 'vue' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Signature: typeof import('./src/components/Signature.vue')['default']
+    UserMeta: typeof import('./src/components/UserMeta.vue')['default']
   }
 }
