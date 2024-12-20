@@ -15,6 +15,17 @@ export function getCurrentTime(): string {
   return `${year}-${month}-${date}`;
 }
 
+export function getCurTimeWithFullDate(): string {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, '0'); // 月份从0开始，需要加1
+  const day = String(now.getDate()).padStart(2, '0');
+  const hours = String(now.getHours()).padStart(2, '0');
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+  
+  return `${year}-${month}-${day} ${hours}:${minutes}`;
+}
+
 export function formatDateFromISO(isoString: string): string {
   const date = new Date(isoString);
   const year = date.getFullYear();
