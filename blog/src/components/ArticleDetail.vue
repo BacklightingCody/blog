@@ -304,6 +304,7 @@ onMounted(()=>{
 
 <style scoped lang="scss">
 .article-detail {
+  letter-spacing: 1px;
   font-size: 18px;
   margin-right: 200px;
   border-radius: 8px;
@@ -444,13 +445,15 @@ onMounted(()=>{
   }
 }
 
-:deep()
 
 :deep(ul) {
   list-style: disc;
   
   li {
     line-height: 2;
+    code{
+      font-weight: 700;
+    }
   }
 }
 
@@ -463,6 +466,7 @@ onMounted(()=>{
 }
 
 :deep(li){
+  margin: 8px 0;
   ul{
     list-style-type: circle;
     li{
@@ -635,6 +639,7 @@ onMounted(()=>{
 
 /* 为每一行文字设置动画样式 */
 :deep(.line) {
+  line-height: 2;
   opacity: 0;
   animation: dropIn 0.5s var(--delay) cubic-bezier(0.42, 0, 0.77, 1.7) forwards;
 }

@@ -167,17 +167,17 @@ CORS（Cross-Origin Resource Sharing）是一种基于 HTTP 头的机制，该�
 
 1. 开发环境vite 配置代理
 
-    ```js
-    proxy: {
-      //针对 /api 开头的请求
-      '/api': {
-        // target: 'http://localhost:3000',
-        target: process.env.VITE_API_BASE_URL, //表示服务器地址
-        changeOrigin: true,   
-        rewrite: (path: any) => path.replace(/^\/api/, '') // 将 /api 替换成 target 目标地址
-      }
+  ```js
+  proxy: {
+    //针对 /api 开头的请求
+    '/api': {
+      // target: 'http://localhost:3000',
+      target: process.env.VITE_API_BASE_URL, //表示服务器地址
+      changeOrigin: true,   
+      rewrite: (path: any) => path.replace(/^\/api/, '') // 将 /api 替换成 target 目标地址
     }
-    ```
+  }
+  ```
 
 2. nginx 代理
 
