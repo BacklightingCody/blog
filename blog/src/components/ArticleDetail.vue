@@ -351,6 +351,10 @@ onMounted(()=>{
 :deep(p) {
   margin: 10px 0;
   line-height: 2;
+  code{
+    color: var(--text-color);
+    font-weight: 900;
+  }
 }
 
 :deep(hr) {
@@ -440,6 +444,7 @@ onMounted(()=>{
   }
 }
 
+:deep()
 
 :deep(ul) {
   list-style: disc;

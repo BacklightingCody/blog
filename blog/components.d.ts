@@ -7,11 +7,9 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    ArticleComment: typeof import('./src/components/ArticleComment.vue')['default']
     ArticleDetail: typeof import('./src/components/ArticleDetail.vue')['default']
     ArticleImage: typeof import('./src/components/ArticleImage.vue')['default']
     ArticleLine: typeof import('./src/components/ArticleLine.vue')['default']
-    ArticleReview: typeof import('./src/components/ArticleReview.vue')['default']
     Avatar: typeof import('./src/components/Avatar.vue')['default']
     BackButton: typeof import('./src/components/BackButton.vue')['default']
     BackTop: typeof import('./src/components/BackTop.vue')['default']
@@ -33,7 +31,6 @@ declare module 'vue' {
     ElTimelineItem: typeof import('element-plus/es')['ElTimelineItem']
     ElTooltip: typeof import('element-plus/es')['ElTooltip']
     EmojiPicker: typeof import('./src/components/EmojiPicker.vue')['default']
-    EmojyPicker: typeof import('./src/components/EmojyPicker.vue')['default']
     GenerateCard: typeof import('./src/components/GenerateCard.vue')['default']
     IconAbout: typeof import('./src/components/icons/iconAbout.vue')['default']
     IconAI: typeof import('./src/components/icons/iconAI.vue')['default']
