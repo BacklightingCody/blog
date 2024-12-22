@@ -247,6 +247,7 @@ const comments = ref([
 
 // 处理添加评论
 const handleAddComment = (content) => {
+  console.log(content)
   const newComment = {
     id: Date.now(),
     user: currentUser.value,
