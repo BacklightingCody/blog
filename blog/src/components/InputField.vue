@@ -2,7 +2,8 @@
   <div class="input-field relative">
     <!-- Textarea Input -->
     <textarea
-      v-model="inputText"
+      :value="modelValue.text"
+      @input="updateInput"
       :placeholder="placeholder"
       class="w-full min-h-[70px] p-2 border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
     ></textarea>
@@ -15,11 +16,11 @@
       </button>
 
       <!-- Image Upload Button -->
-      <label for="image-upload" class="cursor-pointer text-gray-500 hover:text-[#FB7299] transition">
+      <label :for="uniqueId" class="cursor-pointer text-gray-500 hover:text-[#FB7299] transition">
         <ImageIcon class="w-5 h-5" />
         <input
           type="file"
-          id="image-upload"
+          :id="uniqueId"
           accept="image/*"
           class="hidden"
           @change="handleImageUpload"
@@ -34,7 +35,7 @@
     />
     
     <ImagePreview
-      :images="images"
+      :images="modelValue.images"
       @remove-image="removeImage"
     />
 
@@ -42,7 +43,7 @@
     <div class="flex justify-end mt-2">
       <button
         @click="submitInput"
-        :disabled="!inputText || inputText.trim() === ''"
+        :disabled="!modelValue.text || modelValue.text.trim() === ''"
         class="px-4 py-2 bg-[#FB7299] text-white rounded-full text-sm hover:bg-[#FB7299]/90 disabled:opacity-50 disabled:cursor-not-allowed"
       >
         提交
@@ -52,10 +53,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { SmileIcon, ImageIcon, XIcon } from 'lucide-vue-next'
+import { ref, onMounted } from 'vue'
+import { SmileIcon, ImageIcon } from 'lucide-vue-next'
 import EmojiPicker from './EmojiPicker.vue'
 import ImagePreview from './ImagePreview.vue'
+
+interface InputContent {
+  text: string;
+  images: string[];
+}
 
 // Props & Emits
 const props = defineProps({
@@ -63,26 +69,38 @@ const props = defineProps({
     type: String,
     default: '写下你的内容...',
   },
-  images: {
-    type: Array as () => string[],
+  modelValue: {
+    type: Object as () => InputContent,
     required: true,
-  },
+  }
 })
 
-const emit = defineEmits(['input-change','submit'])
+const emit = defineEmits(['update:modelValue', 'submit'])
 
-const inputText = ref<string>('')
+// Generate unique ID for file input
+const uniqueId = `image-upload-${Math.random().toString(36).substr(2, 9)}`
 const showEmojiPicker = ref(false)
-const images = ref<string[]>([])
 
 // Handle emoji picker toggle
 const toggleEmojiPicker = () => {
   showEmojiPicker.value = !showEmojiPicker.value
 }
 
+// Handle input update
+const updateInput = (event: Event) => {
+  const target = event.target as HTMLTextAreaElement
+  emit('update:modelValue', {
+    ...props.modelValue,
+    text: target.value
+  })
+}
+
 // Handle emoji addition
 const addEmoji = (emoji: string) => {
-  inputText.value += emoji
+  emit('update:modelValue', {
+    ...props.modelValue,
+    text: props.modelValue.text + emoji
+  })
 }
 
 // Handle image upload
@@ -94,8 +112,11 @@ const handleImageUpload = (event: Event) => {
       const reader = new FileReader()
       reader.onload = (e) => {
         if (e.target?.result) {
-          images.value.push(e.target.result as string)
-          emit('input-change', { text: inputText.value, images: images.value })
+          const newImages = [...props.modelValue.images, e.target.result as string]
+          emit('update:modelValue', {
+            ...props.modelValue,
+            images: newImages
+          })
         }
       }
       reader.readAsDataURL(file)
@@ -106,17 +127,18 @@ const handleImageUpload = (event: Event) => {
 
 // Remove image from preview
 const removeImage = (index: number) => {
-  images.value.splice(index, 1)
-  emit('input-change', { text: inputText.value, images: images.value })
+  const newImages = [...props.modelValue.images]
+  newImages.splice(index, 1)
+  emit('update:modelValue', {
+    ...props.modelValue,
+    images: newImages
+  })
 }
 
 // Submit input
 const submitInput = () => {
-  if (inputText.value.trim() || images.value.length > 0) {
-    emit('input-change', { text: inputText.value, images: images.value })
+  if (props.modelValue.text.trim() || props.modelValue.images.length > 0) {
     emit('submit')
-    inputText.value = '' // Reset content after submit
-    images.value = [] // Clear images after submit
   }
 }
 </script>
