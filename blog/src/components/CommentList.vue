@@ -47,7 +47,7 @@ import CommentInput from './CommentInput.vue'
 import { ref, computed } from 'vue'
 import {Comment} from '@/interface/Comment'
 import { User } from '@/interface/User'
-
+import type { CommentContent } from '@/interface/Comment'
 const props = defineProps({
   commentCount: Number,
   comments: Array as()=> Comment[],
@@ -63,11 +63,11 @@ const sortedComments = computed(() => {
     : [...props.comments].sort((a, b) => new Date(b.time).getTime() - new Date(a.time).getTime())
 })
 
-const submitComment = (comment: string) => {
-  emit('add-comment', comment)
+const submitComment = (content: CommentContent) => {
+  emit('add-comment', content)
 }
 
-const handleReply = (id: number, content: string, replyTo: string) => {
+const handleReply = (id: number, content: CommentContent, replyTo: string) => {
   emit('add-reply', id, content, replyTo)
 }
 

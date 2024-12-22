@@ -56,6 +56,7 @@ import { getRandomPicture } from '@/utils/useGeneratePicture'
 import iconReturn from './icons/iconReturn.vue'
 import BackButton from './BackButton.vue'
 import BackTop from './BackTop.vue'
+import type { CommentContent } from '@/interface/Comment';
 const route = useRoute()
 
 

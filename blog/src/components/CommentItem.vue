@@ -90,6 +90,7 @@ import ReplyList from './ReplyList.vue';
 import CommentInput from './CommentInput.vue'; // Import CommentInput
 import { User } from '@/interface/User';
 import { Comment } from '@/interface/Comment';
+import type { CommentContent } from '@/interface/Comment';
 
 const props = defineProps<{
   comment: Comment;
@@ -113,7 +114,7 @@ const cancelReply = () => {
   replyToUser.value = '';
 };
 
-const submitReply = ( content:string | { text: string; images: string[] }) => {
+const submitReply = ( content:CommentContent) => {
   emit('reply', props.comment.id, content, replyToUser.value);
   cancelReply();
 };

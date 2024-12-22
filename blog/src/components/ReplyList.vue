@@ -15,7 +15,26 @@
           </span>
         </template>
         <template #default>
-          <p class="mt-1 text-gray-900">{{ reply.content }}</p>
+          <!-- <p class="mt-1 text-gray-900">{{ reply.content }}</p> -->
+          <div v-if="typeof reply.content === 'string'" class="text-gray-900 mt-1">
+            <p v-html="reply.content"></p>
+          </div>
+
+          <div v-else class="text-gray-900 mt-1">
+            <!-- Display text content -->
+            <p v-html="reply.content.text"></p>
+
+            <!-- Display images -->
+            <div v-if="reply.content.images.length" class="mt-2 grid grid-cols-3 gap-2">
+              <div
+                v-for="(image, index) in reply.content.images"
+                :key="index"
+                class="relative w-full h-32 rounded-lg overflow-hidden"
+              >
+                <img :src="image" class="w-full h-full object-cover" alt="Comment Image" />
+              </div>
+            </div>
+          </div>
           <div class="mt-2 flex items-center gap-6 text-sm text-gray-500">
             <span>{{ reply.time }}</span>
             <div class="flex items-center gap-6">
