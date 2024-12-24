@@ -6,7 +6,7 @@
     </BackButton>
     <header class="article-header text-default-text text-center">
       <h1>{{ articleTitle }}</h1>
-      <p class="article-date">发布日期：{{ articleDate }}  &nbsp;&nbsp;本文字数：{{ wordCount }}</p>
+      <p class="article-date">发布日期：{{ articleDate }} &nbsp;&nbsp;本文字数：{{ wordCount }}</p>
       <ColorMap />
     </header>
     <main class="article-content">
@@ -22,24 +22,18 @@
       <GenerateCard v-if="isShowCard" :title="articleTitle" :author="articleAuthor" :publishDate="articleDate"
         :excerpt="articleExcerpt" :image="articleImage" />
     </main>
-    <footer>
-        <div class="w-full">
-          <CommentList
-            :comment-count="commentCount"
-            :comments="comments"
-            :current-user="currentUser"
-            @add-comment="handleAddComment"
-            @add-reply="handleAddReply"
-            @like-comment="handleLikeComment"
-          />
-        </div>
+    <footer ref="footer">
+      <div class="w-full">
+        <CommentList :comment-count="commentCount" :comments="comments" :current-user="currentUser"
+          @add-comment="handleAddComment" @add-reply="handleAddReply" @like-comment="handleLikeComment" />
+      </div>
     </footer>
-   
+
     <BackTop />
   </div>
 </template>
 <script setup lang="ts">
-import Prism from 'prismjs'; 
+import Prism from 'prismjs';
 import 'prismjs/components/prism-javascript'
 import 'prismjs/themes/prism-tomorrow.css';
 import 'prismjs/components/prism-javascript';
@@ -48,7 +42,7 @@ import 'prismjs/components/prism-markup';
 import { ref, onMounted } from 'vue';
 import { useUserStore } from '@/stores';
 import { useRoute } from 'vue-router'
-import { formatDateFromISO,getCurTimeWithFullDate } from '@/utils/time/useCurTime';
+import { formatDateFromISO, getCurTimeWithFullDate } from '@/utils/time/useCurTime';
 import CommentList from './CommentList.vue';
 import ColorMap from '@/components/ColorMap.vue'
 import GenerateCard from './GenerateCard.vue'
@@ -68,6 +62,7 @@ const articleAuthor = ref('')
 const articleExcerpt = ref('')
 const articleImage = getRandomPicture()
 const wordCount = ref(0);
+const footer = useTemplateRef('footer')
 
 onMounted(async () => {
   try {
@@ -75,10 +70,10 @@ onMounted(async () => {
     // 动态加载文章的 index.md 文件
     const module = await import(`@/posts/${category}/${subcategory}/${article}/index.md`)
     markdownContent.value = module.default
-
+    const contentDetail = document.querySelector('.article-detail')
     // 使用 nextTick 确保组件渲染后获取 DOM 元素
     nextTick(() => {
-      const contentDetail = document.querySelector('.article-detail')
+
       if (contentDetail) {
         // 统计文章字数
         function calculateWordCount(text) {
@@ -153,6 +148,7 @@ onMounted(async () => {
             // console.log(img.src)
           })
         })
+
       }
     })
     // 解析 frontmatter 的元数据
@@ -163,6 +159,20 @@ onMounted(async () => {
     articleExcerpt.value = frontmatter.description || ''
   } catch (error) {
     console.error('Failed to load article:', error)
+  }
+})
+
+
+onMounted(() => {
+  const footerElement = footer.value
+  if (footerElement) {
+    footerElement.addEventListener('click', (event) => {
+      const target = event.target as HTMLElement;
+      if (target.tagName === 'IMG') {
+        const image = target as HTMLImageElement;
+        openModal(image.src);
+      }
+    });
   }
 })
 
@@ -198,7 +208,7 @@ const currentUser = ref({
   id: 1,
   nickname: '11',
   avatar: '/avatar.jpg',
-  badges: ['作者','lv1']
+  badges: ['作者', 'lv1']
 })
 
 // 评论总数
@@ -214,7 +224,7 @@ const comments = ref([
       avatar: '/picture/animial/animial1.avif',
       badges: ['1圈圈']
     },
-    content: {text:'小婷这个热搜转包了以后我是填土你填......😆 😆 😆',images:[]},
+    content: { text: '小婷这个热搜转包了以后我是填土你填......😆 😆 😆', images: ['/picture/animial/animial1.avif'] },
     likes: 108,
     time: '6天前',
     replies: [
@@ -225,7 +235,7 @@ const comments = ref([
           nickname: '闲适123567',
           avatar: '/picture/animial/animial2.avif'
         },
-        content: {text:'你还等着',images:[]},
+        content: { text: '你还等着', images: [] },
         likes: 2,
         time: '6天前',
         replyTo: 'kxc'
@@ -237,7 +247,7 @@ const comments = ref([
           nickname: '用户167801569',
           avatar: '/picture/animial/animial3.avif'
         },
-        content: {text:'@社多小窝 小婷能，实点，茶叶开始说吗',images:[]},
+        content: { text: '@社多小窝 小婷能，实点，茶叶开始说吗', images: [] },
         likes: 0,
         time: '2天前',
         replyTo: '社多小窝'
@@ -292,16 +302,17 @@ const handleLikeComment = (commentId, isReply = false) => {
   }
 }
 
-onMounted(()=>{
+onMounted(() => {
   const userStore = useUserStore()
   // console.log(userStore.userId)
   // console.log(userStore.username)
   // console.log(userStore.isLoggedIn)
-  if(userStore.isLoggedIn){
+  if (userStore.isLoggedIn) {
     currentUser.value.nickname = userStore.username
   }
-  
+
 })
+
 </script>
 
 <style scoped lang="scss">
@@ -354,7 +365,8 @@ onMounted(()=>{
 :deep(p) {
   margin: 10px 0;
   line-height: 2;
-  code{
+
+  code {
     color: var(--text-color);
     font-weight: 900;
   }
@@ -383,13 +395,15 @@ onMounted(()=>{
     padding: 10px;
     border: 2px solid var(--table-color);
     text-align: left;
-    code{
+
+    code {
       color: var(--text-color);
     }
   }
 
   tr:hover {
     background-color: var(--accent-color);
+
     td {
       color: #fff;
     }
@@ -404,56 +418,61 @@ onMounted(()=>{
 :deep(pre) {
   overflow: hidden !important;
   position: relative;
-  code{ 
-      display: inline-block;
-      padding-bottom: 20px;
-      position: relative;
-      top: 20px;
+
+  code {
+    display: inline-block;
+    padding-bottom: 20px;
+    position: relative;
+    top: 20px;
   }
+
   &::before {
-      content: "";
-      position: absolute;
-      background: red;
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      top: 10px;
-      left: 15px;
-      transform: translate(-50%);
+    content: "";
+    position: absolute;
+    background: red;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    top: 10px;
+    left: 15px;
+    transform: translate(-50%);
   }
+
   &::after {
+    content: "";
+    position: absolute;
+    background: sandybrown;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    top: 10px;
+    left: 30px;
+    transform: translate(-50%);
+  }
+
+  code:first-child {
+    &::after {
       content: "";
       position: absolute;
-      background: sandybrown;
+      background: limegreen;
       width: 10px;
       height: 10px;
       border-radius: 50%;
-      top: 10px;
-      left: 30px;
+      top: -28px;
+      left: 28px;
       transform: translate(-50%);
-  }
-  code:first-child{
-      &::after{
-          content: "";
-          position: absolute;
-          background: limegreen;
-          width: 10px;
-          height: 10px;
-          border-radius: 50%;
-          top: -28px;
-          left: 28px;
-          transform: translate(-50%);
-      }
+    }
   }
 }
 
 
 :deep(ul) {
   list-style: disc;
-  
+
   li {
     line-height: 2;
-    code{
+
+    code {
       font-weight: 700;
     }
   }
@@ -467,12 +486,14 @@ onMounted(()=>{
   }
 }
 
-:deep(li){
+:deep(li) {
   margin: 8px 0;
-  ul{
+
+  ul {
     list-style-type: circle;
-    li{
-      ul{
+
+    li {
+      ul {
         list-style-type: square;
       }
     }
@@ -682,20 +703,20 @@ onMounted(()=>{
 }
 
 :deep(blockquote) {
-  border-left: 4px solid #42b983; 
-  background-color: #f4f9f4; 
+  border-left: 4px solid #42b983;
+  background-color: #f4f9f4;
   color: #333;
-  padding: 1rem 1.5rem; 
-  margin: 1rem 0; 
-  font-size: 1.1rem; 
-  border-radius: 4px; 
-  font-style: italic; 
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  font-size: 1.1rem;
+  border-radius: 4px;
+  font-style: italic;
   line-height: 1.5;
 }
 
 :deep(blockquote)::before {
-  content: "tip: "; 
-  font-weight: bold; 
-  color: #42b983; 
+  content: "tip: ";
+  font-weight: bold;
+  color: #42b983;
 }
 </style>
