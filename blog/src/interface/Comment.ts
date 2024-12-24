@@ -19,4 +19,7 @@ export interface Comment {
   replies?: Reply[];
 }
 
-export type CommentContent = string | { text: string; images: string[] };
+export interface CommentContent {
+  text: string; 
+  images: string[]; 
+}

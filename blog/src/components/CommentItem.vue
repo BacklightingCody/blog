@@ -99,6 +99,7 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   (e: 'like', id: number, isReply: boolean): void;
+  (e: 'reply', id: number,  content: CommentContent, replyTo: string ): void;
 }>();
 
 const showReplyInput = ref(false);

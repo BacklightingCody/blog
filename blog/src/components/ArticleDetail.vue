@@ -214,7 +214,7 @@ const comments = ref([
       avatar: '/picture/animial/animial1.avif',
       badges: ['1圈圈']
     },
-    content: '小婷这个热搜转包了以后我是填土你填......😆 😆 😆',
+    content: {text:'小婷这个热搜转包了以后我是填土你填......😆 😆 😆',images:[]},
     likes: 108,
     time: '6天前',
     replies: [
@@ -225,7 +225,7 @@ const comments = ref([
           nickname: '闲适123567',
           avatar: '/picture/animial/animial2.avif'
         },
-        content: '你还等着',
+        content: {text:'你还等着',images:[]},
         likes: 2,
         time: '6天前',
         replyTo: 'kxc'
@@ -237,7 +237,7 @@ const comments = ref([
           nickname: '用户167801569',
           avatar: '/picture/animial/animial3.avif'
         },
-        content: '@社多小窝 小婷能，实点，茶叶开始说吗',
+        content: {text:'@社多小窝 小婷能，实点，茶叶开始说吗',images:[]},
         likes: 0,
         time: '2天前',
         replyTo: '社多小窝'

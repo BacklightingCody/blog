@@ -26,7 +26,7 @@ const props = defineProps<{
 
 const emit = defineEmits(['submit'])
 
-const content = ref({
+const content = ref<CommentContent>({
   text: '',
   images: []
 })
@@ -34,9 +34,9 @@ const content = ref({
 const handleSubmit = () => {
   if (content.value.text.trim() || content.value.images.length > 0) {
     emit('submit', {
-      text: content.value.text,
-      images: content.value.images,
-      user: props.currentUser,
+      text: content.value.text||'',
+      images: content.value.images||[],
+      // user: props.currentUser,
     })
     // Reset content after submit
     content.value = {

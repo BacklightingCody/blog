@@ -30,6 +30,7 @@ declare module 'vue' {
     ElSwitch: typeof import('element-plus/es')['ElSwitch']
     ElTimeline: typeof import('element-plus/es')['ElTimeline']
     ElTimelineItem: typeof import('element-plus/es')['ElTimelineItem']
+    ElTooltip: typeof import('element-plus/es')['ElTooltip']
     EmojiPicker: typeof import('./src/components/EmojiPicker.vue')['default']
     GenerateCard: typeof import('./src/components/GenerateCard.vue')['default']
     IconAbout: typeof import('./src/components/icons/iconAbout.vue')['default']
