@@ -1,9 +1,9 @@
 <template>
   <div class="w-full h-[60px] pt-[10px] border border-solid border-default-border">
     <div class="flex justify-center">
-      <span class="text-default-text">
-        © 2024 | 晋ICP备2024050623号
-      </span>
+      <a class="text-default-text" href="https://beian.miit.gov.cn/#/Integrated/index">
+        © 2024 | 	晋ICP备2024050623号-1
+      </a>
 
     </div>
 

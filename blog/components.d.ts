@@ -28,6 +28,7 @@ declare module 'vue' {
     ElHeader: typeof import('element-plus/es')['ElHeader']
     ElMain: typeof import('element-plus/es')['ElMain']
     ElSwitch: typeof import('element-plus/es')['ElSwitch']
+    ElTooltip: typeof import('element-plus/es')['ElTooltip']
     EmojiPicker: typeof import('./src/components/EmojiPicker.vue')['default']
     GenerateCard: typeof import('./src/components/GenerateCard.vue')['default']
     IconAbout: typeof import('./src/components/icons/iconAbout.vue')['default']
