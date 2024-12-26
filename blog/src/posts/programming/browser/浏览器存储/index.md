@@ -1,9 +1,15 @@
 ---
 title: 浏览器存储
-description: Web 存储是指允许 Web 应用程序在浏览器中存储数据的客户端存储机制。这包括会话存储、本地存储、Cookie 和 IndexedDB 等技术。在客户端提供存储空间对于许多标准 Web 功能（如购物车、游戏分数、用户首选项、动态页面内容和离线访问数据）至关重要。本文主要介绍sessionStorage、localStorage、Cookie以及indxDB，从数据存储位置、生命周期、存储大小、写入方式、数据共享、发送请求时是否携带、 安全性、浏览器兼容性、使用方法、应用场景等方面来介绍。
+description: >-
+  Web 存储是指允许 Web 应用程序在浏览器中存储数据的客户端存储机制。这包括会话存储、本地存储、Cookie 和 IndexedDB
+  等技术。在客户端提供存储空间对于许多标准 Web
+  功能（如购物车、游戏分数、用户首选项、动态页面内容和离线访问数据）至关重要。本文主要介绍sessionStorage、localStorage、Cookie以及indxDB，从数据存储位置、生命周期、存储大小、写入方式、数据共享、发送请求时是否携带、
+  安全性、浏览器兼容性、使用方法、应用场景等方面来介绍。
 editLink: true
-date: 2024-12-21
-tag: [browser]
+date: 2024-12-21T00:00:00.000Z
+tag:
+  - browser
+id: b18b15e6dd66759a896e4542c8335140
 ---
 [[toc]]
 

@@ -2,8 +2,10 @@
 title: web性能指标
 description: web性能指标
 editLink: true
-date: 2024-12-13
-tag: [browser]
+date: 2024-12-13T00:00:00.000Z
+tag:
+  - browser
+id: b55f1b32436ea67206565e2b0207d2aa
 ---
 [[toc]]
 

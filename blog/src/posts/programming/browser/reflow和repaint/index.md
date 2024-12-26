@@ -1,9 +1,13 @@
 ---
 title: 浏览器Reflow和Repaint
-description: Reflow 和 Repaint 是浏览器渲染过程中的两个重要概念。重排是浏览器重新计算页面上元素的布局和位置的过程。Repaint 是浏览器在页面上重新绘制元素的过程。在本文中，我们将讨论浏览器渲染过程、Reflow 和 Repaint，以及如何优化。
+description: >-
+  Reflow 和 Repaint 是浏览器渲染过程中的两个重要概念。重排是浏览器重新计算页面上元素的布局和位置的过程。Repaint
+  是浏览器在页面上重新绘制元素的过程。在本文中，我们将讨论浏览器渲染过程、Reflow 和 Repaint，以及如何优化。
 editLink: true
-date: 2024-12-15
-tag: [browser]
+date: 2024-12-15T00:00:00.000Z
+tag:
+  - browser
+id: c71856a4e69ab63a1f840ad578d7cace
 ---
 [[toc]]
 

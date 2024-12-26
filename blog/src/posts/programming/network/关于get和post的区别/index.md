@@ -1,9 +1,12 @@
 ---
 title: 关于get和post的区别
-description: GET和POST，两者是HTTP协议中发送请求的方法，两者其实本质都是一样的，都是tcp链接，但是由于HTTP的规定和浏览器/服务器的限制，导致他们在应用过程中会体现出一些区别，今天简单说一下get和post的区别。。
+description: >-
+  GET和POST，两者是HTTP协议中发送请求的方法，两者其实本质都是一样的，都是tcp链接，但是由于HTTP的规定和浏览器/服务器的限制，导致他们在应用过程中会体现出一些区别，今天简单说一下get和post的区别。。
 editLink: true
-date: 2024-12-25
-tag: [browser]
+date: 2024-12-25T00:00:00.000Z
+tag:
+  - browser
+id: e6f40ce356d0ae2f45676d6be81a5c5a
 ---
 [[toc]]
 

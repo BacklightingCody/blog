@@ -2,8 +2,10 @@
 title: 浏览器事件循环
 description: 浏览器的事件循环原理
 editLink: true
-date: 2024-11-21
-tag: [browser]
+date: 2024-11-21T00:00:00.000Z
+tag:
+  - browser
+id: fdc144d8c79ccebfa49715ece60f7e17
 ---
 [[toc]]
 

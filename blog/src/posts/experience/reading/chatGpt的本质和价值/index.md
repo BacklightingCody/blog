@@ -1,10 +1,14 @@
 ---
 title: ChatGPT的本质与影响
 author: ''
-description: ChatGPT，OpenAI 研发的自然语言处理模型，正深刻影响工作与生活。其本质、优劣、价值独特，于各领域影响广泛，值得深入探究，以明白其在现代社会的角色与变革。
+description: >-
+  ChatGPT，OpenAI
+  研发的自然语言处理模型，正深刻影响工作与生活。其本质、优劣、价值独特，于各领域影响广泛，值得深入探究，以明白其在现代社会的角色与变革。
 editLink: true
-date: 2023-04-07
-tag: [ChatGPT]
+date: 2023-04-07T00:00:00.000Z
+tag:
+  - ChatGPT
+id: 79e5f842407155cefd3bee6c45cd6a03
 ---
 [[toc]]
 
