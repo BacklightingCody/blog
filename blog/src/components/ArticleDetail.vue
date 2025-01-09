@@ -50,6 +50,7 @@ import { getRandomPicture } from '@/utils/useGeneratePicture'
 import iconReturn from './icons/iconReturn.vue'
 import BackButton from './BackButton.vue'
 import BackTop from './BackTop.vue'
+import {getComments,addComment,addReply,likeComment} from '@/services/comment'
 import type { CommentContent } from '@/interface/Comment';
 const route = useRoute()
 
@@ -212,93 +213,114 @@ const currentUser = ref({
 })
 
 // 评论总数
-const commentCount = ref(2687)
-
-// 评论数据
-const comments = ref([
-  {
-    id: 1,
-    user: {
-      id: 2,
-      nickname: '小天鹅',
-      avatar: '/picture/animial/animial1.avif',
-      badges: ['1圈圈']
-    },
-    content: { text: '小婷这个热搜转包了以后我是填土你填......😆 😆 😆', images: ['/picture/animial/animial1.avif'] },
-    likes: 108,
-    time: '6天前',
-    replies: [
-      {
-        id: 2,
-        user: {
-          id: 3,
-          nickname: '闲适123567',
-          avatar: '/picture/animial/animial2.avif'
-        },
-        content: { text: '你还等着', images: [] },
-        likes: 2,
-        time: '6天前',
-        replyTo: 'kxc'
-      },
-      {
-        id: 3,
-        user: {
-          id: 4,
-          nickname: '用户167801569',
-          avatar: '/picture/animial/animial3.avif'
-        },
-        content: { text: '@社多小窝 小婷能，实点，茶叶开始说吗', images: [] },
-        likes: 0,
-        time: '2天前',
-        replyTo: '社多小窝'
-      }
-    ]
+const commentCount = ref(0)
+const comments = ref([])
+const postId = 1 
+// 获取评论列表
+const fetchComments = async (postId: number, sortBy: 'hot' | 'time' = 'time') => {
+  try {
+    const response = await getComments(postId, 'time')  // 也可以选择 'hot' 排序
+    comments.value = response.data.comments
+    commentCount.value = response.data.commentCount
+  } catch (error) {
+    console.error('Failed to fetch comments:', error)
   }
-])
-
-// 处理添加评论
-const handleAddComment = (content) => {
-  console.log(content)
-  const newComment = {
-    id: Date.now(),
-    user: currentUser.value,
-    content,
-    likes: 0,
-    time: getCurTimeWithFullDate(),
-    replies: []
-  }
-  comments.value.unshift(newComment)
-  commentCount.value++
 }
 
-// 处理添加回复
-const handleAddReply = (commentId, content, replyTo) => {
-  console.log(commentId, content, replyTo)
-  const comment = comments.value.find(c => c.id === commentId)
-  if (comment) {
-    const newReply = {
-      id: Date.now(),
-      user: currentUser.value,
-      content,
-      likes: 0,
-      time: getCurTimeWithFullDate(),
-      replyTo
-    }
-    comment.replies.push(newReply)
+onMounted(() => {
+  fetchComments(1)
+})
+
+// 处理添加评论
+
+// const handleAddComment = (content) => {
+//   console.log(content)
+//   const newComment = {
+//     id: Date.now(),
+//     user: currentUser.value,
+//     content,
+//     likes: 0,
+//     time: getCurTimeWithFullDate(),
+//     replies: []
+//   }
+//   comments.value.unshift(newComment)
+//   commentCount.value++
+// }
+const handleAddComment = async (content) => {
+  const newComment = {
+    text: content.text,
+    images: content.images
+  }
+  try {
+    const response = await addComment(postId, newComment)
+    comments.value.unshift(response.data) // 将新的评论添加到评论列表
     commentCount.value++
+  } catch (error) {
+    console.error('Failed to add comment:', error)
+  }
+}
+// 处理添加回复
+
+// const handleAddReply = (commentId, content, replyTo) => {
+//   console.log(commentId, content, replyTo)
+//   const comment = comments.value.find(c => c.id === commentId)
+//   if (comment) {
+//     const newReply = {
+//       id: Date.now(),
+//       user: currentUser.value,
+//       content,
+//       likes: 0,
+//       time: getCurTimeWithFullDate(),
+//       replyTo
+//     }
+//     comment.replies.push(newReply)
+//     commentCount.value++
+//   }
+// }
+
+const handleAddReply = async (commentId, content, replyTo) => {
+  const newReply = {
+    text: content.text,
+    images: content.images
+  }
+  try {
+    const response = await addReply(commentId, newReply)
+    const comment = comments.value.find(c => c.id === commentId)
+    if (comment) {
+      comment.replies.push(response.data) // 将新的回复添加到该评论下
+    }
+  } catch (error) {
+    console.error('Failed to add reply:', error)
   }
 }
 
 // 处理点赞
-const handleLikeComment = (commentId, isReply = false) => {
-  if (!isReply) {
-    const comment = comments.value.find(c => c.id === commentId)
-    if (comment) comment.likes++
-  } else {
-    comments.value.forEach(comment => {
-      const reply = comment.replies.find(r => r.id === commentId)
-      if (reply) reply.likes++
-    })
+// const handleLikeComment = (commentId, isReply = false) => {
+//   if (!isReply) {
+//     const comment = comments.value.find(c => c.id === commentId)
+//     if (comment) comment.likes++
+//   } else {
+//     comments.value.forEach(comment => {
+//       const reply = comment.replies.find(r => r.id === commentId)
+//       if (reply) reply.likes++
+//     })
+//   }
+// }
+
+const handleLikeComment = async (id, isReply = false) => {
+  try {
+    await likeComment(id, isReply)  // 调用接口点赞
+    if (!isReply) {
+      const comment = comments.value.find(c => c.id === id)
+      if (comment) comment.likes++  // 更新本地评论点赞数
+    } else {
+      comments.value.forEach(comment => {
+        const reply = comment.replies.find(r => r.id === id)
+        if (reply) reply.likes++  // 更新本地回复点赞数
+      })
+    }
+  } catch (error) {
+    console.error('Failed to like comment:', error)
   }
 }
 
