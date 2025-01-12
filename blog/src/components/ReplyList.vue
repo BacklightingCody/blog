@@ -11,7 +11,7 @@
       >
         <template #badges>
           <span v-if="reply.replyTo" class="text-gray-500 text-sm">
-            回复 <span class="text-[#FB7299]">@{{ reply.replyTo }}</span>
+            回复 <span class="text-[#FB7299]">@{{ reply.user.nickname}}</span>
           </span>
         </template>
         <template #default>
@@ -36,7 +36,7 @@
             </div>
           </div>
           <div class="mt-2 flex items-center gap-6 text-sm text-gray-500">
-            <span>{{ reply.time }}</span>
+            <span>{{ formatDateFromISOFull(reply.createdAt as string) }}</span>
             <div class="flex items-center gap-6">
               <button
                 class="flex items-center gap-1 hover:text-[#FB7299]"
@@ -62,7 +62,7 @@
 <script setup lang="ts">
 import { Reply } from "@/interface/Comment";
 import { ThumbsUpIcon } from "lucide-vue-next";
-
+import { formatDateFromISOFull } from '@/utils/time/useCurTime';
 const props = defineProps<{
   replies: Reply[];
 }>();

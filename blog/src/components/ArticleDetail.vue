@@ -24,8 +24,9 @@
     </main>
     <footer ref="footer">
       <div class="w-full">
-        <CommentList :comment-count="commentCount" :comments="comments" :current-user="currentUser"
-          @add-comment="handleAddComment" @add-reply="handleAddReply" @like-comment="handleLikeComment" />
+        <CommentList :comment-count="commentCount" :comments="comments" :current-user="currentUser" :sort-by="sortBy"
+          @change-sort="updateSortBy" @add-comment="handleAddComment" @add-reply="handleAddReply"
+          @like-comment="handleLikeComment" />
       </div>
     </footer>
 
@@ -50,13 +51,14 @@ import { getRandomPicture } from '@/utils/useGeneratePicture'
 import iconReturn from './icons/iconReturn.vue'
 import BackButton from './BackButton.vue'
 import BackTop from './BackTop.vue'
-import {getComments,addComment,addReply,likeComment} from '@/services/comment'
+import { getComments, addComment, addReply, likeComment } from '@/services/comment'
 import type { CommentContent } from '@/interface/Comment';
 const route = useRoute()
 
 
 const contentContainer = useTemplateRef('contentContainer')
 const markdownContent = ref(null) // Markdown 主内容
+const postId = ref('')
 const articleTitle = ref('')
 const articleDate = ref('')
 const articleAuthor = ref('')
@@ -154,10 +156,17 @@ onMounted(async () => {
     })
     // 解析 frontmatter 的元数据
     const { frontmatter } = module
+    postId.value = frontmatter.id || 1
+    // console.log(postId.value, 'postId')
     articleTitle.value = frontmatter.title || ''
     articleDate.value = formatDateFromISO(frontmatter.date) || ''
     articleAuthor.value = frontmatter.author || 'backlighting'
     articleExcerpt.value = frontmatter.description || ''
+
+    // 获取评论列表
+    if (postId.value) {
+      fetchComments(postId.value, sortBy.value);
+    }
   } catch (error) {
     console.error('Failed to load article:', error)
   }
@@ -206,7 +215,7 @@ function addTitleClassToHeadings() {
 
 // 当前用户信息
 const currentUser = ref({
-  id: 1,
+  id: '',
   nickname: '11',
   avatar: '/avatar.jpg',
   badges: ['作者', 'lv1']
@@ -215,79 +224,66 @@ const currentUser = ref({
 // 评论总数
 const commentCount = ref(0)
 const comments = ref([])
-const postId = 1 
+type SortBy = 'hot' | 'time';
+const sortBy = ref<SortBy>('time')
+
+// 更新排序方式
+const updateSortBy = (newSortBy) => {
+  sortBy.value = newSortBy;
+  // fetchComments(postId.value, newSortBy); // 根据新的排序方式重新获取数据
+};
 // 获取评论列表
-const fetchComments = async (postId: number, sortBy: 'hot' | 'time' = 'time') => {
+const fetchComments = async (postId: string, sortBy: 'hot' | 'time' = 'time') => {
   try {
-    const response = await getComments(postId, 'time')  // 也可以选择 'hot' 排序
+    // console.log(postId, sortBy)
+    const response = await getComments(postId, sortBy)  // 也可以选择 'hot' 排序
     comments.value = response.data.comments
-    commentCount.value = response.data.commentCount
+    commentCount.value = response.data.totalComments
+    // console.log(comments.value,commentCount.value,'评论')
   } catch (error) {
     console.error('Failed to fetch comments:', error)
   }
 }
 
-onMounted(() => {
-  fetchComments(1)
-})
 
 // 处理添加评论
-
-// const handleAddComment = (content) => {
-//   console.log(content)
-//   const newComment = {
-//     id: Date.now(),
-//     user: currentUser.value,
-//     content,
-//     likes: 0,
-//     time: getCurTimeWithFullDate(),
-//     replies: []
-//   }
-//   comments.value.unshift(newComment)
-//   commentCount.value++
-// }
 const handleAddComment = async (content) => {
   const newComment = {
     text: content.text,
     images: content.images
   }
   try {
-    const response = await addComment(postId, newComment)
-    comments.value.unshift(response.data) // 将新的评论添加到评论列表
+    // console.log(postId.value, newComment)
+    const response = await addComment(postId.value, currentUser.value.id, newComment)
+    console.log('response', response)
+    comments.value.push(response.data.newComment)  // 将新的评论添加到评论列表
     commentCount.value++
+    // await fetchComments(postId.value,sortBy.value)
   } catch (error) {
     console.error('Failed to add comment:', error)
   }
 }
 // 处理添加回复
-
-// const handleAddReply = (commentId, content, replyTo) => {
-//   console.log(commentId, content, replyTo)
-//   const comment = comments.value.find(c => c.id === commentId)
-//   if (comment) {
-//     const newReply = {
-//       id: Date.now(),
-//       user: currentUser.value,
-//       content,
-//       likes: 0,
-//       time: getCurTimeWithFullDate(),
-//       replyTo
-//     }
-//     comment.replies.push(newReply)
-//     commentCount.value++
-//   }
-// }
-
 const handleAddReply = async (commentId, content, replyTo) => {
   const newReply = {
     text: content.text,
     images: content.images
   }
   try {
-    const response = await addReply(commentId, newReply)
-    const comment = comments.value.find(c => c.id === commentId)
-    if (comment) {
-      comment.replies.push(response.data) // 将新的回复添加到该评论下
+    const response = await addReply(commentId, currentUser.value.id, newReply)
+    // const comment = comments.value.find(c => c.id === commentId)
+    const index = comments.value.findIndex(c => c.id === commentId);
+
+    if (index !== -1) {
+      const targetComment = comments.value[index]; // 获取目标评论
+      console.log('targetComment', targetComment)
+      if (!targetComment.replies) {
+        // 如果 replies 未初始化，使用 Vue 的 $set 方法初始化它（确保响应式）
+        targetComment.replies = [];
+      }
+      // 向 replies 数组中添加新回复
+      targetComment.replies.push(response.data.newReply);
+      console.log(comments.value,'11111')
     }
   } catch (error) {
     console.error('Failed to add reply:', error)
@@ -295,21 +291,9 @@ const handleAddReply = async (commentId, content, replyTo) => {
 }
 
 // 处理点赞
-// const handleLikeComment = (commentId, isReply = false) => {
-//   if (!isReply) {
-//     const comment = comments.value.find(c => c.id === commentId)
-//     if (comment) comment.likes++
-//   } else {
-//     comments.value.forEach(comment => {
-//       const reply = comment.replies.find(r => r.id === commentId)
-//       if (reply) reply.likes++
-//     })
-//   }
-// }
-
 const handleLikeComment = async (id, isReply = false) => {
   try {
-    await likeComment(id, isReply)  // 调用接口点赞
+    await likeComment(id, isReply, currentUser.value.id)  // 调用接口点赞
     if (!isReply) {
       const comment = comments.value.find(c => c.id === id)
       if (comment) comment.likes++  // 更新本地评论点赞数
@@ -331,8 +315,9 @@ onMounted(() => {
   // console.log(userStore.isLoggedIn)
   if (userStore.isLoggedIn) {
     currentUser.value.nickname = userStore.username
+    currentUser.value.id = userStore.userId
+    currentUser.value.avatar = userStore.avatar
   }
-
 })
 
 </script>

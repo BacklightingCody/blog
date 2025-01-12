@@ -41,7 +41,7 @@
           </div>
 
           <div class="mt-2 flex items-center gap-6 text-sm text-gray-500">
-            <span>{{ comment.time }}</span>
+            <span>{{ formatDateFromISOFull(comment.createdAt as string) }}</span>
             <div class="flex items-center gap-6">
               <button
                 class="flex items-center gap-1 hover:text-[#FB7299]"
@@ -91,6 +91,7 @@ import CommentInput from './CommentInput.vue'; // Import CommentInput
 import { User } from '@/interface/User';
 import { Comment } from '@/interface/Comment';
 import type { CommentContent } from '@/interface/Comment';
+import { formatDateFromISOFull } from '@/utils/time/useCurTime';
 
 const props = defineProps<{
   comment: Comment;
