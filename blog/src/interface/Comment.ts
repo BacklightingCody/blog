@@ -6,7 +6,7 @@ export interface Reply {
   user: User;
   content: CommentContent; // 支持文本或包含文本和图片数组
   likes: number;
-  time: number | string;
+  createdAt: number | string;
   replyTo?: string;
 }
 
@@ -15,7 +15,7 @@ export interface Comment {
   user: User;
   content: CommentContent; // 支持文本或包含文本和图片数组
   likes: number;
-  time: number | string;
+  createdAt: number | string;
   replies?: Reply[];
 }
 
