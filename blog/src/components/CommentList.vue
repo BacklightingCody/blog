@@ -44,11 +44,20 @@ const props = defineProps({
 const emit = defineEmits(['add-comment', 'add-reply', 'like-comment','change-sort'])
 
 const sortedComments = computed(() => {
+  if (!Array.isArray(props.comments) || props.comments.length === 0) {
+    // 如果 comments 为空或不是数组，返回一个空数组
+    return [];
+  }
+
   const sortedArray = props.sortBy === 'hot'
     ? props.comments.toSorted((a, b) => b.likes - a.likes)
-    : props.comments.toSorted((a, b) => new Date(formatDateFromISOFull(b.createdAt as string)).getTime() - new Date(formatDateFromISOFull(a.createdAt as string)).getTime());
+    : props.comments.toSorted((a, b) =>
+        new Date(formatDateFromISOFull(b.createdAt as string)).getTime() -
+        new Date(formatDateFromISOFull(a.createdAt as string)).getTime()
+      );
+
   return sortedArray;
-})
+});
 
 const updateSortBy = (newSortBy) => {
   emit('change-sort', newSortBy); // 通知父组件更新排序方式
