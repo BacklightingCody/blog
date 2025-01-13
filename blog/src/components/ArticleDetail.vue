@@ -15,10 +15,47 @@
       <div v-if="isModalOpen" class="image-modal" @click="closeModal">
         <img :src="selectedImage" alt="Zoomed Image" />
       </div>
-      <button @click="showCardHandler"
-        class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-6">
-        分享给朋友
-      </button>
+      <div class="flex justify-center mt-6">
+        <div>
+          <div class="p-6 flex items-center space-x-2 bg-default-currgb rounded-full shadow-inner">
+            <ReactionButton color="#FF6B6B">
+              <template #icon>
+                <ThumbsUpIcon class="w-6 h-6 transition-colors duration-300"
+                  :class="{ 'text-gray-400 group-hover:text-[#FF6B6B]': true }" />
+              </template>
+            </ReactionButton>
+
+            <ReactionButton color="#4ECDC4">
+              <template #icon>
+                <Heart class="w-6 h-6 transition-colors duration-300"
+                  :class="{ 'text-gray-400 group-hover:text-[#4ECDC4]': true }" />
+              </template>
+            </ReactionButton>
+
+            <ReactionButton color="#FFB800">
+              <template #icon>
+                <PartyPopperIcon class="w-6 h-6 transition-colors duration-300"
+                  :class="{ 'text-gray-400 group-hover:text-[#FFB800]': true }" />
+              </template>
+            </ReactionButton>
+
+            <ReactionButton color="#45B7D1">
+              <template #icon>
+                <SparklesIcon class="w-6 h-6 transition-colors duration-300"
+                  :class="{ 'text-gray-400 group-hover:text-[#45B7D1]': true }" />
+              </template>
+            </ReactionButton>
+
+            <ReactionButton color="#96C93D"  @click="showCardHandler">
+              <template #icon>
+                <MessageSquareShare class="w-6 h-6 transition-colors duration-300"
+                  :class="{ 'text-gray-400 group-hover:text-[#96C93D]': true }" />
+              </template>
+            </ReactionButton>
+          </div>
+        </div>
+      </div>
+
       <GenerateCard v-if="isShowCard" :title="articleTitle" :author="articleAuthor" :publishDate="articleDate"
         :excerpt="articleExcerpt" :image="articleImage" />
     </main>
@@ -51,6 +88,14 @@ import { getRandomPicture } from '@/utils/useGeneratePicture'
 import iconReturn from './icons/iconReturn.vue'
 import BackButton from './BackButton.vue'
 import BackTop from './BackTop.vue'
+import ReactionButton from './ReactionButton.vue';
+import { 
+  Heart,
+  ThumbsUp as ThumbsUpIcon,
+  MessageSquareShare,
+  PartyPopper as PartyPopperIcon,
+  Sparkles as SparklesIcon,
+} from 'lucide-vue-next';
 import { getComments, addComment, addReply, likeComment } from '@/services/comment'
 import type { CommentContent } from '@/interface/Comment';
 const route = useRoute()
@@ -283,7 +328,7 @@ const handleAddReply = async (commentId, content, replyTo) => {
       }
       // 向 replies 数组中添加新回复
       targetComment.replies.push(response.data.newReply);
-      console.log(comments.value,'11111')
+      console.log(comments.value, '11111')
     }
   } catch (error) {
     console.error('Failed to add reply:', error)
