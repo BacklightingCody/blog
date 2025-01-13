@@ -15,7 +15,7 @@
       <div v-if="isModalOpen" class="image-modal" @click="closeModal">
         <img :src="selectedImage" alt="Zoomed Image" />
       </div>
-      <div class="flex justify-center mt-6">
+      <div class="flex justify-center">
         <div>
           <div class="p-6 flex items-center space-x-2 bg-default-currgb rounded-full shadow-inner">
             <ReactionButton color="#FF6B6B">
