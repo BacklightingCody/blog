@@ -261,9 +261,9 @@ function addTitleClassToHeadings() {
 // 当前用户信息
 const currentUser = ref({
   id: '',
-  nickname: '11',
-  avatar: '/avatar.jpg',
-  badges: ['作者', 'lv1']
+  nickname: '',
+  avatar: '',
+  badges: []
 })
 
 // 评论总数
@@ -301,8 +301,12 @@ const handleAddComment = async (content) => {
     // console.log(postId.value, newComment)
     const response = await addComment(postId.value, currentUser.value.id, newComment)
     console.log('response', response)
-    comments.value.push(response.data.newComment)  // 将新的评论添加到评论列表
-    commentCount.value++
+    if(response.data.newComment){
+      comments.value.push(response.data.newComment)  // 将新的评论添加到评论列表
+      commentCount.value++
+    }
+    // comments.value.push(response.data.newComment)  // 将新的评论添加到评论列表
+    // commentCount.value++
     // await fetchComments(postId.value,sortBy.value)
   } catch (error) {
     console.error('Failed to add comment:', error)
