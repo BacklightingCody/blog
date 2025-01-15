@@ -44,6 +44,7 @@ declare module 'vue' {
     IconComponentLib: typeof import('./src/components/icons/iconComponentLib.vue')['default']
     IconCSS: typeof import('./src/components/icons/iconCSS.vue')['default']
     IconDark: typeof import('./src/components/icons/iconDark.vue')['default']
+    IconDatabase: typeof import('./src/components/icons/iconDatabase.vue')['default']
     IconDefault: typeof import('./src/components/icons/iconDefault.vue')['default']
     IconDocs: typeof import('./src/components/icons/iconDocs.vue')['default']
     IconFriendLink: typeof import('./src/components/icons/iconFriendLink.vue')['default']

@@ -100,7 +100,7 @@ const sortedArticles = computed(() => {
         </span> -->
         <router-link :to="`${curPath}/${article.id}`" class="flex justify-between mb-2 text-xl font-semibold">
           <span class="text-default-text cursor-pointer article-title">{{ article.title }}</span>
-          <time class="mb-2 text-sm ml-2 font-normal text-default-text leading-relaxed">
+          <time class="mb-2 ml-2 text-sm font-normal text-default-text leading-relaxed min-w-[80px] flex items-center">
             {{ article.date }}
           </time>
         </router-link>
