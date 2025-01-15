@@ -35,10 +35,10 @@
       </div>
       <div class="home-middle my-10 text-center">
         <div>
-          <BarrageContainer>
+          <!-- <BarrageContainer>
             <SkillTag color="red" class="barrage-slot">react</SkillTag>
             <SkillTag color="blue" class="barrage-slot">vue</SkillTag>
-          </BarrageContainer>
+          </BarrageContainer> -->
         </div>
         <h1
           class="my-5 text-transparent bg-clip-text bg-gradient-to-r from-green-500 via-yellow-500 to-blue-500 text-2xl">
