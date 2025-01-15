@@ -251,7 +251,7 @@ const showCardHandler = () => {
 
 function addTitleClassToHeadings() {
   // 获取所有 h 标签
-  const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+  const headings = document.querySelectorAll('h2, h3, h4, h5, h6');
   // 遍历每个标签，添加 title 类
   headings.forEach(heading => {
     heading.classList.add('title');
@@ -392,7 +392,9 @@ onMounted(() => {
 /* Markdown 样式 */
 :deep(h1) {
   font-size: 2em;
-
+  max-width: 100%;
+  word-wrap: break-word; /* 支持换行 */
+  word-break: break-word; /* 支持非标准单词换行 */
 }
 
 :deep(h2) {
@@ -421,7 +423,8 @@ onMounted(() => {
 :deep(p) {
   margin: 10px 0;
   line-height: 2;
-
+  max-width: 100%;
+  overflow-wrap: break-word; /* 新标准 */
   code {
     color: var(--text-color);
     font-weight: 900;
@@ -618,6 +621,7 @@ onMounted(() => {
 
 
 :deep(a) {
+  max-width: 100%;
   position: relative;
   display: inline-block;
   color: var(--text-color);
