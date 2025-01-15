@@ -13,6 +13,7 @@ declare module 'vue' {
     Avatar: typeof import('./src/components/Avatar.vue')['default']
     BackButton: typeof import('./src/components/BackButton.vue')['default']
     BackTop: typeof import('./src/components/BackTop.vue')['default']
+    BarrageContainer: typeof import('./src/components/BarrageContainer.vue')['default']
     CategoryCard: typeof import('./src/components/CategoryCard.vue')['default']
     CategoryCardList: typeof import('./src/components/CategoryCardList.vue')['default']
     ColorMap: typeof import('./src/components/ColorMap.vue')['default']
@@ -91,6 +92,7 @@ declare module 'vue' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Signature: typeof import('./src/components/Signature.vue')['default']
+    SkillTag: typeof import('./src/components/SkillTag.vue')['default']
     UserMeta: typeof import('./src/components/UserMeta.vue')['default']
   }
 }
