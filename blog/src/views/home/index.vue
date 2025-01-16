@@ -142,6 +142,7 @@ const skills = [
       { name: "Ant Design", color: "#0170FE" },
       { name: "shadcn", color: "#000000" },
       { name: "Express", color: "#000000" },
+      { name: "NestJS", color: "#EA285A" },
     ];
 
 const homeTopRef = useTemplateRef('homeTop')
