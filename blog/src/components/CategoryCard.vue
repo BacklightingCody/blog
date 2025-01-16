@@ -113,6 +113,7 @@ const handleMouseLeave = () => {
   transition: transform 0.3s ease-out;
 }
 
+
 .card-content {
   transform-style: preserve-3d;
   transition: transform 0.1s ease-out;
@@ -121,6 +122,10 @@ const handleMouseLeave = () => {
   overflow: hidden;
   background-size: cover;
   background-position: center center;
+}
+
+.card-content:hover {
+  box-shadow: -3px -3px 10px #54a29e,3px 3px 10px #a79d66;
 }
 
 /* Overlay layer for background image opacity */
