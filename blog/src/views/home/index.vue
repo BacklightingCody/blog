@@ -35,10 +35,11 @@
       </div>
       <div class="home-middle my-10 text-center">
         <div>
-          <!-- <BarrageContainer>
-            <SkillTag color="red" class="barrage-slot">react</SkillTag>
-            <SkillTag color="blue" class="barrage-slot">vue</SkillTag>
-          </BarrageContainer> -->
+          <BarrageContainer :speed="8">
+            <div v-for="(item, index) in skills":key=item.name>
+              <SkillTag :color="item.color">{{ item.name }}</SkillTag>
+            </div>
+          </BarrageContainer>
         </div>
         <h1
           class="my-5 text-transparent bg-clip-text bg-gradient-to-r from-green-500 via-yellow-500 to-blue-500 text-2xl">
@@ -109,6 +110,32 @@ const height = windowSize.height
 const avatarSize = computed(() => {
   return width.value > 1023 ? 300 : 200
 })
+const skills = [
+      { name: "HTML", color: "#E34F26" },
+      { name: "CSS", color: "#1572B6" },
+      { name: "JavaScript", color: "#F7DF1E" },
+      { name: "Node.js", color: "#339933" },
+      { name: "Vue", color: "#42B883" },
+      { name: "React", color: "#61DAFB" },
+      { name: "Docker", color: "#2496ED" },
+      { name: "Nginx", color: "#009639" },
+      { name: "Linux", color: "#FCC624" },
+      { name: "Tailwind CSS", color: "#38B2AC" },
+      { name: "UnoCSS", color: "#FFD700" },
+      { name: "Vite", color: "#646CFF" },
+      { name: "SCSS", color: "#C6538C" },
+      { name: "pnpm", color: "#F69220" },
+      { name: "npm", color: "#CB3837" },
+      { name: "Git", color: "#F05032" },
+      { name: "Browser", color: "#4285F4" },
+      { name: "TypeScript", color: "#3178C6" },
+      { name: "Prisma", color: "#0C344B" },
+      { name: "Supabase", color: "#3ECF8E" },
+      { name: "Element Plus", color: "#409EFF" },
+      { name: "Ant Design", color: "#0170FE" },
+      { name: "shadcn", color: "#000000" },
+      { name: "Express", color: "#000000" },
+    ];
 
 const homeTopRef = useTemplateRef('homeTop')
 
@@ -125,7 +152,6 @@ onMounted(() => {
     element.classList.add('animated-line');
   });
 });
-
 </script>
 <style lang="scss" scoped>
 .nav {

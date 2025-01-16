@@ -1,7 +1,9 @@
 <template>
-  <div>
-    <a class="glowing-border" :style="{ backgroundColor: color }">
-      <span class="tag"><slot></slot></span>
+  <div class="wrapper">
+    <a class="glowing-border">
+      <span class="tag" :style="{ backgroundColor: color }">
+        <slot></slot>
+      </span>
     </a>
   </div>
 </template>
@@ -22,61 +24,66 @@ export default defineComponent({
 </script>
 
 <style scoped>
+.wrapper {
+  position: relative;
+  display: inline-block;
+}
+
 .glowing-border {
   position: relative;
-  text-decoration: none;
-  text-align: center;
+  display: inline-block;
   border-radius: 50px;
+  /* 控制边框形状 */
+  padding: 2px 2px;
+  /* 边框内部的填充 */
   z-index: 1;
-  background-origin: border-box;
-  background-clip: content-box, border-box;
+  background-color: transparent;
+  /* 透明背景，以便仅显示流光边框 */
+  overflow: hidden;
 }
 
 .glowing-border::before {
   content: '';
   position: absolute;
-  top: -4px;
-  right: -4px;
-  left: -4px;
-  bottom: -4px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   border-radius: 50px;
-  background-image: linear-gradient(to right, #03a9f4, #f441a5, #ffeb3d, #09a8f4);
-  background-size: 400%;
+  /* 确保边框是圆角 */
+  padding: 10px;
+  /* 控制流光边缘的宽度 */
+  box-sizing: border-box;
+  /* 包含内边距在内 */
+  background: conic-gradient(from 90deg,
+      transparent 120deg,
+      #03a9f4 150deg,
+      #f441a5 180deg,
+      #ffeb3d 210deg,
+      transparent 240deg);
+  /* 环形渐变 */
   z-index: -1;
-  opacity: 0; /* 初始透明度 */
-  animation: border-glow 4s linear infinite;
-}
-
-@keyframes border-glow {
-  0% {
-    background-position: 0% 0%; /* 从上左角开始 */
-    opacity: 0; /* 隐藏 */
-  }
-  25% {
-    background-position: 100% 0%; /* 右上角亮起 */
-    opacity: 1; /* 显示 */
-  }
-  50% {
-    background-position: 100% 100%; /* 右下角亮起 */
-    opacity: 1;
-  }
-  75% {
-    background-position: 0% 100%; /* 左下角亮起 */
-    opacity: 1;
-  }
-  100% {
-    background-position: 0% 0%; /* 返回到上左角 */
-    opacity: 0; /* 隐藏 */
-  }
+  animation: rotateGlow 4s linear infinite;
+  /* 控制流光的旋转 */
 }
 
 .tag {
   position: relative;
-  z-index: 2;
   display: inline-block;
+  z-index: 2;
   color: #fff;
-  font-size: 24px;
-  padding: 0px 10px;
-  background-color: transparent;
+  font-weight: bold;
+  border-radius: 50px;
+  padding: 0 10px;
+}
+
+@keyframes rotateGlow {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 </style>
