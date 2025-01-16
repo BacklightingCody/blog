@@ -81,6 +81,13 @@
           </iconCircle>
         </div>
         <div class="my-5 text-center">
+          <div>
+            <BarrageContainer :speed="8">
+              <div v-for="(item, index) in skills":key=item.name>
+                <SkillTag :color="item.color">{{ item.name }}</SkillTag>
+              </div>
+            </BarrageContainer>
+          </div>
           <h1
             class="my-5 text-transparent bg-clip-text bg-gradient-to-r from-green-500 via-yellow-500 to-blue-500 text-2xl">
             Commit 时光拼图
