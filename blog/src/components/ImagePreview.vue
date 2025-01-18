@@ -1,7 +1,7 @@
 <template>
-  <div v-if="images.length > 0" class="flex gap-2 mt-2">
+  <div v-if="imageUrls.length > 0" class="flex gap-2 mt-2">
     <div
-      v-for="(image, index) in images"
+      v-for="(image, index) in imageUrls"
       :key="index"
       class="relative w-20 h-20"
     >
@@ -18,19 +18,29 @@
 
 <script setup lang="ts">
 import { XIcon } from 'lucide-vue-next'
+import { computed, watch } from 'vue'
 
-// Props: 接收图片数组
 const props = defineProps({
   images: {
-    type: Array as PropType<string[]>,
+    type: Array as () => File[],
     required: true,
   },
 })
 
-// Emits: 触发删除事件
 const emit = defineEmits(['remove-image'])
 
-// 删除图片
+// Use computed to make imageUrls reactive
+const imageUrls = computed(() => {
+  return props.images.map(file => URL.createObjectURL(file))
+})
+
+// Clean up ObjectURLs when images change to prevent memory leaks
+watch(() => props.images, (newImages, oldImages) => {
+  if (oldImages) {
+    oldImages.forEach(file => URL.revokeObjectURL(URL.createObjectURL(file)))
+  }
+}, { deep: true })
+
 const removeImage = (index: number) => {
   emit('remove-image', index)
 }

@@ -21,5 +21,5 @@ export interface Comment {
 
 export interface CommentContent {
   text: string; 
-  images: string[]; 
+  images: File[]; 
 }

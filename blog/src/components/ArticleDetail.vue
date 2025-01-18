@@ -298,9 +298,9 @@ const handleAddComment = async (content) => {
     images: content.images
   }
   try {
-    // console.log(postId.value, newComment)
+    //console.log(postId.value, newComment)
     const response = await addComment(postId.value, currentUser.value.id, newComment)
-    console.log('response', response)
+    // console.log('response', response)
     if(response.data.newComment){
       comments.value.push(response.data.newComment)  // 将新的评论添加到评论列表
       commentCount.value++

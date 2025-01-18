@@ -2,12 +2,12 @@
   <div class="bg-white rounded-lg p-4">
     <div class="flex items-start space-x-3">
       <Avatar :src="currentUser.avatar" :size="'middle'" />
-      <InputField
-        class="flex-1"
-        v-model="content"
-        placeholder="写下你的评论..."
-        @submit="handleSubmit"
-      />
+      <InputField class="flex-1" v-model="content" placeholder="写下你的评论..." @submit="handleSubmit"
+        @upload-progress="handleUploadProgress" />
+      <!-- Display progress bar -->
+      <div v-if="uploadProgress > 0 && uploadProgress < 100">
+        <div class="progress-bar" :style="{ width: uploadProgress + '%' }"></div>
+      </div>
     </div>
   </div>
 </template>
@@ -17,7 +17,7 @@ import { ref } from 'vue'
 import Avatar from './Avatar.vue'
 import InputField from './InputField.vue'
 import type { CommentContent } from '@/interface/Comment'
-import {  } from '@/services/comment' 
+import { } from '@/services/comment'
 
 // Props & Emits
 const props = defineProps({
@@ -33,6 +33,13 @@ const content = ref({
   text: '',
   images: []
 })
+
+const uploadProgress = ref(0)
+
+const handleUploadProgress = (progress: number) => {
+  uploadProgress.value = progress
+}
+
 
 // Submit comment
 const handleSubmit = () => {
