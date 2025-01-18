@@ -31,7 +31,7 @@
                 :key="index"
                 class="relative w-full h-32 rounded-lg overflow-hidden"
               >
-                <img :src="image" class="w-full h-full object-cover" alt="Comment Image" />
+                <img :src="image as string" class="w-full h-full object-cover" alt="Comment Image" />
               </div>
             </div>
           </div>

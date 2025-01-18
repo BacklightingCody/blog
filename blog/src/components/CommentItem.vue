@@ -35,7 +35,7 @@
                 :key="index"
                 class="relative w-full h-32 rounded-lg overflow-hidden"
               >
-                <img :src="image" class="w-full h-full object-cover" alt="Comment Image" />
+                <img :src="image as string" class="w-full h-full object-cover" alt="Comment Image" />
               </div>
             </div>
           </div>
@@ -90,7 +90,7 @@ import ReplyList from './ReplyList.vue';
 import CommentInput from './CommentInput.vue'; // Import CommentInput
 import { User } from '@/interface/User';
 import { Comment } from '@/interface/Comment';
-import type { CommentContent } from '@/interface/Comment';
+import type { CommentContent,CommentReturn } from '@/interface/Comment';
 import { formatDateFromISOFull } from '@/utils/time/useCurTime';
 
 const props = defineProps<{
