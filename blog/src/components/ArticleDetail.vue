@@ -373,7 +373,7 @@ onMounted(() => {
 
 <style scoped lang="scss">
 .article-detail {
-  letter-spacing: 1px;
+  letter-spacing: 2px;
   font-size: 18px;
   margin-right: 200px;
   border-radius: 8px;
@@ -541,6 +541,7 @@ onMounted(() => {
   list-style: decimal;
 
   li {
+    line-height: 2;
     margin: 8px 0;
   }
 }
