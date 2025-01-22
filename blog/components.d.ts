@@ -60,6 +60,7 @@ declare module 'vue' {
     IconLargeModel: typeof import('./src/components/icons/iconLargeModel.vue')['default']
     IconLife: typeof import('./src/components/icons/iconLife.vue')['default']
     IconLight: typeof import('./src/components/icons/iconLight.vue')['default']
+    IconLinux: typeof import('./src/components/icons/iconLinux.vue')['default']
     IconMore: typeof import('./src/components/icons/iconMore.vue')['default']
     IconNetwork: typeof import('./src/components/icons/iconNetwork.vue')['default']
     IconNode: typeof import('./src/components/icons/iconNode.vue')['default']

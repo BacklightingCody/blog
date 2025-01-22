@@ -19,6 +19,7 @@ import iconAlgorithms from '@/components/icons/iconAlgorithms.vue'
 import iconBrowser from '@/components/icons/iconBrowser.vue'
 import iconReact from '@/components/icons/iconReact.vue'
 import iconDatabase from '@/components/icons/iconDatabase.vue'
+import iconLinux from '@/components/icons/iconLinux.vue'
 // 数据源：为每个分类指定不同的 icon 组件
 const categories = [
   {
@@ -89,6 +90,13 @@ const categories = [
     color: '#61DAFB',
     backgroundImage: '/picture/animial/animial10.avif',
     link: '/docs/programming/database'
+  },
+  {
+    name: 'Linux',
+    icon: iconLinux,
+    color: '#61DAFB',
+    backgroundImage: '/picture/animial/animial11.avif',
+    link: '/docs/programming/linux'
   }
 ]
 </script>
