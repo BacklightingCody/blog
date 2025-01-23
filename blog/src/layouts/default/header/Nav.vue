@@ -70,7 +70,7 @@
           <iconAbout class="icon  icon-animation" :class="{
             'block': route.path === '/about' ? true : false,
             'hidden': route.path === '/about' ? false : true,
-          }"></iconAbout>关于
+          }"></iconAbout>书栈
         </RouterLink>
       </div>
       <div class="nav-tab">
@@ -134,7 +134,7 @@
 
             <div class="nav-tab">
               <RouterLink to="/about" active-class="active-nav">
-                <iconAbout class="icon icon-animation"></iconAbout>关于
+                <iconAbout class="icon icon-animation"></iconAbout>书栈
               </RouterLink>
             </div>
 
