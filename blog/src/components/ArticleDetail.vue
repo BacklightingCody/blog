@@ -374,7 +374,7 @@ onMounted(() => {
 <style scoped lang="scss">
 .article-detail {
   letter-spacing: 2px;
-  font-size: 18px;
+  font-size: 1rem;
   margin-right: 200px;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 1);
@@ -391,24 +391,36 @@ onMounted(() => {
 
 /* Markdown 样式 */
 :deep(h1) {
-  font-size: 2em;
+  font-size: 1.5rem;
   max-width: 100%;
   word-wrap: break-word; /* 支持换行 */
   word-break: break-word; /* 支持非标准单词换行 */
 }
 
 :deep(h2) {
-  font-size: 1.75em;
+  font-size: 1.375rem;
   margin: 1em 0;
+  position: relative; /* 确保伪元素相对于 h2 定位 */
+}
+
+:deep(h2)::after {
+  content: ''; /* 伪元素内容为空 */
+  display: block;
+  width: 100%; /* 宽度与 h2 相同 */
+  height: 1px; /* 细线的高度 */
+  background-color: var(--currgb-color); /* 细线的颜色，可以调整 */
+  position: absolute; /* 绝对定位 */
+  bottom: -0.5em; /* 将细线定位在 h2 下方 */
+  left: 0; /* 从左侧开始 */
 }
 
 :deep(h3) {
-  font-size: 1.5em;
+  font-size: 1.375rem;
   margin: 1em 0;
 }
 
 :deep(h4) {
-  font-size: 1.3em;
+  font-size: 1.3rem;
   margin: 1em 0;
 }
 
