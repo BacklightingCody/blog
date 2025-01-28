@@ -176,14 +176,14 @@ onMounted(async () => {
         });
 
         relLis.forEach((li) => {
-          const lines = li.innerText.split('\n');
+          const lines = li.innerHTML.split('\n');
           li.innerHTML = '';
           lines.forEach((line, index) => {
             if (line.trim() !== '') {
               const lineWrapper = document.createElement('div');
               lineWrapper.classList.add('line');
               lineWrapper.style.setProperty('--delay', `${index * 0.2}s`)
-              lineWrapper.innerText = line;
+              lineWrapper.innerHTML = line;
               li.appendChild(lineWrapper);
             }
           });
@@ -483,8 +483,9 @@ onMounted(() => {
 }
 
 :deep(strong) {
-  font-weight: 600;
+  font-weight: 800;
 }
+
 
 :deep(pre) {
   overflow: hidden !important;
@@ -560,6 +561,10 @@ onMounted(() => {
 
 :deep(li) {
   margin: 8px 0;
+
+  strong{
+    color:var(--strong-color);
+  }
 
   ul {
     list-style-type: circle;
