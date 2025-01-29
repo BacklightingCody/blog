@@ -46,7 +46,7 @@
               </template>
             </ReactionButton>
 
-            <ReactionButton color="#96C93D"  @click="showCardHandler">
+            <ReactionButton color="#96C93D" @click="showCardHandler">
               <template #icon>
                 <MessageSquareShare class="w-6 h-6 transition-colors duration-300"
                   :class="{ 'text-gray-400 group-hover:text-[#96C93D]': true }" />
@@ -89,7 +89,7 @@ import iconReturn from './icons/iconReturn.vue'
 import BackButton from './BackButton.vue'
 import BackTop from './BackTop.vue'
 import ReactionButton from './ReactionButton.vue';
-import { 
+import {
   Heart,
   ThumbsUp as ThumbsUpIcon,
   MessageSquareShare,
@@ -301,7 +301,7 @@ const handleAddComment = async (content) => {
     //console.log(postId.value, newComment)
     const response = await addComment(postId.value, currentUser.value.id, newComment)
     // console.log('response', response)
-    if(response.data.newComment){
+    if (response.data.newComment) {
       comments.value.push(response.data.newComment)  // 将新的评论添加到评论列表
       commentCount.value++
     }
@@ -393,25 +393,35 @@ onMounted(() => {
 :deep(h1) {
   font-size: 1.5rem;
   max-width: 100%;
-  word-wrap: break-word; /* 支持换行 */
-  word-break: break-word; /* 支持非标准单词换行 */
+  word-wrap: break-word;
+  /* 支持换行 */
+  word-break: break-word;
+  /* 支持非标准单词换行 */
 }
 
 :deep(h2) {
   font-size: 1.375rem;
   margin: 1em 0;
-  position: relative; /* 确保伪元素相对于 h2 定位 */
+  position: relative;
+  /* 确保伪元素相对于 h2 定位 */
 }
 
 :deep(h2)::after {
-  content: ''; /* 伪元素内容为空 */
+  content: '';
+  /* 伪元素内容为空 */
   display: block;
-  width: 100%; /* 宽度与 h2 相同 */
-  height: 1px; /* 细线的高度 */
-  background-color: var(--currgb-color); /* 细线的颜色，可以调整 */
-  position: absolute; /* 绝对定位 */
-  bottom: -0.5em; /* 将细线定位在 h2 下方 */
-  left: 0; /* 从左侧开始 */
+  width: 100%;
+  /* 宽度与 h2 相同 */
+  height: 1px;
+  /* 细线的高度 */
+  background-color: var(--currgb-color);
+  /* 细线的颜色，可以调整 */
+  position: absolute;
+  /* 绝对定位 */
+  bottom: -0.5em;
+  /* 将细线定位在 h2 下方 */
+  left: 0;
+  /* 从左侧开始 */
 }
 
 :deep(h3) {
@@ -436,7 +446,9 @@ onMounted(() => {
   margin: 10px 0;
   line-height: 2;
   max-width: 100%;
-  overflow-wrap: break-word; /* 新标准 */
+  overflow-wrap: break-word;
+
+  /* 新标准 */
   code {
     color: var(--text-color);
     font-weight: 900;
@@ -562,12 +574,13 @@ onMounted(() => {
 :deep(li) {
   margin: 8px 0;
 
-  strong{
-    color:var(--strong-color);
+  strong {
+    color: var(--strong-color);
   }
 
   ul {
     list-style-type: circle;
+    margin-left: 2rem;
 
     li {
       ul {
@@ -790,6 +803,10 @@ onMounted(() => {
   border-radius: 4px;
   font-style: italic;
   line-height: 1.5;
+
+  a {
+    color: #42b983;
+  }
 }
 
 :deep(blockquote)::before {
