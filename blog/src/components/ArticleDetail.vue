@@ -592,7 +592,6 @@ onMounted(() => {
 
 :deep(.table-of-contents) {
   position: relative;
-
   ul {
     list-style-type: upper-roman;
     padding: 20px 0 20px 25px;
@@ -601,7 +600,7 @@ onMounted(() => {
     width: 250px;
     height: 500px;
     overflow-y: scroll;
-    overflow-x: hidden;
+    overflow-x: scroll;
     position: fixed;
     top: 100px;
     right: 30px;
