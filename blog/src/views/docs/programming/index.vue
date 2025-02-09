@@ -98,6 +98,7 @@ const categories = [
     color: '#61DAFB',
     backgroundImage: '/picture/animial/animial11.avif',
     link: '/docs/programming/linux'
+
   },
   {
     name: 'CI/CD',
