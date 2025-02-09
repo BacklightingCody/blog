@@ -104,7 +104,7 @@ const categories = [
     icon: iconCICD,
     color: '#61DAFB',
     backgroundImage: '/picture/animial/animial12.avif',
-    link: '/docs/programming/cicd'
+    link: '/docs/programming/CICD'
   }
 ]
 </script>
