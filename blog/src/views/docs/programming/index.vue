@@ -21,6 +21,7 @@ import iconReact from '@/components/icons/iconReact.vue'
 import iconDatabase from '@/components/icons/iconDatabase.vue'
 import iconLinux from '@/components/icons/iconLinux.vue'
 import iconCICD from '@/components/icons/iconCICD.vue'
+import iconCloud from '@/components/icons/iconCloud.vue'
 // 数据源：为每个分类指定不同的 icon 组件
 const categories = [
   {
@@ -106,6 +107,13 @@ const categories = [
     color: '#61DAFB',
     backgroundImage: '/picture/animial/animial12.avif',
     link: '/docs/programming/CICD'
+  },
+  {
+    name: 'Cloud',
+    icon: iconCloud,
+    color: '#61DAFB',
+    backgroundImage: '/picture/animial/animial13.avif',
+    link: '/docs/programming/cloud'
   }
 ]
 </script>

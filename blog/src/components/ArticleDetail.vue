@@ -98,6 +98,7 @@ import {
 } from 'lucide-vue-next';
 import { getComments, addComment, addReply, likeComment } from '@/services/comment'
 import type { CommentContent } from '@/interface/Comment';
+import { copyWithCopyright } from '@/utils/copyWithright';
 const route = useRoute()
 
 
@@ -229,6 +230,26 @@ onMounted(() => {
       }
     });
   }
+})
+
+// Add copyright information to the clipboard
+
+onMounted(() => {
+  document.addEventListener('copy', (event) => {
+    const selection = window.getSelection()?.toString() || '';
+    const currentUrl = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1);
+    copyWithCopyright(selection,currentUrl)
+      .catch((err) => {
+        // 处理复制错误
+        console.error("复制失败:", err);
+      });
+
+    event.preventDefault(); // 阻止默认复制行为
+  });
+})
+
+onUnmounted(()=>{
+  document.removeEventListener('copy',()=>{})
 })
 
 const isModalOpen = ref(false);
@@ -403,6 +424,7 @@ onMounted(() => {
   font-size: 1.375rem;
   margin: 1em 0;
   position: relative;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
   /* 确保伪元素相对于 h2 定位 */
 }
 
@@ -425,8 +447,9 @@ onMounted(() => {
 }
 
 :deep(h3) {
-  font-size: 1.375rem;
+  font-size: 1.25rem;
   margin: 1em 0;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 :deep(h4) {
@@ -591,21 +614,21 @@ onMounted(() => {
 }
 
 :deep(.table-of-contents) {
-  position: relative;
+  position: fixed;
+  top: 100px;
+  right: 30px;
+  width: 260px;
+  max-height: 500px; // Use max-height instead of fixed height for better content handling
+  overflow-y: auto; // Only vertical scroll if needed
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 1); // Softer shadow
+  padding-left: 20px;
+
   ul {
-    list-style-type: upper-roman;
-    padding: 20px 0 20px 25px;
-    display: flex;
-    flex-direction: column;
-    width: 250px;
-    height: 500px;
-    overflow-y: scroll;
-    overflow-x: scroll;
-    position: fixed;
-    top: 100px;
-    right: 30px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 1);
+    list-style-type: upper-roman; // Remove default list styling
+    padding: 20px;
+    margin: 0;
+
 
     &::before {
       content: '目录';
@@ -613,13 +636,16 @@ onMounted(() => {
       font-weight: 800;
       text-align: start;
       margin-bottom: 10px;
+      display: block;
+      text-align: center;
+      border-bottom: 1px solid var(--text-color);
     }
 
-    li {
+    &>li {
       position: relative;
-      font-size: 13px;
-      margin: 5px 0;
-      line-height: 1.5;
+      font-size: 0.8rem;
+      margin-bottom: 8px;
+      line-height: 1.6;
 
       &::marker {
         display: block;
@@ -627,6 +653,7 @@ onMounted(() => {
       }
 
       ul {
+        list-style-type: decimal;
         padding: 0;
         position: relative;
         width: 300px;
@@ -635,6 +662,11 @@ onMounted(() => {
         left: 20px;
         border-radius: 0px;
         box-shadow: none;
+
+        &::before {
+          display: block;
+          border-bottom: none;
+        }
 
         li {
           margin: 2px 0;
@@ -707,6 +739,7 @@ onMounted(() => {
   color: #654321;
   font-size: 40px;
   background-color: #E8F5E9;
+  text-shadow: none;
 }
 
 .image-modal {
