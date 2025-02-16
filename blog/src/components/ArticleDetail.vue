@@ -126,13 +126,14 @@ onMounted(async () => {
       if (contentDetail) {
         // 统计文章字数
         function calculateWordCount(text) {
-          // 去除 HTML 标签和首尾多余空格
+          // 去除 HTML 标签和首尾空格（包括全角空格）
           const plainText = text.replace(/<[^>]+>/g, '').trim();
 
-          // 精确匹配统计的内容：中文字符、数字、标点符号
-          const matchedCharacters = plainText.match(/[\u4e00-\u9fa5\u3000-\u303F\uFF00-\uFFEF0-9，。！？、：；“”‘’（）【】《》〈〉'"。,!?]/g);
+          // 匹配英文单词、中文字符、全角/半角数字、中文/英文标点
+          const regex = /[\w\'-]+|[\u4e00-\u9fa5]|[\uFF10-\uFF19]|[0-9]|[\u3000-\u303F\uFF00-\uFF0F\u201C-\u201F\u2026\u2014]/g;
 
-          // 如果匹配到了，返回匹配的字符数量；否则返回 0
+          // 统计匹配结果
+          const matchedCharacters = plainText.match(regex);
           return matchedCharacters ? matchedCharacters.length : 0;
         }
         const plainText = contentContainer.value?.textContent.trim();
@@ -238,7 +239,7 @@ onMounted(() => {
   document.addEventListener('copy', (event) => {
     const selection = window.getSelection()?.toString() || '';
     const currentUrl = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1);
-    copyWithCopyright(selection,currentUrl)
+    copyWithCopyright(selection, currentUrl)
       .catch((err) => {
         // 处理复制错误
         console.error("复制失败:", err);
@@ -248,8 +249,8 @@ onMounted(() => {
   });
 })
 
-onUnmounted(()=>{
-  document.removeEventListener('copy',()=>{})
+onUnmounted(() => {
+  document.removeEventListener('copy', () => { })
 })
 
 const isModalOpen = ref(false);
@@ -523,7 +524,8 @@ onMounted(() => {
 
 
 :deep(pre) {
-  overflow: hidden !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
   position: relative;
 
   code {
@@ -565,8 +567,8 @@ onMounted(() => {
       width: 10px;
       height: 10px;
       border-radius: 50%;
-      top: -28px;
-      left: 28px;
+      top: -26px;
+      left: 29px;
       transform: translate(-50%);
     }
   }
