@@ -4,7 +4,7 @@ author: ''
 description: >-
   在本文中，我们将深入探讨JavaScript中的Worker，揭示它如何提升网页性能，特别是通过后台处理任务来保持用户界面的响应性。我们将从基本概念开始，逐步讲解如何使用Worker，以及其在现代Web开发中的实际应用。
 editLink: true
-date: 2023-01-19T00:00:00.000Z
+date: 2025-01-19T00:00:00.000Z
 tag:
   - js
 id: 9c7ad4bd73b266c0bfd6fc60f1d6132b

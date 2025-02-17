@@ -246,7 +246,7 @@ for(const key of iterator2){
 
 在诸多数组方法中，我个人认为其中最高级的就是 reduce，它是 JavaScript 的一种高阶数组方法，它能够以累积的方式对数组中的每一项数据进行处理，最终归并为一个值。除了最常见的加总或聚合数据之外，reduce 还具备处理复杂逻辑的能力，甚至可以实现其他数组方法（如 map、filter 等）的功能。因此想多说明一下，reduce 方法在很多场景下都十分有用。
 
-#### 数值聚合：reduce 方法可以用来计算数组中元素的总和、平均值、最大值、最小值等。
+#### 数值聚合：reduce 方法可以用来计算数组中元素的总和、平均值、最大值、最小值等
 
 ```js
 // 计算数组元素的总和、最大值、最小值
@@ -284,6 +284,15 @@ console.log(uniqueNums); // [1, 2, 3, 4, 5]
 #### 实现其他数组方法 map,filter
 
 ```js
+// 使用reduce 实现 map
+function myMap(array, callback) {
+  return array.reduce((acc, curr, index, fullArray) => {
+    // 将 callback 的返回值加入到 acc 中
+    acc.push(callback(curr, index, fullArray));
+    return acc;
+  }, []); 
+}
+
 // 使用reduce实现map功能
 const numbers = [1, 2, 3, 4];
 const squared = numbers.reduce((acc, curr) => {
@@ -291,6 +300,17 @@ const squared = numbers.reduce((acc, curr) => {
   return acc;
 }, []);
 console.log(squared); // [1, 4, 9, 16]
+
+// 使用reduce实现filter功能
+function myFilter(array, callback) {
+  return array.reduce((acc, curr, index, fullArray) => {
+    // 如果当前元素通过了 callback 的测试条件，则加入到 acc
+    if (callback(curr, index, fullArray)) {
+      acc.push(curr);
+    }
+    return acc;
+  }, []);
+}
 
 // 使用reduce实现filter功能
 const evenNumbers = numbers.reduce((acc, curr) => {
