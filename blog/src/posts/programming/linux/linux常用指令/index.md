@@ -3,7 +3,7 @@ title: linux基本指令
 description: >-
   本文档旨在为初学者和有经验的用户提供一个全面的Linux基本指令指南。从文件操作到系统管理，我们将探索各种命令及其用法，帮助用户有效地在Linux环境中导航和操作。
 editLink: true
-date: 2024-01-29T00:00:00.000Z
+date: 2025-01-29T00:00:00.000Z
 tag:
   - linux
 id: 53adc9fefb498d8dfac5897567c643f7

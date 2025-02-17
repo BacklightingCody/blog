@@ -3,7 +3,7 @@ title: 理解react核心思维
 description: >-
   在《坐标React星，React核心思维模型》一书中，作者叶凌东深入探讨了React的核心思维模型，帮助开发者更好地理解React的精髓和最佳实践。本文将通过总结书中的核心概念与技巧，带领读者一同领略React的独特思维方式，帮助开发者在实际项目中更加高效地运用React。
 editLink: true
-date: 2024-02-08T00:00:00.000Z
+date: 2025-02-08T00:00:00.000Z
 tag:
   - react
 id: 560a9b9c3e152a35939a819cf1db86a9

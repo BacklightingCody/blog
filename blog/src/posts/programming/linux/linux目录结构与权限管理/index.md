@@ -3,7 +3,7 @@ title: linux目录结构与常用命令
 description: >-
   本文将介绍Linux操作系统的目录结构及其功能，并详细介绍常用的Linux命令及其使用场景。同时涵盖文件权限管理的核心概念与操作技巧，帮助读者全面掌握Linux目录组织逻辑、常用命令操作以及权限设置方法，提升系统管理与运维效率。
 editLink: true
-date: 2024-01-28T00:00:00.000Z
+date: 2025-01-28T00:00:00.000Z
 tag:
   - linux
 id: 2b6d45defc148196acbb0f61f36c48e6

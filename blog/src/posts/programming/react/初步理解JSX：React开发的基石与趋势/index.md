@@ -3,7 +3,7 @@ title: 初步理解JSX：React开发的基石与趋势
 description: >-
   JSX是React开发中不可或缺的一部分，它结合了HTML的直观性与JavaScript的强大功能，提升了组件化开发的效率。本文将深入解析JSX的核心概念、优势及其在现代前端开发中的趋势，并分享学习JSX的高效方法，助你掌握这一重要技能。
 editLink: true
-date: 2024-01-16T00:00:00.000Z
+date: 2025-01-16T00:00:00.000Z
 tag:
   - react
 id: 246dec96cdee978d9d3ef66553c19bf5
