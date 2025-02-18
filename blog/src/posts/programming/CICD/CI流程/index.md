@@ -152,3 +152,9 @@ id: a90359a285df795ec2b9bf0ac188240c
 ## 总结
 
 企业级前端开发中的CI/CD流程是一个复杂而精细的过程，涉及多个环节和工具。从本地开发的质量保障，到代码提交与合并策略，再到持续集成和持续交付的实现，每个环节都至关重要。通过合理的工具和策略，可以确保代码质量，加快交付速度，降低上线风险。本文详细解析了每个环节的具体操作和注意事项，希望能为正在或即将实施CI/CD流程的团队提供参考和帮助。在实际操作中，团队需要根据自身的项目特点和需求，灵活运用这些方法和工具，不断优化和改进CI/CD流程，以达到最佳效果。
+
+## 参考文献
+
+[https://www.git-tower.com/learn/git/ebook/cn/command-line/advanced-topics/git-flow](https://www.git-tower.com/learn/git/ebook/cn/command-line/advanced-topics/git-flow)
+[https://blog.csdn.net/sunyctf/article/details/130587970](https://blog.csdn.net/sunyctf/article/details/130587970)
+[https://nvie.com/posts/a-successful-git-branching-model/](https://nvie.com/posts/a-successful-git-branching-model/)
